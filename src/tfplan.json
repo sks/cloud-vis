@@ -1,0 +1,948 @@
+{
+  "format_version": "0.1",
+  "terraform_version": "0.12.13",
+  "variables": {
+    "aws_amis": {
+      "value": {
+        "eu-west-1": "ami-674cbc1e",
+        "us-east-1": "ami-1d4e7a66",
+        "us-west-1": "ami-969ab1f6",
+        "us-west-2": "ami-8803e0f0"
+      }
+    },
+    "aws_region": {
+      "value": "us-west-2"
+    },
+    "key_name": {
+      "value": "soemthing"
+    },
+    "public_key_path": {
+      "value": "terraform.pub"
+    }
+  },
+  "planned_values": {
+    "root_module": {
+      "resources": [
+        {
+          "address": "aws_elb.web",
+          "mode": "managed",
+          "type": "aws_elb",
+          "name": "web",
+          "provider_name": "aws",
+          "schema_version": 0,
+          "values": {
+            "access_logs": [],
+            "connection_draining": false,
+            "connection_draining_timeout": 300,
+            "cross_zone_load_balancing": true,
+            "idle_timeout": 60,
+            "listener": [
+              {
+                "instance_port": 80,
+                "instance_protocol": "http",
+                "lb_port": 80,
+                "lb_protocol": "http",
+                "ssl_certificate_id": ""
+              }
+            ],
+            "name": "terraform-example-elb",
+            "name_prefix": null,
+            "tags": null
+          }
+        },
+        {
+          "address": "aws_instance.web",
+          "mode": "managed",
+          "type": "aws_instance",
+          "name": "web",
+          "provider_name": "aws",
+          "schema_version": 1,
+          "values": {
+            "ami": "ami-8803e0f0",
+            "credit_specification": [],
+            "disable_api_termination": null,
+            "ebs_optimized": null,
+            "get_password_data": false,
+            "iam_instance_profile": null,
+            "instance_initiated_shutdown_behavior": null,
+            "instance_type": "t2.micro",
+            "monitoring": null,
+            "source_dest_check": true,
+            "tags": null,
+            "timeouts": null,
+            "user_data": null,
+            "user_data_base64": null
+          }
+        },
+        {
+          "address": "aws_internet_gateway.default",
+          "mode": "managed",
+          "type": "aws_internet_gateway",
+          "name": "default",
+          "provider_name": "aws",
+          "schema_version": 0,
+          "values": {
+            "tags": null
+          }
+        },
+        {
+          "address": "aws_key_pair.auth",
+          "mode": "managed",
+          "type": "aws_key_pair",
+          "name": "auth",
+          "provider_name": "aws",
+          "schema_version": 1,
+          "values": {
+            "key_name": "soemthing",
+            "key_name_prefix": null,
+            "public_key": "asdads"
+          }
+        },
+        {
+          "address": "aws_route.internet_access",
+          "mode": "managed",
+          "type": "aws_route",
+          "name": "internet_access",
+          "provider_name": "aws",
+          "schema_version": 0,
+          "values": {
+            "destination_cidr_block": "0.0.0.0/0",
+            "destination_ipv6_cidr_block": null,
+            "timeouts": null,
+            "transit_gateway_id": null,
+            "vpc_peering_connection_id": null
+          }
+        },
+        {
+          "address": "aws_security_group.default",
+          "mode": "managed",
+          "type": "aws_security_group",
+          "name": "default",
+          "provider_name": "aws",
+          "schema_version": 1,
+          "values": {
+            "description": "Used in the terraform",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 22,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 22
+              },
+              {
+                "cidr_blocks": [
+                  "10.0.0.0/16"
+                ],
+                "description": "",
+                "from_port": 80,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 80
+              }
+            ],
+            "name": "terraform_example",
+            "name_prefix": null,
+            "revoke_rules_on_delete": false,
+            "tags": null,
+            "timeouts": null
+          }
+        },
+        {
+          "address": "aws_security_group.elb",
+          "mode": "managed",
+          "type": "aws_security_group",
+          "name": "elb",
+          "provider_name": "aws",
+          "schema_version": 1,
+          "values": {
+            "description": "Used in the terraform",
+            "egress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 0,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "-1",
+                "security_groups": [],
+                "self": false,
+                "to_port": 0
+              }
+            ],
+            "ingress": [
+              {
+                "cidr_blocks": [
+                  "0.0.0.0/0"
+                ],
+                "description": "",
+                "from_port": 80,
+                "ipv6_cidr_blocks": [],
+                "prefix_list_ids": [],
+                "protocol": "tcp",
+                "security_groups": [],
+                "self": false,
+                "to_port": 80
+              }
+            ],
+            "name": "terraform_example_elb",
+            "name_prefix": null,
+            "revoke_rules_on_delete": false,
+            "tags": null,
+            "timeouts": null
+          }
+        },
+        {
+          "address": "aws_subnet.default",
+          "mode": "managed",
+          "type": "aws_subnet",
+          "name": "default",
+          "provider_name": "aws",
+          "schema_version": 1,
+          "values": {
+            "assign_ipv6_address_on_creation": false,
+            "cidr_block": "10.0.1.0/24",
+            "map_public_ip_on_launch": true,
+            "tags": null,
+            "timeouts": null
+          }
+        },
+        {
+          "address": "aws_vpc.default",
+          "mode": "managed",
+          "type": "aws_vpc",
+          "name": "default",
+          "provider_name": "aws",
+          "schema_version": 1,
+          "values": {
+            "assign_generated_ipv6_cidr_block": false,
+            "cidr_block": "10.0.0.0/16",
+            "enable_dns_support": true,
+            "instance_tenancy": "default",
+            "tags": null
+          }
+        }
+      ]
+    }
+  },
+  "resource_changes": [
+    {
+      "address": "aws_elb.web",
+      "mode": "managed",
+      "type": "aws_elb",
+      "name": "web",
+      "provider_name": "aws",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "access_logs": [],
+          "connection_draining": false,
+          "connection_draining_timeout": 300,
+          "cross_zone_load_balancing": true,
+          "idle_timeout": 60,
+          "listener": [
+            {
+              "instance_port": 80,
+              "instance_protocol": "http",
+              "lb_port": 80,
+              "lb_protocol": "http",
+              "ssl_certificate_id": ""
+            }
+          ],
+          "name": "terraform-example-elb",
+          "name_prefix": null,
+          "tags": null
+        },
+        "after_unknown": {
+          "access_logs": [],
+          "arn": true,
+          "availability_zones": true,
+          "dns_name": true,
+          "health_check": true,
+          "id": true,
+          "instances": true,
+          "internal": true,
+          "listener": [
+            {}
+          ],
+          "security_groups": true,
+          "source_security_group": true,
+          "source_security_group_id": true,
+          "subnets": true,
+          "zone_id": true
+        }
+      }
+    },
+    {
+      "address": "aws_instance.web",
+      "mode": "managed",
+      "type": "aws_instance",
+      "name": "web",
+      "provider_name": "aws",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "ami": "ami-8803e0f0",
+          "credit_specification": [],
+          "disable_api_termination": null,
+          "ebs_optimized": null,
+          "get_password_data": false,
+          "iam_instance_profile": null,
+          "instance_initiated_shutdown_behavior": null,
+          "instance_type": "t2.micro",
+          "monitoring": null,
+          "source_dest_check": true,
+          "tags": null,
+          "timeouts": null,
+          "user_data": null,
+          "user_data_base64": null
+        },
+        "after_unknown": {
+          "arn": true,
+          "associate_public_ip_address": true,
+          "availability_zone": true,
+          "cpu_core_count": true,
+          "cpu_threads_per_core": true,
+          "credit_specification": [],
+          "ebs_block_device": true,
+          "ephemeral_block_device": true,
+          "host_id": true,
+          "id": true,
+          "instance_state": true,
+          "ipv6_address_count": true,
+          "ipv6_addresses": true,
+          "key_name": true,
+          "network_interface": true,
+          "network_interface_id": true,
+          "password_data": true,
+          "placement_group": true,
+          "primary_network_interface_id": true,
+          "private_dns": true,
+          "private_ip": true,
+          "public_dns": true,
+          "public_ip": true,
+          "root_block_device": true,
+          "security_groups": true,
+          "subnet_id": true,
+          "tenancy": true,
+          "volume_tags": true,
+          "vpc_security_group_ids": true
+        }
+      }
+    },
+    {
+      "address": "aws_internet_gateway.default",
+      "mode": "managed",
+      "type": "aws_internet_gateway",
+      "name": "default",
+      "provider_name": "aws",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "tags": null
+        },
+        "after_unknown": {
+          "id": true,
+          "owner_id": true,
+          "vpc_id": true
+        }
+      }
+    },
+    {
+      "address": "aws_key_pair.auth",
+      "mode": "managed",
+      "type": "aws_key_pair",
+      "name": "auth",
+      "provider_name": "aws",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "key_name": "soemthing",
+          "key_name_prefix": null,
+          "public_key": "asdads"
+        },
+        "after_unknown": {
+          "fingerprint": true,
+          "id": true
+        }
+      }
+    },
+    {
+      "address": "aws_route.internet_access",
+      "mode": "managed",
+      "type": "aws_route",
+      "name": "internet_access",
+      "provider_name": "aws",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "destination_cidr_block": "0.0.0.0/0",
+          "destination_ipv6_cidr_block": null,
+          "timeouts": null,
+          "transit_gateway_id": null,
+          "vpc_peering_connection_id": null
+        },
+        "after_unknown": {
+          "destination_prefix_list_id": true,
+          "egress_only_gateway_id": true,
+          "gateway_id": true,
+          "id": true,
+          "instance_id": true,
+          "instance_owner_id": true,
+          "nat_gateway_id": true,
+          "network_interface_id": true,
+          "origin": true,
+          "route_table_id": true,
+          "state": true
+        }
+      }
+    },
+    {
+      "address": "aws_security_group.default",
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "default",
+      "provider_name": "aws",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "description": "Used in the terraform",
+          "egress": [
+            {
+              "cidr_blocks": [
+                "0.0.0.0/0"
+              ],
+              "description": "",
+              "from_port": 0,
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "protocol": "-1",
+              "security_groups": [],
+              "self": false,
+              "to_port": 0
+            }
+          ],
+          "ingress": [
+            {
+              "cidr_blocks": [
+                "0.0.0.0/0"
+              ],
+              "description": "",
+              "from_port": 22,
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "protocol": "tcp",
+              "security_groups": [],
+              "self": false,
+              "to_port": 22
+            },
+            {
+              "cidr_blocks": [
+                "10.0.0.0/16"
+              ],
+              "description": "",
+              "from_port": 80,
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "protocol": "tcp",
+              "security_groups": [],
+              "self": false,
+              "to_port": 80
+            }
+          ],
+          "name": "terraform_example",
+          "name_prefix": null,
+          "revoke_rules_on_delete": false,
+          "tags": null,
+          "timeouts": null
+        },
+        "after_unknown": {
+          "arn": true,
+          "egress": [
+            {
+              "cidr_blocks": [
+                false
+              ],
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "security_groups": []
+            }
+          ],
+          "id": true,
+          "ingress": [
+            {
+              "cidr_blocks": [
+                false
+              ],
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "security_groups": []
+            },
+            {
+              "cidr_blocks": [
+                false
+              ],
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "security_groups": []
+            }
+          ],
+          "owner_id": true,
+          "vpc_id": true
+        }
+      }
+    },
+    {
+      "address": "aws_security_group.elb",
+      "mode": "managed",
+      "type": "aws_security_group",
+      "name": "elb",
+      "provider_name": "aws",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "description": "Used in the terraform",
+          "egress": [
+            {
+              "cidr_blocks": [
+                "0.0.0.0/0"
+              ],
+              "description": "",
+              "from_port": 0,
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "protocol": "-1",
+              "security_groups": [],
+              "self": false,
+              "to_port": 0
+            }
+          ],
+          "ingress": [
+            {
+              "cidr_blocks": [
+                "0.0.0.0/0"
+              ],
+              "description": "",
+              "from_port": 80,
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "protocol": "tcp",
+              "security_groups": [],
+              "self": false,
+              "to_port": 80
+            }
+          ],
+          "name": "terraform_example_elb",
+          "name_prefix": null,
+          "revoke_rules_on_delete": false,
+          "tags": null,
+          "timeouts": null
+        },
+        "after_unknown": {
+          "arn": true,
+          "egress": [
+            {
+              "cidr_blocks": [
+                false
+              ],
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "security_groups": []
+            }
+          ],
+          "id": true,
+          "ingress": [
+            {
+              "cidr_blocks": [
+                false
+              ],
+              "ipv6_cidr_blocks": [],
+              "prefix_list_ids": [],
+              "security_groups": []
+            }
+          ],
+          "owner_id": true,
+          "vpc_id": true
+        }
+      }
+    },
+    {
+      "address": "aws_subnet.default",
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "default",
+      "provider_name": "aws",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "assign_ipv6_address_on_creation": false,
+          "cidr_block": "10.0.1.0/24",
+          "map_public_ip_on_launch": true,
+          "tags": null,
+          "timeouts": null
+        },
+        "after_unknown": {
+          "arn": true,
+          "availability_zone": true,
+          "availability_zone_id": true,
+          "id": true,
+          "ipv6_cidr_block": true,
+          "ipv6_cidr_block_association_id": true,
+          "owner_id": true,
+          "vpc_id": true
+        }
+      }
+    },
+    {
+      "address": "aws_vpc.default",
+      "mode": "managed",
+      "type": "aws_vpc",
+      "name": "default",
+      "provider_name": "aws",
+      "change": {
+        "actions": [
+          "create"
+        ],
+        "before": null,
+        "after": {
+          "assign_generated_ipv6_cidr_block": false,
+          "cidr_block": "10.0.0.0/16",
+          "enable_dns_support": true,
+          "instance_tenancy": "default",
+          "tags": null
+        },
+        "after_unknown": {
+          "arn": true,
+          "default_network_acl_id": true,
+          "default_route_table_id": true,
+          "default_security_group_id": true,
+          "dhcp_options_id": true,
+          "enable_classiclink": true,
+          "enable_classiclink_dns_support": true,
+          "enable_dns_hostnames": true,
+          "id": true,
+          "ipv6_association_id": true,
+          "ipv6_cidr_block": true,
+          "main_route_table_id": true,
+          "owner_id": true
+        }
+      }
+    }
+  ],
+  "configuration": {
+    "provider_config": {
+      "aws": {
+        "name": "aws",
+        "expressions": {
+          "region": {
+            "references": [
+              "var.aws_region"
+            ]
+          }
+        }
+      }
+    },
+    "root_module": {
+      "resources": [
+        {
+          "address": "aws_elb.web",
+          "mode": "managed",
+          "type": "aws_elb",
+          "name": "web",
+          "provider_config_key": "aws",
+          "expressions": {
+            "instances": {
+              "references": [
+                "aws_instance.web"
+              ]
+            },
+            "listener": [
+              {
+                "instance_port": {
+                  "constant_value": 80
+                },
+                "instance_protocol": {
+                  "constant_value": "http"
+                },
+                "lb_port": {
+                  "constant_value": 80
+                },
+                "lb_protocol": {
+                  "constant_value": "http"
+                }
+              }
+            ],
+            "name": {
+              "constant_value": "terraform-example-elb"
+            },
+            "security_groups": {
+              "references": [
+                "aws_security_group.elb"
+              ]
+            },
+            "subnets": {
+              "references": [
+                "aws_subnet.default"
+              ]
+            }
+          },
+          "schema_version": 0
+        },
+        {
+          "address": "aws_instance.web",
+          "mode": "managed",
+          "type": "aws_instance",
+          "name": "web",
+          "provider_config_key": "aws",
+          "provisioners": [
+            {
+              "type": "remote-exec",
+              "expressions": {
+                "inline": {
+                  "constant_value": [
+                    "sudo apt-get -y update",
+                    "sudo apt-get -y install nginx",
+                    "sudo service nginx start"
+                  ]
+                }
+              }
+            }
+          ],
+          "expressions": {
+            "ami": {
+              "references": [
+                "var.aws_amis",
+                "var.aws_region"
+              ]
+            },
+            "instance_type": {
+              "constant_value": "t2.micro"
+            },
+            "key_name": {
+              "references": [
+                "aws_key_pair.auth"
+              ]
+            },
+            "subnet_id": {
+              "references": [
+                "aws_subnet.default"
+              ]
+            },
+            "vpc_security_group_ids": {
+              "references": [
+                "aws_security_group.default"
+              ]
+            }
+          },
+          "schema_version": 1
+        },
+        {
+          "address": "aws_internet_gateway.default",
+          "mode": "managed",
+          "type": "aws_internet_gateway",
+          "name": "default",
+          "provider_config_key": "aws",
+          "expressions": {
+            "vpc_id": {
+              "references": [
+                "aws_vpc.default"
+              ]
+            }
+          },
+          "schema_version": 0
+        },
+        {
+          "address": "aws_key_pair.auth",
+          "mode": "managed",
+          "type": "aws_key_pair",
+          "name": "auth",
+          "provider_config_key": "aws",
+          "expressions": {
+            "key_name": {
+              "references": [
+                "var.key_name"
+              ]
+            },
+            "public_key": {
+              "references": [
+                "var.public_key_path"
+              ]
+            }
+          },
+          "schema_version": 1
+        },
+        {
+          "address": "aws_route.internet_access",
+          "mode": "managed",
+          "type": "aws_route",
+          "name": "internet_access",
+          "provider_config_key": "aws",
+          "expressions": {
+            "destination_cidr_block": {
+              "constant_value": "0.0.0.0/0"
+            },
+            "gateway_id": {
+              "references": [
+                "aws_internet_gateway.default"
+              ]
+            },
+            "route_table_id": {
+              "references": [
+                "aws_vpc.default"
+              ]
+            }
+          },
+          "schema_version": 0
+        },
+        {
+          "address": "aws_security_group.default",
+          "mode": "managed",
+          "type": "aws_security_group",
+          "name": "default",
+          "provider_config_key": "aws",
+          "expressions": {
+            "description": {
+              "constant_value": "Used in the terraform"
+            },
+            "name": {
+              "constant_value": "terraform_example"
+            },
+            "vpc_id": {
+              "references": [
+                "aws_vpc.default"
+              ]
+            }
+          },
+          "schema_version": 1
+        },
+        {
+          "address": "aws_security_group.elb",
+          "mode": "managed",
+          "type": "aws_security_group",
+          "name": "elb",
+          "provider_config_key": "aws",
+          "expressions": {
+            "description": {
+              "constant_value": "Used in the terraform"
+            },
+            "name": {
+              "constant_value": "terraform_example_elb"
+            },
+            "vpc_id": {
+              "references": [
+                "aws_vpc.default"
+              ]
+            }
+          },
+          "schema_version": 1
+        },
+        {
+          "address": "aws_subnet.default",
+          "mode": "managed",
+          "type": "aws_subnet",
+          "name": "default",
+          "provider_config_key": "aws",
+          "expressions": {
+            "cidr_block": {
+              "constant_value": "10.0.1.0/24"
+            },
+            "map_public_ip_on_launch": {
+              "constant_value": true
+            },
+            "vpc_id": {
+              "references": [
+                "aws_vpc.default"
+              ]
+            }
+          },
+          "schema_version": 1
+        },
+        {
+          "address": "aws_vpc.default",
+          "mode": "managed",
+          "type": "aws_vpc",
+          "name": "default",
+          "provider_config_key": "aws",
+          "expressions": {
+            "cidr_block": {
+              "constant_value": "10.0.0.0/16"
+            }
+          },
+          "schema_version": 1
+        }
+      ],
+      "variables": {
+        "aws_amis": {
+          "default": {
+            "eu-west-1": "ami-674cbc1e",
+            "us-east-1": "ami-1d4e7a66",
+            "us-west-1": "ami-969ab1f6",
+            "us-west-2": "ami-8803e0f0"
+          }
+        },
+        "aws_region": {
+          "default": "us-west-2",
+          "description": "AWS region to launch servers."
+        },
+        "key_name": {
+          "default": "soemthing",
+          "description": "Desired name of AWS key pair"
+        },
+        "public_key_path": {
+          "default": "terraform.pub",
+          "description": "Path to the SSH public key to be used for authentication.\nEnsure this keypair is added to your local SSH agent so provisioners can\nconnect.\nExample: ~/.ssh/terraform.pub\n"
+        }
+      }
+    }
+  }
+}
