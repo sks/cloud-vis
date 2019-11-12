@@ -787,6 +787,54 @@
           "schema_version": 1
         },
         {
+          "address": "aws_instance.web_2",
+          "mode": "managed",
+          "type": "aws_instance",
+          "name": "web_2",
+          "provider_config_key": "aws",
+          "provisioners": [
+            {
+              "type": "remote-exec",
+              "expressions": {
+                "inline": {
+                  "constant_value": [
+                    "sudo apt-get -y update",
+                    "sudo apt-get -y install nginx",
+                    "sudo service nginx start"
+                  ]
+                }
+              }
+            }
+          ],
+          "expressions": {
+            "ami": {
+              "references": [
+                "var.aws_amis",
+                "var.aws_region"
+              ]
+            },
+            "instance_type": {
+              "constant_value": "t2.micro"
+            },
+            "key_name": {
+              "references": [
+                "aws_key_pair.auth"
+              ]
+            },
+            "subnet_id": {
+              "references": [
+                "aws_subnet.default"
+              ]
+            },
+            "vpc_security_group_ids": {
+              "references": [
+                "aws_security_group.default"
+              ]
+            }
+          },
+          "schema_version": 1
+        },
+        {
           "address": "aws_internet_gateway.default",
           "mode": "managed",
           "type": "aws_internet_gateway",
