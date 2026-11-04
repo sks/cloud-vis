@@ -3,18 +3,12 @@
 Default branch. Holds a single GitHub Actions workflow:
 [`.github/workflows/cce-scan.yml`](.github/workflows/cce-scan.yml).
 
-It resolves the latest [`cce`](https://github.com/appcd-dev/cce) release from
-[`stackgenhq/homebrew-stackgen/cce.rb`](https://github.com/stackgenhq/homebrew-stackgen/blob/main/cce.rb),
-downloads and checksums the linux amd64 build, then scans public repos.
-`CCE_DIAGNOSTICS` is on. `cce` v0.0.11 batches distinct cloud API operations
-into a few posts per scan and leaves builtins, the standard library, and local
-helpers out. After each scan the workflow runs `cce policy export` for:
-
-- `aws-iam` — minimum AWS IAM policy JSON
-- `gcp-iam` — minimum GCP custom role YAML (`--allow-inferred`)
-- `azure-rbac` — minimum Azure role definition JSON (`--allow-inferred`)
-- `esbom` — cloud-neutral entitlement SBOM (AWS/GCP/Azure plus OCI, IBM, and
-  any other provider CCE mapped)
+This repo is a **fuzz harness**: it clones random public cloud-SDK repos and
+scans them with [`stackgenhq/cce-action`](https://github.com/stackgenhq/cce-action)
+(`diagnostics: true`) so unmapped signatures feed catalog-gap ingest. The
+action installs `cce`, scans the clone, and exports AWS/GCP/Azure policies plus
+E-SBOM. Everyday product CI should call the action directly on its own checkout
+instead (diagnostics off by default).
 
 Two ways repos get picked:
 
@@ -59,11 +53,10 @@ manual run still scans the three fixed repos even if they are on the list.
 Run it from the Actions tab: **CCE scan (internet repos)** → **Run workflow**.
 `cce-scan` is the default branch, so GitHub lists the workflow there. Inputs let
 you switch to random repos, change the per-language random count, or add one
-more ad hoc `owner/repo` to the matrix either way. Each scan's JSON report and
-any derived policy artifacts (`*-aws-iam.json`, `*-gcp-iam.yaml`,
-`*-azure-rbac.json`, `*-esbom.json`) are attached as a build artifact. A
-per-repo summary (files scanned, entitlements by provider, and minimum
-permissions per cloud) is written to the run's step summary.
+more ad hoc `owner/repo` to the matrix either way. Each scan's report and
+policy artifacts from `cce-action` are attached as a build artifact. A per-repo
+summary (files scanned, entitlements by provider, and minimum permissions per
+cloud) is written to the run's step summary.
 
 ```bash
 gh workflow run cce-scan.yml --repo sks/cloud-vis
@@ -72,10 +65,10 @@ gh workflow run cce-scan.yml --repo sks/cloud-vis -f random_repos=true -f random
 
 ## Diagnostics
 
-`CCE_DIAGNOSTICS` is on. Releases before v0.0.11 posted one HTTP request per
-unmapped call, from its own goroutine, with no dedup and no cap. One run
-against `eksctl`, `prowler`, and `spring-cloud-aws` fired **282,761** of those
-from a single runner:
+This harness sets `diagnostics: true` on `stackgenhq/cce-action`. Releases
+before cce v0.0.11 posted one HTTP request per unmapped call, from its own
+goroutine, with no dedup and no cap. One run against `eksctl`, `prowler`, and
+`spring-cloud-aws` fired **282,761** of those from a single runner:
 
 | Failure | Count |
 |---|---|
@@ -94,4 +87,4 @@ the same S3 key (`cce/YYYYMMDD.ndjson`); the ingest Lambda appends with
 racing the same key's ETag blow through its 64-attempt retry budget.
 
 v0.0.11 collects distinct cloud API operations and posts them in batches of
-at most 500 after the scan. That is what this workflow runs.
+at most 500 after the scan. That is what this workflow runs via `cce-action`.
