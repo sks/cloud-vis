@@ -1,9 +1,13 @@
 name: CCE scan (internet repos)
 
-# Manually triggered demo: downloads the latest `cce` release referenced by
+# Downloads the latest `cce` release referenced by
 # https://github.com/stackgenhq/homebrew-stackgen/blob/main/cce.rb, then runs it
-# against a small set of public Go/Python/Java repos that are known to use cloud
-# SDKs directly, so the scan produces real entitlements instead of an empty report.
+# with -diagnostics against public Go/Python/Java repos, so cce reports any method
+# signature it can't map to Stackgen's catalog-gap ingest. On a schedule it picks
+# random repos per language from GitHub search, which is the point: a wide, varied
+# sample surfaces more distinct unmapped call signatures than a fixed repo list.
+# workflow_dispatch keeps three curated repos by default; set random_repos to true
+# to exercise the same random path on demand.
 on:
   workflow_dispatch:
     inputs:
@@ -12,6 +16,14 @@ on:
         type: choice
         options: [cloud, all]
         default: cloud
+      random_repos:
+        description: "Pick random public repos per language instead of the curated three"
+        type: boolean
+        default: false
+      random_repo_count:
+        description: "Random repos per language (only used when random_repos is true)"
+        type: string
+        default: "2"
       extra_repo:
         description: 'Optional extra repo to scan, "owner/repo" (leave blank to skip)'
         type: string
@@ -25,6 +37,9 @@ on:
         description: "Branch/tag/commit for extra_repo"
         type: string
         default: "main"
+  schedule:
+    # Daily at 06:00 UTC. Always runs the random-repo path (see the plan job).
+    - cron: "0 6 * * *"
 
 permissions:
   contents: read
@@ -34,8 +49,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Builds the scan matrix: three curated repos (one per language cce supports
-  # well) plus an optional ad hoc repo supplied via workflow_dispatch inputs.
+  # Builds the scan matrix. Schedule runs, and workflow_dispatch runs with
+  # random_repos=true, pick N repos per language at random from GitHub search
+  # instead of the curated three. An optional extra ad hoc repo can be appended
+  # either way via the extra_repo input.
   plan:
     runs-on: ubuntu-latest
     outputs:
@@ -44,16 +61,44 @@ jobs:
       - name: Build scan matrix
         id: build
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USE_RANDOM: ${{ github.event_name == 'schedule' || inputs.random_repos == true }}
+          RANDOM_REPO_COUNT: ${{ inputs.random_repo_count || '2' }}
           EXTRA_REPO: ${{ inputs.extra_repo }}
           EXTRA_LANGUAGE: ${{ inputs.extra_language }}
           EXTRA_REF: ${{ inputs.extra_ref }}
         run: |
           set -euo pipefail
-          base='[
-            {"name":"eksctl (Go, AWS EKS cluster management)","language":"GO","repo":"eksctl-io/eksctl","ref":"main"},
-            {"name":"prowler (Python, AWS/GCP/Azure security checks)","language":"PYTHON","repo":"prowler-cloud/prowler","ref":"master"},
-            {"name":"spring-cloud-aws (Java, AWS SDK v2 integration)","language":"JAVA","repo":"awspring/spring-cloud-aws","ref":"main"}
-          ]'
+
+          if [ "$USE_RANDOM" = "true" ]; then
+            matrix="[]"
+            # stars/forks/size bound the pool to real, maintained projects and keep
+            # clone+scan time bounded by excluding kernel-scale monorepos (size is in KB).
+            for pair in "GO:go" "PYTHON:python" "JAVA:java"; do
+              lang="${pair%%:*}"
+              gh_lang="${pair##*:}"
+              page=$(( (RANDOM % 5) + 1 ))
+              picks=$(gh api "search/repositories?q=language:${gh_lang}+stars:100..3000+forks:20..2000+size:<200000+archived:false&sort=stars&order=desc&per_page=100&page=${page}" \
+                --jq '[.items[] | {full_name, default_branch}] | .[] | [.full_name, .default_branch] | @tsv' \
+                | shuf -n "$RANDOM_REPO_COUNT")
+              while IFS=$'\t' read -r full_name default_branch; do
+                [ -z "$full_name" ] && continue
+                item=$(jq -nc \
+                  --arg name "random: $full_name ($lang)" \
+                  --arg language "$lang" \
+                  --arg repo "$full_name" \
+                  --arg ref "$default_branch" \
+                  '{name:$name, language:$language, repo:$repo, ref:$ref}')
+                matrix=$(printf '%s' "$matrix" | jq -c --argjson e "$item" '. + [$e]')
+              done <<< "$picks"
+            done
+          else
+            matrix='[
+              {"name":"eksctl (Go, AWS EKS cluster management)","language":"GO","repo":"eksctl-io/eksctl","ref":"main"},
+              {"name":"prowler (Python, AWS/GCP/Azure security checks)","language":"PYTHON","repo":"prowler-cloud/prowler","ref":"master"},
+              {"name":"spring-cloud-aws (Java, AWS SDK v2 integration)","language":"JAVA","repo":"awspring/spring-cloud-aws","ref":"main"}
+            ]'
+          fi
 
           if [ -n "$EXTRA_REPO" ]; then
             extra=$(jq -nc \
@@ -62,9 +107,7 @@ jobs:
               --arg repo "$EXTRA_REPO" \
               --arg ref "$EXTRA_REF" \
               '{name:$name, language:$language, repo:$repo, ref:$ref}')
-            matrix=$(printf '%s' "$base" | jq -c --argjson e "$extra" '. + [$e]')
-          else
-            matrix="$base"
+            matrix=$(printf '%s' "$matrix" | jq -c --argjson e "$extra" '. + [$e]')
           fi
 
           echo "matrix=$(printf '%s' "$matrix" | jq -c '{include: .}')" >> "$GITHUB_OUTPUT"
@@ -72,6 +115,7 @@ jobs:
   scan:
     needs: plan
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
@@ -125,6 +169,12 @@ jobs:
       - name: Clone ${{ matrix.repo }}@${{ matrix.ref }}
         run: git clone --depth 1 --branch "${{ matrix.ref }}" "https://github.com/${{ matrix.repo }}.git" target-repo
 
+      # -diagnostics opts in to Stackgen's catalog-gap reports (off by default in cce);
+      # -log-level debug is the only way a failed report surfaces at all, since a
+      # successful post isn't logged. NOTE: cce posts diagnostics from a background
+      # goroutine with its own 5s timeout and does not wait for it before returning,
+      # so on a fast scan the process can exit before the POST finishes. Debug logs
+      # here show attempts/failures but can't confirm a report actually landed.
       - name: Scan ${{ matrix.name }}
         id: scan
         run: |
@@ -134,8 +184,10 @@ jobs:
           echo "safe_name=$safe_name" >> "$GITHUB_OUTPUT"
           cce --folder target-repo \
               --language "${{ matrix.language }}" \
-              --filter "${{ inputs.filter }}" \
+              --filter "${{ inputs.filter || 'cloud' }}" \
               --format json \
+              --diagnostics \
+              --log-level debug \
               --output "results/${safe_name}.json"
 
       - name: Summarize
