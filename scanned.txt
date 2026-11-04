@@ -1,0 +1,15 @@
+# Repos the cce-scan workflow has already selected.
+# Random runs skip these. One owner/repo per line.
+DLR-RM/rl-baselines3-zoo
+Jopepato/DogSpotting
+MagicMashRoom/SuperCalendar
+Nightonke/WoWoViewPager
+Songmu/ecschedule
+awspring/spring-cloud-aws
+corevaluecamp/the-app
+eksctl-io/eksctl
+nzoschke/gofaas
+prowler-cloud/prowler
+shen100/wemall
+ying32/govcl
+zhaipro/easy12306
