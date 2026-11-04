@@ -80,11 +80,12 @@ jobs:
             first=true
             for pair in "GO:go:github.com/aws/aws-sdk-go" "PYTHON:python:import boto3" "JAVA:java:com.amazonaws"; do
               # Code search has a much tighter secondary rate limit than regular
-              # search; firing all three queries back to back gets a 429.
+              # search; firing all three queries back to back gets a 429, and the
+              # cooldown it names (seen up to ~113s) outlasts a short fixed sleep.
               if [ "$first" = "true" ]; then
                 first=false
               else
-                sleep 10
+                sleep 20
               fi
               lang="${pair%%:*}"
               rest="${pair#*:}"
@@ -93,9 +94,21 @@ jobs:
               page=$(( (RANDOM % 3) + 1 ))
               query_string="\"${marker}\" language:${gh_lang}"
               encoded=$(jq -rn --arg q "$query_string" '$q|@uri')
-              picks=$(gh api "search/code?q=${encoded}&per_page=30&page=${page}" \
-                --jq '[.items[].repository.full_name] | unique | .[]' \
-                | shuf -n "$RANDOM_REPO_COUNT")
+              raw=""
+              for attempt in 1 2 3 4; do
+                if raw=$(gh api "search/code?q=${encoded}&per_page=30&page=${page}" \
+                  --jq '[.items[].repository.full_name] | unique | .[]' 2>/tmp/code_search_err); then
+                  break
+                fi
+                echo "::warning::code search for ${lang} failed (attempt ${attempt}): $(cat /tmp/code_search_err)"
+                raw=""
+                sleep $((attempt * 30))
+              done
+              if [ -z "$raw" ]; then
+                echo "::warning::giving up on random ${lang} repos this run"
+                continue
+              fi
+              picks=$(printf '%s\n' "$raw" | shuf -n "$RANDOM_REPO_COUNT")
               while IFS= read -r full_name; do
                 [ -z "$full_name" ] && continue
                 # Code search results don't carry default_branch; the clone step
