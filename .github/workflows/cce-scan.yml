@@ -204,16 +204,14 @@ jobs:
             git clone --depth 1 "https://github.com/${{ matrix.repo }}.git" target-repo
           fi
 
-      # CCE_DIAGNOSTICS is OFF for now (see README "Diagnostics caveat"): a prior run
-      # against real cloud-SDK repos fired ~280k unbatched POSTs from one goroutine
-      # per unmapped signature, overwhelming both the client's own local network
-      # resources and the ingest Lambda's S3 append (optimistic-concurrency writes
-      # to one shared day-file). Re-enable once the appcd-dev/cce client batches
-      # diagnostics into one request per scan instead of one request per call.
+      # cce v0.0.11 batches distinct cloud API operations after the scan (at most
+      # 500 per POST) and drops builtins, stdlib, and local helpers. Earlier
+      # releases posted one request per unmapped call and must not be used with
+      # this flag against a large repo.
       - name: Scan ${{ matrix.name }}
         id: scan
         env:
-          CCE_DIAGNOSTICS: "false"
+          CCE_DIAGNOSTICS: "true"
         run: |
           set -euo pipefail
           mkdir -p results

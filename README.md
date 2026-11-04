@@ -5,8 +5,10 @@ Default branch. Holds a single GitHub Actions workflow:
 
 It resolves the latest [`cce`](https://github.com/appcd-dev/cce) release from
 [`stackgenhq/homebrew-stackgen/cce.rb`](https://github.com/stackgenhq/homebrew-stackgen/blob/main/cce.rb),
-downloads and checksums the linux amd64 build, then scans public repos. See
-"Diagnostics caveat" below for why `CCE_DIAGNOSTICS` is off for now.
+downloads and checksums the linux amd64 build, then scans public repos.
+`CCE_DIAGNOSTICS` is on. `cce` v0.0.11 batches distinct cloud API operations
+into a few posts per scan and leaves builtins, the standard library, and local
+helpers out.
 
 Two ways repos get picked:
 
@@ -41,14 +43,12 @@ gh workflow run cce-scan.yml --repo sks/cloud-vis
 gh workflow run cce-scan.yml --repo sks/cloud-vis -f random_repos=true -f random_repo_count=3
 ```
 
-## Diagnostics caveat
+## Diagnostics
 
-`CCE_DIAGNOSTICS` is off by default right now. `cce` posts one unmapped call
-signature per HTTP request, fired from its own goroutine with no dedup, no
-batching, and no concurrency cap. A single run against three real AWS-SDK
-repos (`eksctl`, `prowler`, `spring-cloud-aws`, plus one duplicate `eksctl`
-job) fired **282,761** of those near-simultaneously from one GitHub Actions
-runner:
+`CCE_DIAGNOSTICS` is on. Releases before v0.0.11 posted one HTTP request per
+unmapped call, from its own goroutine, with no dedup and no cap. One run
+against `eksctl`, `prowler`, and `spring-cloud-aws` fired **282,761** of those
+from a single runner:
 
 | Failure | Count |
 |---|---|
@@ -66,6 +66,5 @@ the same S3 key (`cce/YYYYMMDD.ndjson`); the ingest Lambda appends with
 `GetObject` + `PutObject --if-match`, so thousands of concurrent executions
 racing the same key's ETag blow through its 64-attempt retry budget.
 
-Re-enable `CCE_DIAGNOSTICS` here once `appcd-dev/cce` batches diagnostics into
-one request per scan (accumulate distinct signatures, send once) instead of
-one request per occurrence.
+v0.0.11 collects distinct cloud API operations and posts them in batches of
+at most 500 after the scan. That is what this workflow runs.
