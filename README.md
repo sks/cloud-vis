@@ -6,8 +6,8 @@ Default branch. Holds a single GitHub Actions workflow:
 It resolves the latest [`cce`](https://github.com/appcd-dev/cce) release from
 [`stackgenhq/homebrew-stackgen/cce.rb`](https://github.com/stackgenhq/homebrew-stackgen/blob/main/cce.rb),
 downloads and checksums the linux amd64 build, then scans public repos with
-`cce --diagnostics`, so cce reports any method call signature it can't map to
-Stackgen's catalog back to the ingest endpoint.
+`CCE_DIAGNOSTICS=true`, so cce reports any method call signature it can't map
+to Stackgen's catalog back to the ingest endpoint.
 
 Two ways repos get picked:
 
@@ -42,11 +42,20 @@ gh workflow run cce-scan.yml --repo sks/cloud-vis -f random_repos=true -f random
 
 ## Diagnostics caveat
 
-`cce`'s `-diagnostics` posts are fire-and-forget: each unmapped call signature
+`cce`'s diagnostics posts are fire-and-forget: each unmapped call signature
 spawns a background goroutine with its own 5-second timeout, and `cce` does not
 wait for those goroutines before exiting. On a scan that finishes in a second
 or two, the process can exit before a POST completes, so a report can be
-silently dropped even with `-diagnostics` on. `-log-level debug` surfaces a
-failed post, but a successful one isn't logged either way, so the workflow logs
-can't fully confirm whether reports landed. This is a gap in `cce` itself, not
-something this workflow can work around.
+silently dropped even with `CCE_DIAGNOSTICS=true` set. `-log-level debug`
+surfaces a failed post, but a successful one isn't logged either way, so the
+workflow logs can't fully confirm whether reports landed. This is a gap in
+`cce` itself, not something this workflow can work around.
+
+A live test run against random repos (2026-11-04) showed one repo
+(`ying32/govcl`, Go) firing 4,180 unmapped-signature posts almost
+simultaneously (no concurrency limit on the goroutine fan-out), nearly all
+failing with `unexpected status 500` from the ingest endpoint, plus at least
+one client-side `i/o timeout`. The other repos in that run logged none either
+way. Whether the 500s are from signature/signing-key mismatches, the ingest
+Lambda being overwhelmed by the burst, or something else server-side is still
+open; this workflow can surface the failures but can't diagnose their cause.

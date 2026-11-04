@@ -169,14 +169,16 @@ jobs:
       - name: Clone ${{ matrix.repo }}@${{ matrix.ref }}
         run: git clone --depth 1 --branch "${{ matrix.ref }}" "https://github.com/${{ matrix.repo }}.git" target-repo
 
-      # -diagnostics opts in to Stackgen's catalog-gap reports (off by default in cce);
-      # -log-level debug is the only way a failed report surfaces at all, since a
-      # successful post isn't logged. NOTE: cce posts diagnostics from a background
+      # CCE_DIAGNOSTICS opts in to Stackgen's catalog-gap reports (off by default in
+      # cce); -log-level debug is the only way a failed report surfaces at all, since
+      # a successful post isn't logged. NOTE: cce posts diagnostics from a background
       # goroutine with its own 5s timeout and does not wait for it before returning,
       # so on a fast scan the process can exit before the POST finishes. Debug logs
       # here show attempts/failures but can't confirm a report actually landed.
       - name: Scan ${{ matrix.name }}
         id: scan
+        env:
+          CCE_DIAGNOSTICS: "true"
         run: |
           set -euo pipefail
           mkdir -p results
@@ -186,7 +188,6 @@ jobs:
               --language "${{ matrix.language }}" \
               --filter "${{ inputs.filter || 'cloud' }}" \
               --format json \
-              --diagnostics \
               --log-level debug \
               --output "results/${safe_name}.json"
 
