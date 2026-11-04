@@ -1,0 +1,166 @@
+name: CCE scan (internet repos)
+
+# Manually triggered demo: downloads the latest `cce` release referenced by
+# https://github.com/stackgenhq/homebrew-stackgen/blob/main/cce.rb, then runs it
+# against a small set of public Go/Python/Java repos that are known to use cloud
+# SDKs directly, so the scan produces real entitlements instead of an empty report.
+on:
+  workflow_dispatch:
+    inputs:
+      filter:
+        description: "cce -filter value"
+        type: choice
+        options: [cloud, all]
+        default: cloud
+      extra_repo:
+        description: 'Optional extra repo to scan, "owner/repo" (leave blank to skip)'
+        type: string
+        default: ""
+      extra_language:
+        description: "Language for extra_repo"
+        type: choice
+        options: [GO, JAVA, PYTHON, JAVASCRIPT, AUTO]
+        default: AUTO
+      extra_ref:
+        description: "Branch/tag/commit for extra_repo"
+        type: string
+        default: "main"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cce-scan-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  # Builds the scan matrix: three curated repos (one per language cce supports
+  # well) plus an optional ad hoc repo supplied via workflow_dispatch inputs.
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.build.outputs.matrix }}
+    steps:
+      - name: Build scan matrix
+        id: build
+        env:
+          EXTRA_REPO: ${{ inputs.extra_repo }}
+          EXTRA_LANGUAGE: ${{ inputs.extra_language }}
+          EXTRA_REF: ${{ inputs.extra_ref }}
+        run: |
+          set -euo pipefail
+          base='[
+            {"name":"eksctl (Go, AWS EKS cluster management)","language":"GO","repo":"eksctl-io/eksctl","ref":"main"},
+            {"name":"prowler (Python, AWS/GCP/Azure security checks)","language":"PYTHON","repo":"prowler-cloud/prowler","ref":"master"},
+            {"name":"spring-cloud-aws (Java, AWS SDK v2 integration)","language":"JAVA","repo":"awspring/spring-cloud-aws","ref":"main"}
+          ]'
+
+          if [ -n "$EXTRA_REPO" ]; then
+            extra=$(jq -nc \
+              --arg name "extra: $EXTRA_REPO" \
+              --arg language "$EXTRA_LANGUAGE" \
+              --arg repo "$EXTRA_REPO" \
+              --arg ref "$EXTRA_REF" \
+              '{name:$name, language:$language, repo:$repo, ref:$ref}')
+            matrix=$(printf '%s' "$base" | jq -c --argjson e "$extra" '. + [$e]')
+          else
+            matrix="$base"
+          fi
+
+          echo "matrix=$(printf '%s' "$matrix" | jq -c '{include: .}')" >> "$GITHUB_OUTPUT"
+
+  scan:
+    needs: plan
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      # cce.rb is GoReleaser-generated and always has this exact shape: a top-level
+      # `version`, then on_macos/on_linux blocks, each with an intel-64-bit and an
+      # arm-64-bit sub-block carrying `url` + `sha256`. GitHub Actions runners are
+      # linux amd64, so we only need the first sub-block of on_linux.
+      - name: Resolve latest cce from the Homebrew formula
+        id: cce
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          formula="$(gh api repos/stackgenhq/homebrew-stackgen/contents/cce.rb --jq '.content' | base64 -d)"
+
+          version=$(printf '%s\n' "$formula" | grep -m1 -E '^\s*version "' | sed -E 's/.*version "([^"]+)".*/\1/')
+          if [ -z "$version" ]; then
+            echo "::error::could not parse cce version from the Homebrew formula"
+            exit 1
+          fi
+
+          linux_block=$(printf '%s\n' "$formula" | awk '/on_linux do/{flag=1} flag{print} flag && /^  end$/{exit}')
+          url=$(printf '%s\n' "$linux_block" | awk '/Hardware::CPU\.intel\? && Hardware::CPU\.is_64_bit\?/{found=1; next} found && /url "/{print; exit}' | sed -E 's/.*url "([^"]+)".*/\1/')
+          sha256=$(printf '%s\n' "$linux_block" | awk '/Hardware::CPU\.intel\? && Hardware::CPU\.is_64_bit\?/{found=1; next} found && /sha256 "/{print; exit}' | sed -E 's/.*sha256 "([^"]+)".*/\1/')
+          if [ -z "$url" ] || [ -z "$sha256" ]; then
+            echo "::error::could not parse the linux amd64 url/sha256 from the Homebrew formula"
+            exit 1
+          fi
+
+          echo "cce $version -> $url"
+          {
+            echo "version=$version"
+            echo "url=$url"
+            echo "sha256=$sha256"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Download and verify cce ${{ steps.cce.outputs.version }}
+        run: |
+          set -euo pipefail
+          curl -fsSL -o cce.tar.gz "${{ steps.cce.outputs.url }}"
+          echo "${{ steps.cce.outputs.sha256 }}  cce.tar.gz" | sha256sum -c -
+          mkdir -p "$HOME/.local/bin"
+          tar xzf cce.tar.gz -C "$HOME/.local/bin" cce
+          chmod +x "$HOME/.local/bin/cce"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - name: cce --version
+        run: cce --version
+
+      - name: Clone ${{ matrix.repo }}@${{ matrix.ref }}
+        run: git clone --depth 1 --branch "${{ matrix.ref }}" "https://github.com/${{ matrix.repo }}.git" target-repo
+
+      - name: Scan ${{ matrix.name }}
+        id: scan
+        run: |
+          set -euo pipefail
+          mkdir -p results
+          safe_name="$(echo '${{ matrix.repo }}' | tr '/' '_')"
+          echo "safe_name=$safe_name" >> "$GITHUB_OUTPUT"
+          cce --folder target-repo \
+              --language "${{ matrix.language }}" \
+              --filter "${{ inputs.filter }}" \
+              --format json \
+              --output "results/${safe_name}.json"
+
+      - name: Summarize
+        if: always()
+        run: |
+          report="results/${{ steps.scan.outputs.safe_name }}.json"
+          {
+            echo "### ${{ matrix.name }}"
+            echo
+            if [ -f "$report" ]; then
+              jq -r '
+                "- Files scanned: \(.files_scanned)",
+                "- Entitlements: \(.summary.total_entitlements)",
+                (.summary.by_provider | to_entries[] | "  - \(.key): \(.value)")
+              ' "$report"
+            else
+              echo "- scan produced no report"
+            fi
+            echo
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload scan results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cce-scan-${{ matrix.language }}-${{ steps.scan.outputs.safe_name }}
+          path: results/*.json
+          if-no-files-found: warn
