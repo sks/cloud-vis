@@ -51,7 +51,7 @@ manual run still scans the three fixed repos even if they are on the list.
 | Java | [`awspring/spring-cloud-aws`](https://github.com/awspring/spring-cloud-aws) |
 
 Run it from the Actions tab: **CCE scan (internet repos)** → **Run workflow**.
-`cce-scan` is the default branch, so GitHub lists the workflow there. Inputs let
+`main` is the default branch, so GitHub lists the workflow there. Inputs let
 you switch to random repos, change the per-language random count, or add one
 more ad hoc `owner/repo` to the matrix either way. Each scan's report and
 policy artifacts from `cce-action` are attached as a build artifact. A per-repo

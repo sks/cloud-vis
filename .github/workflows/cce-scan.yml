@@ -78,7 +78,7 @@ jobs:
           set -euo pipefail
 
           # scanned.txt lives on its own branch so recording a scan does not
-          # change this workflow file or retrigger anything on cce-scan.
+          # change this workflow file or retrigger anything on main.
           scanned=$(mktemp)
           if gh api "repos/${GITHUB_REPOSITORY}/contents/scanned.txt?ref=scanned-repos" --jq .content > /tmp/scanned.b64 2>/tmp/scanned.err; then
             base64 -d /tmp/scanned.b64 > "$scanned"
