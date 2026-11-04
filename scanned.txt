@@ -1,9 +1,11 @@
 # Repos the cce-scan workflow has already selected.
 # Random runs skip these. One owner/repo per line.
+AagamVadecha/CSCI201FinalProject
 AirStair/eye
 AssortedAppSecTestProjects/JavaVulnerableLab
 Avnet/Monarch-AzureAWS-OOB
 DLR-RM/rl-baselines3-zoo
+GoogleCloudPlatform/k8s-config-connector
 InsightDataScience/ansible-playbook
 JGAntunes/cnv-renderfarm
 Jack-261108/oss-spring-boot-starter
@@ -24,22 +26,29 @@ ThreatResponse/poor-webhook
 ThreatResponse/serverless-observatory
 UCSB-CS-RACELab/jetty-examples
 a3linux/go-aws-mon
+aaronosb/sam-python-serverless-stack
+angelshuwei/Memestagram
+anisarambelieva/devops-upskill-final-project
 aws/aws-sam-cli-app-templates
 aws/aws-sdk-java
 awspring/spring-cloud-aws
 banzaicloud/lambda-slack-bot
 casper-gh/AutoTagOwner
 chanan/AwsConsole
+contrivancecompanychicago/qualityoflifegames
 corevaluecamp/the-app
 cx-oleg-mikashevsky/18M_LOC_source
 devenes/maven-server-automation
 eksctl-io/eksctl
+emicklei/parzello
 envato/ejsonkms
 fmguerreiro/cloud-prime
 getsocial-rnd/ecs-drain-lambda
 gmr/env-aws-params
+googleapis/google-cloud-java
 hyphmongo/deepcurator
 in4it/ecs-ssh
+jaswanthk993/multi-ai-agent
 jlcoto/elections_lambda_api
 jquepi/bind
 jszwec/s3fs
@@ -50,12 +59,17 @@ lucagrulla/cw
 madebymany/moltar
 mateusmuller/k8s-cluster-spinup
 mattsahn/alexa-subway
+mwking0/Generating-S3-presigned-URLS-using-Lambda
+namita-tj/Email-Filtering-Using-DistilBERT
 nine-entertainment/flywheel
 notnoopci/bazel-remote-proxy
 nzoschke/gofaas
+patnaikshekhar/KEDA-GCP-PubSub-Sample
 prowler-cloud/prowler
+rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
 rambleRamblePie/RiskProject
 remind101/ssm-env
+rs3lab/veritas
 segmentio/go-athena
 shen100/wemall
 srirajan/athena
@@ -69,4 +83,5 @@ uber/assume-role-cli
 venu-gopal-myneni/aws_and_associates
 wibd-ls/wibd-ls1
 ying32/govcl
+zak905/gcp-pub-sub-emulator-test-demo
 zhaipro/easy12306
