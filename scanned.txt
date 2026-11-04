@@ -5,6 +5,8 @@ AirStair/eye
 AssortedAppSecTestProjects/JavaVulnerableLab
 Avnet/Monarch-AzureAWS-OOB
 DLR-RM/rl-baselines3-zoo
+GoogleCloudPlatform/gke-autoneg-controller
+GoogleCloudPlatform/healthcare-data-harmonization
 GoogleCloudPlatform/k8s-config-connector
 InsightDataScience/ansible-playbook
 JGAntunes/cnv-renderfarm
@@ -25,6 +27,7 @@ Spartak95/devbooks-project
 ThreatResponse/poor-webhook
 ThreatResponse/serverless-observatory
 UCSB-CS-RACELab/jetty-examples
+Vardhan0257/security-policy-attack-path-analysis
 a3linux/go-aws-mon
 aaronosb/sam-python-serverless-stack
 angelshuwei/Memestagram
@@ -39,6 +42,7 @@ contrivancecompanychicago/qualityoflifegames
 corevaluecamp/the-app
 cx-oleg-mikashevsky/18M_LOC_source
 devenes/maven-server-automation
+devlancer412/test-api
 eksctl-io/eksctl
 emicklei/parzello
 envato/ejsonkms
@@ -49,6 +53,7 @@ googleapis/google-cloud-java
 hyphmongo/deepcurator
 in4it/ecs-ssh
 jaswanthk993/multi-ai-agent
+jessfraz/s3server
 jlcoto/elections_lambda_api
 jquepi/bind
 jszwec/s3fs
@@ -59,6 +64,7 @@ lucagrulla/cw
 madebymany/moltar
 mateusmuller/k8s-cluster-spinup
 mattsahn/alexa-subway
+meloMPK/MeloZone
 mwking0/Generating-S3-presigned-URLS-using-Lambda
 namita-tj/Email-Filtering-Using-DistilBERT
 nine-entertainment/flywheel
