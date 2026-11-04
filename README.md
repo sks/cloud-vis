@@ -8,14 +8,21 @@ It resolves the latest [`cce`](https://github.com/appcd-dev/cce) release from
 downloads and checksums the linux amd64 build, then scans public repos.
 `CCE_DIAGNOSTICS` is on. `cce` v0.0.11 batches distinct cloud API operations
 into a few posts per scan and leaves builtins, the standard library, and local
-helpers out. After each scan the workflow runs `cce iam export` to derive a
-minimum AWS IAM policy from the entitlement report.
+helpers out. After each scan the workflow runs `cce policy export` for:
+
+- `aws-iam` — minimum AWS IAM policy JSON
+- `gcp-iam` — minimum GCP custom role YAML (`--allow-inferred`)
+- `azure-rbac` — minimum Azure role definition JSON (`--allow-inferred`)
+- `esbom` — cloud-neutral entitlement SBOM (AWS/GCP/Azure plus OCI, IBM, and
+  any other provider CCE mapped)
 
 Two ways repos get picked:
 
 - **Hourly** (`schedule`, minute 17 UTC): picks `random_repo_count` (default 2) repos each for
-  Go, Python, and Java using GitHub *code* search for an exact cloud-SDK import
-  marker (`github.com/aws/aws-sdk-go`, `import boto3`, `com.amazonaws`), not
+  Go, Python, and Java using GitHub *code* search for a cloud-SDK import
+  marker. Each language randomly selects one of an AWS, GCP, or Azure marker
+  (`github.com/aws/aws-sdk-go` / `cloud.google.com/go` /
+  `github.com/Azure/azure-sdk-for-go`, and the Python/Java equivalents), not
   plain repository search. Plain repository search (stars/forks/size) picks
   popular repos regardless of what they do; an earlier run using that approach
   scanned 6 random repos and got 0 entitlements on all 6, because none of them
@@ -31,9 +38,9 @@ Two ways repos get picked:
   gh secret set CODE_SEARCH_TOKEN --repo sks/cloud-vis
   ```
 - **Manual** (`workflow_dispatch`): scans three fixed repos by default (one per
-  language, all known AWS SDK consumers), so a run is reproducible when you're
-  checking a specific mapping change. Set `random_repos: true` to exercise the
-  same random path on demand instead.
+  language; prowler exercises AWS/GCP/Azure checks), so a run is reproducible
+  when you're checking a specific mapping change. Set `random_repos: true` to
+  exercise the same random path on demand instead.
 
 Repos that have already been selected are kept in
 [`scanned.txt`](https://github.com/sks/cloud-vis/blob/scanned-repos/scanned.txt)
@@ -53,9 +60,10 @@ Run it from the Actions tab: **CCE scan (internet repos)** → **Run workflow**.
 `cce-scan` is the default branch, so GitHub lists the workflow there. Inputs let
 you switch to random repos, change the per-language random count, or add one
 more ad hoc `owner/repo` to the matrix either way. Each scan's JSON report and
-its derived IAM policy (`*-iam.json`, when AWS entitlements exist) are attached
-as a build artifact. A per-repo summary (files scanned, entitlements by
-provider, and minimum AWS IAM Actions) is written to the run's step summary.
+any derived policy artifacts (`*-aws-iam.json`, `*-gcp-iam.yaml`,
+`*-azure-rbac.json`, `*-esbom.json`) are attached as a build artifact. A
+per-repo summary (files scanned, entitlements by provider, and minimum
+permissions per cloud) is written to the run's step summary.
 
 ```bash
 gh workflow run cce-scan.yml --repo sks/cloud-vis
