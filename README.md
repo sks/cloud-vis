@@ -12,7 +12,7 @@ helpers out.
 
 Two ways repos get picked:
 
-- **Hourly** (`schedule`): picks `random_repo_count` (default 2) repos each for
+- **Hourly** (`schedule`, minute 17 UTC): picks `random_repo_count` (default 2) repos each for
   Go, Python, and Java using GitHub *code* search for an exact cloud-SDK import
   marker (`github.com/aws/aws-sdk-go`, `import boto3`, `com.amazonaws`), not
   plain repository search. Plain repository search (stars/forks/size) picks

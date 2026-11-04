@@ -40,8 +40,10 @@ on:
         type: string
         default: "main"
   schedule:
-    # Hourly. Always runs the random-repo path (see the plan job).
-    - cron: "0 * * * *"
+    # Hourly at minute 17. Minute 0 is when Actions is busiest, and GitHub
+    # drops a delayed schedule instead of running it late. Always runs the
+    # random-repo path (see the plan job).
+    - cron: "17 * * * *"
 
 permissions:
   contents: read
