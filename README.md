@@ -25,6 +25,14 @@ Two ways repos get picked:
   checking a specific mapping change. Set `random_repos: true` to exercise the
   same random path on demand instead.
 
+Repos that have already been selected are kept in
+[`scanned.txt`](https://github.com/sks/cloud-vis/blob/scanned-repos/scanned.txt)
+on the `scanned-repos` branch, not on this one. Random selection skips every
+`owner/repo` in that file. After a run finishes, the workflow appends the repos
+it selected and pushes the list back to `scanned-repos`. Curated and extra
+repos are recorded too, so a later random run does not pick them again. A
+manual run still scans the three fixed repos even if they are on the list.
+
 | Language | Default manual-run repo |
 |----------|------|
 | Go | [`eksctl-io/eksctl`](https://github.com/eksctl-io/eksctl) |

@@ -6,6 +6,8 @@ name: CCE scan (internet repos)
 # signature it can't map to Stackgen's catalog-gap ingest. On a schedule it picks
 # random repos per language from GitHub search, which is the point: a wide, varied
 # sample surfaces more distinct unmapped call signatures than a fixed repo list.
+# Repos already selected are listed in scanned.txt on the scanned-repos branch.
+# Random picks skip that list, and a record job appends the repos from each run.
 # workflow_dispatch keeps three curated repos by default; set random_repos to true
 # to exercise the same random path on demand.
 on:
@@ -51,7 +53,8 @@ concurrency:
 jobs:
   # Builds the scan matrix. Schedule runs, and workflow_dispatch runs with
   # random_repos=true, pick N repos per language at random from GitHub search
-  # instead of the curated three. An optional extra ad hoc repo can be appended
+  # instead of the curated three, skipping repos already listed on the
+  # scanned-repos branch. An optional extra ad hoc repo can be appended
   # either way via the extra_repo input.
   plan:
     runs-on: ubuntu-latest
@@ -69,6 +72,19 @@ jobs:
           EXTRA_REF: ${{ inputs.extra_ref }}
         run: |
           set -euo pipefail
+
+          # scanned.txt lives on its own branch so recording a scan does not
+          # change this workflow file or retrigger anything on cce-scan.
+          scanned=$(mktemp)
+          if gh api "repos/${GITHUB_REPOSITORY}/contents/scanned.txt?ref=scanned-repos" --jq .content > /tmp/scanned.b64 2>/tmp/scanned.err; then
+            base64 -d /tmp/scanned.b64 > "$scanned"
+          else
+            echo "::warning::could not read scanned.txt on scanned-repos, not excluding anything: $(tr '\n' ' ' < /tmp/scanned.err)"
+            : > "$scanned"
+          fi
+          patterns=$(mktemp)
+          grep -v '^#' "$scanned" | sed '/^[[:space:]]*$/d' > "$patterns" || true
+          echo "excluding $(wc -l < "$patterns" | tr -d ' ') repo(s) listed on scanned-repos"
 
           if [ "$USE_RANDOM" = "true" ]; then
             matrix="[]"
@@ -91,24 +107,47 @@ jobs:
               rest="${pair#*:}"
               gh_lang="${rest%%:*}"
               marker="${rest#*:}"
-              page=$(( (RANDOM % 3) + 1 ))
               query_string="\"${marker}\" language:${gh_lang}"
               encoded=$(jq -rn --arg q "$query_string" '$q|@uri')
-              raw=""
-              for attempt in 1 2 3 4; do
-                if raw=$(gh api "search/code?q=${encoded}&per_page=30&page=${page}" \
-                  --jq '[.items[].repository.full_name] | unique | .[]' 2>/tmp/code_search_err); then
+              # One page is often enough. If that page is mostly repos we already
+              # scanned, try the next pages before giving up on this language.
+              found=""
+              page=$(( (RANDOM % 5) + 1 ))
+              for extra in 0 1 2; do
+                this_page=$((page + extra))
+                raw=""
+                for attempt in 1 2 3 4; do
+                  if raw=$(gh api "search/code?q=${encoded}&per_page=30&page=${this_page}" \
+                    --jq '[.items[].repository.full_name] | unique | .[]' 2>/tmp/code_search_err); then
+                    break
+                  fi
+                  echo "::warning::code search for ${lang} page ${this_page} failed (attempt ${attempt}): $(cat /tmp/code_search_err)"
+                  raw=""
+                  sleep $((attempt * 30))
+                done
+                if [ -z "$raw" ]; then
+                  continue
+                fi
+                unseen="$raw"
+                if [ -s "$patterns" ]; then
+                  unseen=$(printf '%s\n' "$raw" | grep -vxF -f "$patterns" || true)
+                fi
+                found=$(printf '%s\n%s\n' "$found" "$unseen" | sed '/^$/d' | sort -u)
+                have=$(printf '%s\n' "$found" | sed '/^$/d' | wc -l | tr -d ' ')
+                if [ "$have" -ge "$RANDOM_REPO_COUNT" ]; then
                   break
                 fi
-                echo "::warning::code search for ${lang} failed (attempt ${attempt}): $(cat /tmp/code_search_err)"
-                raw=""
-                sleep $((attempt * 30))
+                if [ "$extra" -eq 2 ]; then
+                  break
+                fi
+                echo "only ${have} unseen ${lang} repo(s) after page ${this_page}, trying another page"
+                sleep 20
               done
-              if [ -z "$raw" ]; then
-                echo "::warning::giving up on random ${lang} repos this run"
+              if [ -z "$found" ]; then
+                echo "::warning::no unseen ${lang} repos this run"
                 continue
               fi
-              picks=$(printf '%s\n' "$raw" | shuf -n "$RANDOM_REPO_COUNT")
+              picks=$(printf '%s\n' "$found" | shuf -n "$RANDOM_REPO_COUNT")
               while IFS= read -r full_name; do
                 [ -z "$full_name" ] && continue
                 # Code search results don't carry default_branch; the clone step
@@ -250,3 +289,52 @@ jobs:
           name: cce-scan-${{ matrix.language }}-${{ steps.scan.outputs.safe_name }}
           path: results/*.json
           if-no-files-found: warn
+
+  # Appends this run's repos to scanned.txt on scanned-repos. That branch is
+  # data only, so this commit does not touch the workflow. Random selection
+  # reads the file at the start of the next run and skips those repos.
+  # Curated and extra repos are recorded too, so a later random run skips them.
+  record:
+    needs: [plan, scan]
+    if: always() && needs.plan.result == 'success'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Append repos to scanned-repos
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MATRIX: ${{ needs.plan.outputs.matrix }}
+        run: |
+          set -euo pipefail
+          repos=$(printf '%s' "$MATRIX" | jq -r '.include[].repo // empty' | sed '/^$/d' | sort -u)
+          if [ -z "$repos" ]; then
+            echo "no repos to record"
+            exit 0
+          fi
+
+          work=$(mktemp -d)
+          gh repo clone "${GITHUB_REPOSITORY}" "$work" -- --depth 1 --branch scanned-repos --single-branch
+          cd "$work"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          touch scanned.txt
+
+          body=$(mktemp)
+          grep -v '^#' scanned.txt | sed '/^[[:space:]]*$/d' > "$body" || true
+          printf '%s\n' "$repos" >> "$body"
+          sort -u "$body" -o "$body"
+          {
+            grep '^#' scanned.txt || true
+            cat "$body"
+          } > scanned.txt.new
+          mv scanned.txt.new scanned.txt
+
+          git add scanned.txt
+          if git diff --cached --quiet; then
+            echo "scanned.txt already contains these repos"
+            exit 0
+          fi
+          git commit -m "Record repos from run ${GITHUB_RUN_ID}"
+          gh auth setup-git
+          git push origin HEAD:scanned-repos
