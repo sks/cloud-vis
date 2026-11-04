@@ -77,7 +77,15 @@ jobs:
             # repos this way and every one scanned to 0 entitlements. GitHub *code*
             # search for an exact AWS SDK import marker only returns repos that have
             # that call somewhere, so a -filter cloud scan has something to find.
+            first=true
             for pair in "GO:go:github.com/aws/aws-sdk-go" "PYTHON:python:import boto3" "JAVA:java:com.amazonaws"; do
+              # Code search has a much tighter secondary rate limit than regular
+              # search; firing all three queries back to back gets a 429.
+              if [ "$first" = "true" ]; then
+                first=false
+              else
+                sleep 10
+              fi
               lang="${pair%%:*}"
               rest="${pair#*:}"
               gh_lang="${rest%%:*}"
