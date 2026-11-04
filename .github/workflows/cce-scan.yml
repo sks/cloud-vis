@@ -411,11 +411,7 @@ jobs:
               echo "- Minimum AWS IAM actions: none"
             fi
             if [ -f "$gcp_iam" ]; then
-              mapfile -t perms < <(ruby -ryaml -e '
-doc = YAML.load_file(ARGV[0]) || {}
-perms = Array(doc["includedPermissions"]).uniq.sort
-puts perms
-' "$gcp_iam")
+              mapfile -t perms < <(ruby -ryaml -e 'doc=YAML.load_file(ARGV[0])||{}; Array(doc["includedPermissions"]).uniq.sort.each{|p| puts p}' "$gcp_iam")
               list_capped "Minimum GCP IAM permissions" "${perms[@]}"
             else
               echo "- Minimum GCP IAM permissions: none"
