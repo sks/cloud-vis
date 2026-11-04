@@ -3,9 +3,11 @@ name: CCE scan (internet repos)
 # Downloads the latest `cce` release referenced by
 # https://github.com/stackgenhq/homebrew-stackgen/blob/main/cce.rb, then runs it
 # with -diagnostics against public Go/Python/Java repos, so cce reports any method
-# signature it can't map to Stackgen's catalog-gap ingest. On a schedule it picks
-# random repos per language from GitHub search, which is the point: a wide, varied
-# sample surfaces more distinct unmapped call signatures than a fixed repo list.
+# signature it can't map to Stackgen's catalog-gap ingest. After each scan it also
+# runs `cce iam export` to derive a minimum AWS IAM policy from the entitlements
+# and lists those Actions in the job summary. On a schedule it picks random repos
+# per language from GitHub search, which is the point: a wide, varied sample
+# surfaces more distinct unmapped call signatures than a fixed repo list.
 # Repos already selected are listed in scanned.txt on the scanned-repos branch.
 # Random picks skip that list, and a record job appends the repos from each run.
 # workflow_dispatch keeps three curated repos by default; set random_repos to true
@@ -291,10 +293,38 @@ jobs:
               --log-level debug \
               --output "results/${safe_name}.json"
 
+      # Derives a minimum AWS IAM policy from the entitlement report. Empty AWS
+      # entitlement sets exit non-zero (ErrNoEntitlements); that is expected and
+      # must not fail the job. Unmapped call methods were already posted during
+      # the scan when CCE_DIAGNOSTICS is on.
+      - name: Export IAM policy
+        id: iam
+        if: always() && steps.scan.outputs.safe_name != ''
+        run: |
+          set -euo pipefail
+          safe_name="${{ steps.scan.outputs.safe_name }}"
+          report="results/${safe_name}.json"
+          iam="results/${safe_name}-iam.json"
+          if [ ! -f "$report" ]; then
+            echo "iam_ok=false" >> "$GITHUB_OUTPUT"
+            echo "no scan report; skipping IAM export"
+            exit 0
+          fi
+          if cce iam export "$report" -o "$iam"; then
+            echo "iam_ok=true" >> "$GITHUB_OUTPUT"
+            echo "wrote $iam"
+          else
+            echo "iam_ok=false" >> "$GITHUB_OUTPUT"
+            rm -f "$iam"
+            echo "no AWS IAM actions derived from entitlements"
+          fi
+
       - name: Summarize
         if: always()
         run: |
-          report="results/${{ steps.scan.outputs.safe_name }}.json"
+          safe_name="${{ steps.scan.outputs.safe_name }}"
+          report="results/${safe_name}.json"
+          iam="results/${safe_name}-iam.json"
           {
             echo "### ${{ matrix.name }}"
             echo
@@ -306,6 +336,15 @@ jobs:
               ' "$report"
             else
               echo "- scan produced no report"
+            fi
+            echo
+            if [ -f "$iam" ]; then
+              echo "- Minimum AWS IAM actions:"
+              jq -r '
+                [.Statement[]?.Action[]?] | unique | sort | .[] | "  - \(.)"
+              ' "$iam"
+            else
+              echo "- no AWS IAM actions derived"
             fi
             echo
           } >> "$GITHUB_STEP_SUMMARY"

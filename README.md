@@ -8,7 +8,8 @@ It resolves the latest [`cce`](https://github.com/appcd-dev/cce) release from
 downloads and checksums the linux amd64 build, then scans public repos.
 `CCE_DIAGNOSTICS` is on. `cce` v0.0.11 batches distinct cloud API operations
 into a few posts per scan and leaves builtins, the standard library, and local
-helpers out.
+helpers out. After each scan the workflow runs `cce iam export` to derive a
+minimum AWS IAM policy from the entitlement report.
 
 Two ways repos get picked:
 
@@ -51,9 +52,10 @@ manual run still scans the three fixed repos even if they are on the list.
 Run it from the Actions tab: **CCE scan (internet repos)** → **Run workflow**.
 `cce-scan` is the default branch, so GitHub lists the workflow there. Inputs let
 you switch to random repos, change the per-language random count, or add one
-more ad hoc `owner/repo` to the matrix either way. Each scan's JSON report is
-attached as a build artifact. A per-repo summary (files scanned, entitlements by
-provider) is written to the run's step summary.
+more ad hoc `owner/repo` to the matrix either way. Each scan's JSON report and
+its derived IAM policy (`*-iam.json`, when AWS entitlements exist) are attached
+as a build artifact. A per-repo summary (files scanned, entitlements by
+provider, and minimum AWS IAM Actions) is written to the run's step summary.
 
 ```bash
 gh workflow run cce-scan.yml --repo sks/cloud-vis
