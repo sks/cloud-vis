@@ -3,7 +3,13 @@
 Default branch. Holds a single GitHub Actions workflow:
 [`.github/workflows/cce-scan.yml`](.github/workflows/cce-scan.yml).
 
-It resolves the latest [`cce`](https://github.com/appcd-dev/cce) release from
+This repo is a **fuzz harness**: it clones random public cloud-SDK repos and
+runs CCE with diagnostics on so unmapped signatures feed catalog-gap ingest.
+If you only want to scan *your* repository in CI, use the reusable action
+instead: [`stackgenhq/cce-action`](https://github.com/stackgenhq/cce-action)
+(diagnostics off by default).
+
+This harness resolves the latest [`cce`](https://github.com/appcd-dev/cce) release from
 [`stackgenhq/homebrew-stackgen/cce.rb`](https://github.com/stackgenhq/homebrew-stackgen/blob/main/cce.rb),
 downloads and checksums the linux amd64 build, then scans public repos.
 `CCE_DIAGNOSTICS` is on. `cce` v0.0.11 batches distinct cloud API operations
