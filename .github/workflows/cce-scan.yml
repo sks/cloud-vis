@@ -1,14 +1,10 @@
 name: CCE scan (internet repos)
 
-# Downloads the latest `cce` release referenced by
-# https://github.com/stackgenhq/homebrew-stackgen/blob/main/cce.rb, then runs it
-# with -diagnostics against public Go/Python/Java repos, so cce reports any method
-# signature it can't map to Stackgen's catalog-gap ingest. After each scan it also
-# exports provider policies (aws-iam, gcp-iam, azure-rbac) plus a cloud-neutral
-# E-SBOM, and lists derived permissions in the job summary. On a schedule it picks
-# random repos per language from GitHub search across AWS/GCP/Azure SDK markers,
-# which is the point: a wide, varied sample surfaces more distinct unmapped call
-# signatures than a fixed repo list.
+# Fuzz harness: clone public Go/Python/Java cloud-SDK repos and scan them with
+# stackgenhq/cce-action (diagnostics on) so unmapped signatures feed StackGen
+# catalog-gap ingest. The action installs cce, scans, and exports aws-iam /
+# gcp-iam / azure-rbac / esbom. On a schedule it picks random repos per language
+# from GitHub code search across AWS/GCP/Azure SDK markers.
 # Repos already selected are listed in scanned.txt on the scanned-repos branch.
 # Random picks skip that list, and a record job appends the repos from each run.
 # workflow_dispatch keeps three curated repos by default; set random_repos to true
@@ -238,137 +234,45 @@ jobs:
       fail-fast: false
       matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
     steps:
-      # cce.rb is GoReleaser-generated and always has this exact shape: a top-level
-      # `version`, then on_macos/on_linux blocks, each with an intel-64-bit and an
-      # arm-64-bit sub-block carrying `url` + `sha256`. GitHub Actions runners are
-      # linux amd64, so we only need the first sub-block of on_linux.
-      - name: Resolve latest cce from the Homebrew formula
-        id: cce
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          set -euo pipefail
-          formula="$(gh api repos/stackgenhq/homebrew-stackgen/contents/cce.rb --jq '.content' | base64 -d)"
-
-          version=$(printf '%s\n' "$formula" | grep -m1 -E '^\s*version "' | sed -E 's/.*version "([^"]+)".*/\1/')
-          if [ -z "$version" ]; then
-            echo "::error::could not parse cce version from the Homebrew formula"
-            exit 1
-          fi
-
-          linux_block=$(printf '%s\n' "$formula" | awk '/on_linux do/{flag=1} flag{print} flag && /^  end$/{exit}')
-          url=$(printf '%s\n' "$linux_block" | awk '/Hardware::CPU\.intel\? && Hardware::CPU\.is_64_bit\?/{found=1; next} found && /url "/{print; exit}' | sed -E 's/.*url "([^"]+)".*/\1/')
-          sha256=$(printf '%s\n' "$linux_block" | awk '/Hardware::CPU\.intel\? && Hardware::CPU\.is_64_bit\?/{found=1; next} found && /sha256 "/{print; exit}' | sed -E 's/.*sha256 "([^"]+)".*/\1/')
-          if [ -z "$url" ] || [ -z "$sha256" ]; then
-            echo "::error::could not parse the linux amd64 url/sha256 from the Homebrew formula"
-            exit 1
-          fi
-
-          echo "cce $version -> $url"
-          {
-            echo "version=$version"
-            echo "url=$url"
-            echo "sha256=$sha256"
-          } >> "$GITHUB_OUTPUT"
-
-      - name: Download and verify cce ${{ steps.cce.outputs.version }}
-        run: |
-          set -euo pipefail
-          curl -fsSL -o cce.tar.gz "${{ steps.cce.outputs.url }}"
-          echo "${{ steps.cce.outputs.sha256 }}  cce.tar.gz" | sha256sum -c -
-          mkdir -p "$HOME/.local/bin"
-          tar xzf cce.tar.gz -C "$HOME/.local/bin" cce
-          chmod +x "$HOME/.local/bin/cce"
-          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-
-      - name: cce --version
-        run: cce --version
-
       - name: Clone ${{ matrix.repo }}${{ matrix.ref != '' && format('@{0}', matrix.ref) || '' }}
+        id: clone
         run: |
           set -euo pipefail
+          safe_name="$(echo '${{ matrix.repo }}' | tr '/' '_')"
+          echo "safe_name=$safe_name" >> "$GITHUB_OUTPUT"
           if [ -n "${{ matrix.ref }}" ]; then
             git clone --depth 1 --branch "${{ matrix.ref }}" "https://github.com/${{ matrix.repo }}.git" target-repo
           else
             git clone --depth 1 "https://github.com/${{ matrix.repo }}.git" target-repo
           fi
 
-      # cce v0.0.11 batches distinct cloud API operations after the scan (at most
-      # 500 per POST) and drops builtins, stdlib, and local helpers. Earlier
-      # releases posted one request per unmapped call and must not be used with
-      # this flag against a large repo.
+      # Installs cce, scans target-repo, exports aws-iam/gcp-iam/azure-rbac/esbom.
+      # diagnostics=true is intentional for this fuzz harness only.
       - name: Scan ${{ matrix.name }}
-        id: scan
-        env:
-          CCE_DIAGNOSTICS: "true"
-        run: |
-          set -euo pipefail
-          mkdir -p results
-          safe_name="$(echo '${{ matrix.repo }}' | tr '/' '_')"
-          echo "safe_name=$safe_name" >> "$GITHUB_OUTPUT"
-          cce --folder target-repo \
-              --language "${{ matrix.language }}" \
-              --filter "${{ inputs.filter || 'cloud' }}" \
-              --format json \
-              --log-level debug \
-              --output "results/${safe_name}.json"
-
-      # Derives minimum provider policies from the entitlement report:
-      # aws-iam, gcp-iam, azure-rbac, plus cloud-neutral esbom (covers OCI/IBM/…
-      # and any provider without a dedicated exporter). Missing providers exit
-      # non-zero; that is expected and must not fail the job. GCP/Azure use
-      # --allow-inferred so sparse catalog entries still yield permissions.
-      # Unmapped call methods were already posted during the scan when
-      # CCE_DIAGNOSTICS is on.
-      - name: Export cloud policies
-        id: policy
-        if: always() && steps.scan.outputs.safe_name != ''
-        run: |
-          set -euo pipefail
-          safe_name="${{ steps.scan.outputs.safe_name }}"
-          report="results/${safe_name}.json"
-          if [ ! -f "$report" ]; then
-            echo "no scan report; skipping policy export"
-            exit 0
-          fi
-
-          try_export() {
-            local format="$1"
-            local provider="$2"
-            local out="$3"
-            shift 3
-            if [ -n "$provider" ]; then
-              if cce policy export "$report" --format "$format" --provider "$provider" "$@" -o "$out"; then
-                echo "wrote $out"
-                return 0
-              fi
-            else
-              if cce policy export "$report" --format "$format" "$@" -o "$out"; then
-                echo "wrote $out"
-                return 0
-              fi
-            fi
-            rm -f "$out"
-            echo "no ${format} policy derived"
-            return 0
-          }
-
-          try_export aws-iam AWS "results/${safe_name}-aws-iam.json"
-          try_export gcp-iam GCP "results/${safe_name}-gcp-iam.yaml" --allow-inferred
-          try_export azure-rbac AZURE "results/${safe_name}-azure-rbac.json" --allow-inferred
-          try_export esbom "" "results/${safe_name}-esbom.json"
+        id: cce
+        uses: stackgenhq/cce-action@v1
+        with:
+          path: target-repo
+          language: ${{ matrix.language }}
+          filter: ${{ inputs.filter || 'cloud' }}
+          output-dir: results
+          diagnostics: true
+          export-policies: true
+          log-level: debug
 
       - name: Summarize
         if: always()
+        env:
+          REPORT: ${{ steps.cce.outputs.report-path }}
+          AWS_IAM: ${{ steps.cce.outputs.aws-iam-path }}
+          GCP_IAM: ${{ steps.cce.outputs.gcp-iam-path }}
+          AZURE_RBAC: ${{ steps.cce.outputs.azure-rbac-path }}
+          ESBOM: ${{ steps.cce.outputs.esbom-path }}
+          ENTITLEMENTS: ${{ steps.cce.outputs.entitlement-count }}
+          CCE_VERSION: ${{ steps.cce.outputs.version }}
         run: |
-          safe_name="${{ steps.scan.outputs.safe_name }}"
-          report="results/${safe_name}.json"
-          aws_iam="results/${safe_name}-aws-iam.json"
-          gcp_iam="results/${safe_name}-gcp-iam.yaml"
-          azure_rbac="results/${safe_name}-azure-rbac.json"
-          esbom="results/${safe_name}-esbom.json"
+          set -euo pipefail
 
-          # Cap long action lists so a noisy repo does not drown the summary.
           list_capped() {
             local label="$1"
             shift
@@ -394,43 +298,44 @@ jobs:
           {
             echo "### ${{ matrix.name }}"
             echo
-            if [ -f "$report" ]; then
+            echo "- cce: ${CCE_VERSION:-unknown}"
+            if [ -n "${REPORT:-}" ] && [ -f "$REPORT" ]; then
               jq -r '
                 "- Files scanned: \(.files_scanned)",
                 "- Entitlements: \(.summary.total_entitlements)",
                 (.summary.by_provider | to_entries[] | "  - \(.key): \(.value)")
-              ' "$report"
+              ' "$REPORT"
             else
+              echo "- Entitlements: ${ENTITLEMENTS:-0}"
               echo "- scan produced no report"
             fi
             echo
-            if [ -f "$aws_iam" ]; then
-              mapfile -t actions < <(jq -r '[.Statement[]?.Action[]?] | unique | sort | .[]' "$aws_iam")
+            if [ -n "${AWS_IAM:-}" ] && [ -f "$AWS_IAM" ]; then
+              mapfile -t actions < <(jq -r '[.Statement[]?.Action[]?] | unique | sort | .[]' "$AWS_IAM")
               list_capped "Minimum AWS IAM actions" "${actions[@]}"
             else
               echo "- Minimum AWS IAM actions: none"
             fi
-            if [ -f "$gcp_iam" ]; then
-              mapfile -t perms < <(ruby -ryaml -e 'doc=YAML.load_file(ARGV[0])||{}; Array(doc["includedPermissions"]).uniq.sort.each{|p| puts p}' "$gcp_iam")
+            if [ -n "${GCP_IAM:-}" ] && [ -f "$GCP_IAM" ]; then
+              mapfile -t perms < <(ruby -ryaml -e 'doc=YAML.load_file(ARGV[0])||{}; Array(doc["includedPermissions"]).uniq.sort.each{|p| puts p}' "$GCP_IAM")
               list_capped "Minimum GCP IAM permissions" "${perms[@]}"
             else
               echo "- Minimum GCP IAM permissions: none"
             fi
-            if [ -f "$azure_rbac" ]; then
-              mapfile -t actions < <(jq -r '[.Actions[]?] | unique | sort | .[]' "$azure_rbac")
+            if [ -n "${AZURE_RBAC:-}" ] && [ -f "$AZURE_RBAC" ]; then
+              mapfile -t actions < <(jq -r '[.Actions[]?] | unique | sort | .[]' "$AZURE_RBAC")
               list_capped "Minimum Azure RBAC actions" "${actions[@]}"
             else
               echo "- Minimum Azure RBAC actions: none"
             fi
-            if [ -f "$esbom" ]; then
-              # Other providers (OCI, IBM, …) and catalog gaps show up here.
+            if [ -n "${ESBOM:-}" ] && [ -f "$ESBOM" ]; then
               other=$(jq -r '
                 [.entitlements[]?
                   | select((.provider | ascii_upcase) as $p
                     | ($p != "AWS" and $p != "GCP" and $p != "AZURE"))
                   | (.canonical_permission // "\(.provider)/\(.resource):\(.operation)")]
                 | unique | sort | .[]
-              ' "$esbom")
+              ' "$ESBOM")
               if [ -n "$other" ]; then
                 mapfile -t other_items <<< "$other"
                 list_capped "Other provider permissions (E-SBOM)" "${other_items[@]}"
@@ -445,7 +350,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: cce-scan-${{ matrix.language }}-${{ steps.scan.outputs.safe_name }}
+          name: cce-scan-${{ matrix.language }}-${{ steps.clone.outputs.safe_name }}
           path: results/*
           if-no-files-found: warn
 
