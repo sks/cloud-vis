@@ -4,10 +4,11 @@ name: CCE scan (internet repos)
 # https://github.com/stackgenhq/homebrew-stackgen/blob/main/cce.rb, then runs it
 # with -diagnostics against public Go/Python/Java repos, so cce reports any method
 # signature it can't map to Stackgen's catalog-gap ingest. After each scan it also
-# runs `cce iam export` to derive a minimum AWS IAM policy from the entitlements
-# and lists those Actions in the job summary. On a schedule it picks random repos
-# per language from GitHub search, which is the point: a wide, varied sample
-# surfaces more distinct unmapped call signatures than a fixed repo list.
+# exports provider policies (aws-iam, gcp-iam, azure-rbac) plus a cloud-neutral
+# E-SBOM, and lists derived permissions in the job summary. On a schedule it picks
+# random repos per language from GitHub search across AWS/GCP/Azure SDK markers,
+# which is the point: a wide, varied sample surfaces more distinct unmapped call
+# signatures than a fixed repo list.
 # Repos already selected are listed in scanned.txt on the scanned-repos branch.
 # Random picks skip that list, and a record job appends the repos from each run.
 # workflow_dispatch keeps three curated repos by default; set random_repos to true
@@ -121,10 +122,12 @@ jobs:
             # Plain repository search (stars/forks/size) picks popular repos, not
             # repos that call a cloud SDK -- a prior run picked 6 random Go/Python/Java
             # repos this way and every one scanned to 0 entitlements. GitHub *code*
-            # search for an exact AWS SDK import marker only returns repos that have
-            # that call somewhere, so a -filter cloud scan has something to find.
+            # search for an SDK import marker only returns repos that have that call
+            # somewhere, so a -filter cloud scan has something to find. Each language
+            # picks one AWS, GCP, or Azure marker at random so scheduled runs cover
+            # more than AWS without tripling code-search traffic.
             first=true
-            for pair in "GO:go:github.com/aws/aws-sdk-go" "PYTHON:python:import boto3" "JAVA:java:com.amazonaws"; do
+            for pair in "GO:go" "PYTHON:python" "JAVA:java"; do
               # Code search allows about 10 requests a minute per token. The gap
               # below stays under that. A 429 still names its own wait, and
               # sleep_for_search_limit follows that instead of a fixed backoff.
@@ -134,9 +137,24 @@ jobs:
                 sleep 20
               fi
               lang="${pair%%:*}"
-              rest="${pair#*:}"
-              gh_lang="${rest%%:*}"
-              marker="${rest#*:}"
+              gh_lang="${pair#*:}"
+              case "$lang" in
+                GO)
+                  markers=("github.com/aws/aws-sdk-go" "cloud.google.com/go" "github.com/Azure/azure-sdk-for-go")
+                  ;;
+                PYTHON)
+                  markers=("import boto3" "from google.cloud" "from azure")
+                  ;;
+                JAVA)
+                  markers=("com.amazonaws" "com.google.cloud" "com.azure")
+                  ;;
+                *)
+                  echo "::warning::unknown language $lang; skipping"
+                  continue
+                  ;;
+              esac
+              marker="${markers[$((RANDOM % ${#markers[@]}))]}"
+              echo "random ${lang}: searching for marker ${marker}"
               query_string="\"${marker}\" language:${gh_lang}"
               encoded=$(jq -rn --arg q "$query_string" '$q|@uri')
               # One page is often enough. If that page is mostly repos we already
@@ -191,6 +209,8 @@ jobs:
               done <<< "$picks"
             done
           else
+            # Curated set spans AWS (eksctl, spring-cloud-aws) and multi-cloud
+            # (prowler covers AWS/GCP/Azure checks). Random runs rotate SDK markers.
             matrix='[
               {"name":"eksctl (Go, AWS EKS cluster management)","language":"GO","repo":"eksctl-io/eksctl","ref":""},
               {"name":"prowler (Python, AWS/GCP/Azure security checks)","language":"PYTHON","repo":"prowler-cloud/prowler","ref":""},
@@ -293,38 +313,84 @@ jobs:
               --log-level debug \
               --output "results/${safe_name}.json"
 
-      # Derives a minimum AWS IAM policy from the entitlement report. Empty AWS
-      # entitlement sets exit non-zero (ErrNoEntitlements); that is expected and
-      # must not fail the job. Unmapped call methods were already posted during
-      # the scan when CCE_DIAGNOSTICS is on.
-      - name: Export IAM policy
-        id: iam
+      # Derives minimum provider policies from the entitlement report:
+      # aws-iam, gcp-iam, azure-rbac, plus cloud-neutral esbom (covers OCI/IBM/…
+      # and any provider without a dedicated exporter). Missing providers exit
+      # non-zero; that is expected and must not fail the job. GCP/Azure use
+      # --allow-inferred so sparse catalog entries still yield permissions.
+      # Unmapped call methods were already posted during the scan when
+      # CCE_DIAGNOSTICS is on.
+      - name: Export cloud policies
+        id: policy
         if: always() && steps.scan.outputs.safe_name != ''
         run: |
           set -euo pipefail
           safe_name="${{ steps.scan.outputs.safe_name }}"
           report="results/${safe_name}.json"
-          iam="results/${safe_name}-iam.json"
           if [ ! -f "$report" ]; then
-            echo "iam_ok=false" >> "$GITHUB_OUTPUT"
-            echo "no scan report; skipping IAM export"
+            echo "no scan report; skipping policy export"
             exit 0
           fi
-          if cce iam export "$report" -o "$iam"; then
-            echo "iam_ok=true" >> "$GITHUB_OUTPUT"
-            echo "wrote $iam"
-          else
-            echo "iam_ok=false" >> "$GITHUB_OUTPUT"
-            rm -f "$iam"
-            echo "no AWS IAM actions derived from entitlements"
-          fi
+
+          try_export() {
+            local format="$1"
+            local provider="$2"
+            local out="$3"
+            shift 3
+            if [ -n "$provider" ]; then
+              if cce policy export "$report" --format "$format" --provider "$provider" "$@" -o "$out"; then
+                echo "wrote $out"
+                return 0
+              fi
+            else
+              if cce policy export "$report" --format "$format" "$@" -o "$out"; then
+                echo "wrote $out"
+                return 0
+              fi
+            fi
+            rm -f "$out"
+            echo "no ${format} policy derived"
+            return 0
+          }
+
+          try_export aws-iam AWS "results/${safe_name}-aws-iam.json"
+          try_export gcp-iam GCP "results/${safe_name}-gcp-iam.yaml" --allow-inferred
+          try_export azure-rbac AZURE "results/${safe_name}-azure-rbac.json" --allow-inferred
+          try_export esbom "" "results/${safe_name}-esbom.json"
 
       - name: Summarize
         if: always()
         run: |
           safe_name="${{ steps.scan.outputs.safe_name }}"
           report="results/${safe_name}.json"
-          iam="results/${safe_name}-iam.json"
+          aws_iam="results/${safe_name}-aws-iam.json"
+          gcp_iam="results/${safe_name}-gcp-iam.yaml"
+          azure_rbac="results/${safe_name}-azure-rbac.json"
+          esbom="results/${safe_name}-esbom.json"
+
+          # Cap long action lists so a noisy repo does not drown the summary.
+          list_capped() {
+            local label="$1"
+            shift
+            local -a items=("$@")
+            local n="${#items[@]}"
+            if [ "$n" -eq 0 ]; then
+              echo "- ${label}: none"
+              return
+            fi
+            echo "- ${label} (${n}):"
+            local i=0
+            local max=40
+            for item in "${items[@]}"; do
+              if [ "$i" -ge "$max" ]; then
+                echo "  - ... and $((n - max)) more"
+                break
+              fi
+              echo "  - ${item}"
+              i=$((i + 1))
+            done
+          }
+
           {
             echo "### ${{ matrix.name }}"
             echo
@@ -338,13 +404,39 @@ jobs:
               echo "- scan produced no report"
             fi
             echo
-            if [ -f "$iam" ]; then
-              echo "- Minimum AWS IAM actions:"
-              jq -r '
-                [.Statement[]?.Action[]?] | unique | sort | .[] | "  - \(.)"
-              ' "$iam"
+            if [ -f "$aws_iam" ]; then
+              mapfile -t actions < <(jq -r '[.Statement[]?.Action[]?] | unique | sort | .[]' "$aws_iam")
+              list_capped "Minimum AWS IAM actions" "${actions[@]}"
             else
-              echo "- no AWS IAM actions derived"
+              echo "- Minimum AWS IAM actions: none"
+            fi
+            if [ -f "$gcp_iam" ]; then
+              mapfile -t perms < <(ruby -ryaml -e 'doc=YAML.load_file(ARGV[0])||{}; Array(doc["includedPermissions"]).uniq.sort.each{|p| puts p}' "$gcp_iam")
+              list_capped "Minimum GCP IAM permissions" "${perms[@]}"
+            else
+              echo "- Minimum GCP IAM permissions: none"
+            fi
+            if [ -f "$azure_rbac" ]; then
+              mapfile -t actions < <(jq -r '[.Actions[]?] | unique | sort | .[]' "$azure_rbac")
+              list_capped "Minimum Azure RBAC actions" "${actions[@]}"
+            else
+              echo "- Minimum Azure RBAC actions: none"
+            fi
+            if [ -f "$esbom" ]; then
+              # Other providers (OCI, IBM, …) and catalog gaps show up here.
+              other=$(jq -r '
+                [.entitlements[]?
+                  | select((.provider | ascii_upcase) as $p
+                    | ($p != "AWS" and $p != "GCP" and $p != "AZURE"))
+                  | (.canonical_permission // "\(.provider)/\(.resource):\(.operation)")]
+                | unique | sort | .[]
+              ' "$esbom")
+              if [ -n "$other" ]; then
+                mapfile -t other_items <<< "$other"
+                list_capped "Other provider permissions (E-SBOM)" "${other_items[@]}"
+              else
+                echo "- Other provider permissions (E-SBOM): none"
+              fi
             fi
             echo
           } >> "$GITHUB_STEP_SUMMARY"
@@ -354,7 +446,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cce-scan-${{ matrix.language }}-${{ steps.scan.outputs.safe_name }}
-          path: results/*.json
+          path: results/*
           if-no-files-found: warn
 
   # Appends this run's repos to scanned.txt on scanned-repos. That branch is
