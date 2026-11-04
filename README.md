@@ -5,18 +5,19 @@ Default branch. Holds a single GitHub Actions workflow:
 
 It resolves the latest [`cce`](https://github.com/appcd-dev/cce) release from
 [`stackgenhq/homebrew-stackgen/cce.rb`](https://github.com/stackgenhq/homebrew-stackgen/blob/main/cce.rb),
-downloads and checksums the linux amd64 build, then scans public repos with
-`CCE_DIAGNOSTICS=true`, so cce reports any method call signature it can't map
-to Stackgen's catalog back to the ingest endpoint.
+downloads and checksums the linux amd64 build, then scans public repos. See
+"Diagnostics caveat" below for why `CCE_DIAGNOSTICS` is off for now.
 
 Two ways repos get picked:
 
-- **Daily at 06:00 UTC** (`schedule`): picks 2 random repos each for Go, Python,
-  and Java from GitHub search (stars 100-3000, forks 20-2000, size under 200MB,
-  not archived). A different random page is sampled each run, so the set of
-  repos varies day to day. The point of randomizing is coverage: varied repos
-  hit varied, real-world call patterns, which surfaces more distinct catalog
-  gaps than scanning the same few repos every time.
+- **Hourly** (`schedule`): picks `random_repo_count` (default 2) repos each for
+  Go, Python, and Java using GitHub *code* search for an exact cloud-SDK import
+  marker (`github.com/aws/aws-sdk-go`, `import boto3`, `com.amazonaws`), not
+  plain repository search. Plain repository search (stars/forks/size) picks
+  popular repos regardless of what they do; an earlier run using that approach
+  scanned 6 random repos and got 0 entitlements on all 6, because none of them
+  happened to call a cloud SDK. Code search only returns repos that contain the
+  marker, so a `-filter cloud` scan has something to find.
 - **Manual** (`workflow_dispatch`): scans three fixed repos by default (one per
   language, all known AWS SDK consumers), so a run is reproducible when you're
   checking a specific mapping change. Set `random_repos: true` to exercise the
@@ -42,20 +43,29 @@ gh workflow run cce-scan.yml --repo sks/cloud-vis -f random_repos=true -f random
 
 ## Diagnostics caveat
 
-`cce`'s diagnostics posts are fire-and-forget: each unmapped call signature
-spawns a background goroutine with its own 5-second timeout, and `cce` does not
-wait for those goroutines before exiting. On a scan that finishes in a second
-or two, the process can exit before a POST completes, so a report can be
-silently dropped even with `CCE_DIAGNOSTICS=true` set. `-log-level debug`
-surfaces a failed post, but a successful one isn't logged either way, so the
-workflow logs can't fully confirm whether reports landed. This is a gap in
-`cce` itself, not something this workflow can work around.
+`CCE_DIAGNOSTICS` is off by default right now. `cce` posts one unmapped call
+signature per HTTP request, fired from its own goroutine with no dedup, no
+batching, and no concurrency cap. A single run against three real AWS-SDK
+repos (`eksctl`, `prowler`, `spring-cloud-aws`, plus one duplicate `eksctl`
+job) fired **282,761** of those near-simultaneously from one GitHub Actions
+runner:
 
-A live test run against random repos (2026-11-04) showed one repo
-(`ying32/govcl`, Go) firing 4,180 unmapped-signature posts almost
-simultaneously (no concurrency limit on the goroutine fan-out), nearly all
-failing with `unexpected status 500` from the ingest endpoint, plus at least
-one client-side `i/o timeout`. The other repos in that run logged none either
-way. Whether the 500s are from signature/signing-key mismatches, the ingest
-Lambda being overwhelmed by the burst, or something else server-side is still
-open; this workflow can surface the failures but can't diagnose their cause.
+| Failure | Count |
+|---|---|
+| `connect: connection refused` (never left the runner) | 246,624 |
+| `unexpected status 500` from the ingest Lambda | ~27,800 |
+| `i/o timeout` | 6,226 |
+| `context deadline exceeded` | 1,976 |
+
+CloudWatch confirmed both halves of that: the ingest Lambda's
+`ConcurrentExecutions` hit the account's default ceiling of 1000 and recorded
+170 throttles, but it only saw ~32,000 invocations total out of 282,761
+attempts, so most posts died on the runner itself before reaching AWS. Of the
+~32,000 that did arrive, most of the 500s trace back to every post targeting
+the same S3 key (`cce/YYYYMMDD.ndjson`); the ingest Lambda appends with
+`GetObject` + `PutObject --if-match`, so thousands of concurrent executions
+racing the same key's ETag blow through its 64-attempt retry budget.
+
+Re-enable `CCE_DIAGNOSTICS` here once `appcd-dev/cce` batches diagnostics into
+one request per scan (accumulate distinct signatures, send once) instead of
+one request per occurrence.

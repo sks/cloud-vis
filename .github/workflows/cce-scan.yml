@@ -38,8 +38,8 @@ on:
         type: string
         default: "main"
   schedule:
-    # Daily at 06:00 UTC. Always runs the random-repo path (see the plan job).
-    - cron: "0 6 * * *"
+    # Hourly. Always runs the random-repo path (see the plan job).
+    - cron: "0 * * * *"
 
 permissions:
   contents: read
@@ -72,31 +72,39 @@ jobs:
 
           if [ "$USE_RANDOM" = "true" ]; then
             matrix="[]"
-            # stars/forks/size bound the pool to real, maintained projects and keep
-            # clone+scan time bounded by excluding kernel-scale monorepos (size is in KB).
-            for pair in "GO:go" "PYTHON:python" "JAVA:java"; do
+            # Plain repository search (stars/forks/size) picks popular repos, not
+            # repos that call a cloud SDK -- a prior run picked 6 random Go/Python/Java
+            # repos this way and every one scanned to 0 entitlements. GitHub *code*
+            # search for an exact AWS SDK import marker only returns repos that have
+            # that call somewhere, so a -filter cloud scan has something to find.
+            for pair in "GO:go:github.com/aws/aws-sdk-go" "PYTHON:python:import boto3" "JAVA:java:com.amazonaws"; do
               lang="${pair%%:*}"
-              gh_lang="${pair##*:}"
-              page=$(( (RANDOM % 5) + 1 ))
-              picks=$(gh api "search/repositories?q=language:${gh_lang}+stars:100..3000+forks:20..2000+size:<200000+archived:false&sort=stars&order=desc&per_page=100&page=${page}" \
-                --jq '[.items[] | {full_name, default_branch}] | .[] | [.full_name, .default_branch] | @tsv' \
+              rest="${pair#*:}"
+              gh_lang="${rest%%:*}"
+              marker="${rest#*:}"
+              page=$(( (RANDOM % 3) + 1 ))
+              query_string="\"${marker}\" language:${gh_lang}"
+              encoded=$(jq -rn --arg q "$query_string" '$q|@uri')
+              picks=$(gh api "search/code?q=${encoded}&per_page=30&page=${page}" \
+                --jq '[.items[].repository.full_name] | unique | .[]' \
                 | shuf -n "$RANDOM_REPO_COUNT")
-              while IFS=$'\t' read -r full_name default_branch; do
+              while IFS= read -r full_name; do
                 [ -z "$full_name" ] && continue
+                # Code search results don't carry default_branch; the clone step
+                # omits -branch for repos with no ref, which clones the default HEAD.
                 item=$(jq -nc \
                   --arg name "random: $full_name ($lang)" \
                   --arg language "$lang" \
                   --arg repo "$full_name" \
-                  --arg ref "$default_branch" \
-                  '{name:$name, language:$language, repo:$repo, ref:$ref}')
+                  '{name:$name, language:$language, repo:$repo, ref:""}')
                 matrix=$(printf '%s' "$matrix" | jq -c --argjson e "$item" '. + [$e]')
               done <<< "$picks"
             done
           else
             matrix='[
-              {"name":"eksctl (Go, AWS EKS cluster management)","language":"GO","repo":"eksctl-io/eksctl","ref":"main"},
-              {"name":"prowler (Python, AWS/GCP/Azure security checks)","language":"PYTHON","repo":"prowler-cloud/prowler","ref":"master"},
-              {"name":"spring-cloud-aws (Java, AWS SDK v2 integration)","language":"JAVA","repo":"awspring/spring-cloud-aws","ref":"main"}
+              {"name":"eksctl (Go, AWS EKS cluster management)","language":"GO","repo":"eksctl-io/eksctl","ref":""},
+              {"name":"prowler (Python, AWS/GCP/Azure security checks)","language":"PYTHON","repo":"prowler-cloud/prowler","ref":""},
+              {"name":"spring-cloud-aws (Java, AWS SDK v2 integration)","language":"JAVA","repo":"awspring/spring-cloud-aws","ref":""}
             ]'
           fi
 
@@ -166,19 +174,25 @@ jobs:
       - name: cce --version
         run: cce --version
 
-      - name: Clone ${{ matrix.repo }}@${{ matrix.ref }}
-        run: git clone --depth 1 --branch "${{ matrix.ref }}" "https://github.com/${{ matrix.repo }}.git" target-repo
+      - name: Clone ${{ matrix.repo }}${{ matrix.ref != '' && format('@{0}', matrix.ref) || '' }}
+        run: |
+          set -euo pipefail
+          if [ -n "${{ matrix.ref }}" ]; then
+            git clone --depth 1 --branch "${{ matrix.ref }}" "https://github.com/${{ matrix.repo }}.git" target-repo
+          else
+            git clone --depth 1 "https://github.com/${{ matrix.repo }}.git" target-repo
+          fi
 
-      # CCE_DIAGNOSTICS opts in to Stackgen's catalog-gap reports (off by default in
-      # cce); -log-level debug is the only way a failed report surfaces at all, since
-      # a successful post isn't logged. NOTE: cce posts diagnostics from a background
-      # goroutine with its own 5s timeout and does not wait for it before returning,
-      # so on a fast scan the process can exit before the POST finishes. Debug logs
-      # here show attempts/failures but can't confirm a report actually landed.
+      # CCE_DIAGNOSTICS is OFF for now (see README "Diagnostics caveat"): a prior run
+      # against real cloud-SDK repos fired ~280k unbatched POSTs from one goroutine
+      # per unmapped signature, overwhelming both the client's own local network
+      # resources and the ingest Lambda's S3 append (optimistic-concurrency writes
+      # to one shared day-file). Re-enable once the appcd-dev/cce client batches
+      # diagnostics into one request per scan instead of one request per call.
       - name: Scan ${{ matrix.name }}
         id: scan
         env:
-          CCE_DIAGNOSTICS: "true"
+          CCE_DIAGNOSTICS: "false"
         run: |
           set -euo pipefail
           mkdir -p results
