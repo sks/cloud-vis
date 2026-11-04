@@ -19,7 +19,16 @@ Two ways repos get picked:
   popular repos regardless of what they do; an earlier run using that approach
   scanned 6 random repos and got 0 entitlements on all 6, because none of them
   happened to call a cloud SDK. Code search only returns repos that contain the
-  marker, so a `-filter cloud` scan has something to find.
+  marker, so a `-filter cloud` scan has something to find. Those searches use
+  the `CODE_SEARCH_TOKEN` repository secret, not the Actions `GITHUB_TOKEN`.
+  The Actions token is what produced the long 429s (one response asked for a
+  728 second wait). The secret is sent only on `search/code`. Reading the
+  scanned-repo list and pushing updates still use the Actions token. A
+  fine-grained token that can read public repositories is enough:
+
+  ```bash
+  gh secret set CODE_SEARCH_TOKEN --repo sks/cloud-vis
+  ```
 - **Manual** (`workflow_dispatch`): scans three fixed repos by default (one per
   language, all known AWS SDK consumers), so a run is reproducible when you're
   checking a specific mapping change. Set `random_repos: true` to exercise the

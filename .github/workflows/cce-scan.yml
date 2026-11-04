@@ -65,6 +65,9 @@ jobs:
         id: build
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # User token for search/code only. The Actions GITHUB_TOKEN is what
+          # draws the long secondary 429s (one run was told to wait 728s).
+          CODE_SEARCH_TOKEN: ${{ secrets.CODE_SEARCH_TOKEN }}
           USE_RANDOM: ${{ github.event_name == 'schedule' || inputs.random_repos == true }}
           RANDOM_REPO_COUNT: ${{ inputs.random_repo_count || '2' }}
           EXTRA_REPO: ${{ inputs.extra_repo }}
@@ -86,6 +89,29 @@ jobs:
           grep -v '^#' "$scanned" | sed '/^[[:space:]]*$/d' > "$patterns" || true
           echo "excluding $(wc -l < "$patterns" | tr -d ' ') repo(s) listed on scanned-repos"
 
+          # Code search has its own quota. The Actions token shares a small one
+          # and gets secondary 429s; a user token has its own budget.
+          search_token="${CODE_SEARCH_TOKEN:-}"
+          if [ -z "$search_token" ]; then
+            echo "::warning::CODE_SEARCH_TOKEN is unset. Code search is using the Actions GITHUB_TOKEN, which is the token that gets the long 429s."
+            search_token="$GH_TOKEN"
+          else
+            echo "code search is using CODE_SEARCH_TOKEN"
+          fi
+
+          sleep_for_search_limit() {
+            local fallback="$1"
+            local wait
+            wait=$(sed -n 's/.*try again in \([0-9][0-9.]*\)s.*/\1/p' /tmp/code_search_err | head -1)
+            if [ -z "$wait" ]; then
+              sleep "$fallback"
+              return
+            fi
+            wait=$(awk -v w="$wait" 'BEGIN { s=int(w)+1; if (s>120) s=120; if (s<1) s=1; print s }')
+            echo "code search asked for a wait; sleeping ${wait}s"
+            sleep "$wait"
+          }
+
           if [ "$USE_RANDOM" = "true" ]; then
             matrix="[]"
             # Plain repository search (stars/forks/size) picks popular repos, not
@@ -95,9 +121,9 @@ jobs:
             # that call somewhere, so a -filter cloud scan has something to find.
             first=true
             for pair in "GO:go:github.com/aws/aws-sdk-go" "PYTHON:python:import boto3" "JAVA:java:com.amazonaws"; do
-              # Code search has a much tighter secondary rate limit than regular
-              # search; firing all three queries back to back gets a 429, and the
-              # cooldown it names (seen up to ~113s) outlasts a short fixed sleep.
+              # Code search allows about 10 requests a minute per token. The gap
+              # below stays under that. A 429 still names its own wait, and
+              # sleep_for_search_limit follows that instead of a fixed backoff.
               if [ "$first" = "true" ]; then
                 first=false
               else
@@ -117,13 +143,13 @@ jobs:
                 this_page=$((page + extra))
                 raw=""
                 for attempt in 1 2 3 4; do
-                  if raw=$(gh api "search/code?q=${encoded}&per_page=30&page=${this_page}" \
+                  if raw=$(GH_TOKEN="$search_token" gh api "search/code?q=${encoded}&per_page=30&page=${this_page}" \
                     --jq '[.items[].repository.full_name] | unique | .[]' 2>/tmp/code_search_err); then
                     break
                   fi
                   echo "::warning::code search for ${lang} page ${this_page} failed (attempt ${attempt}): $(cat /tmp/code_search_err)"
                   raw=""
-                  sleep $((attempt * 30))
+                  sleep_for_search_limit $((attempt * 30))
                 done
                 if [ -z "$raw" ]; then
                   continue
