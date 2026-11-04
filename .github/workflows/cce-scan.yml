@@ -39,10 +39,10 @@ on:
         type: string
         default: "main"
   schedule:
-    # Hourly at minute 17. Minute 0 is when Actions is busiest, and GitHub
-    # drops a delayed schedule instead of running it late. Always runs the
-    # random-repo path (see the plan job).
-    - cron: "17 * * * *"
+    # Every 10 minutes. Always runs the random-repo path (see the plan job).
+    # GitHub's shortest allowed interval is 5 minutes; load can still delay
+    # or drop a slot, so treat this as best-effort rather than exact.
+    - cron: "*/10 * * * *"
 
 permissions:
   contents: read

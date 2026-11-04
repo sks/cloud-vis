@@ -12,7 +12,7 @@ instead (diagnostics off by default).
 
 Two ways repos get picked:
 
-- **Hourly** (`schedule`, minute 17 UTC): picks `random_repo_count` (default 2) repos each for
+- **Every 10 minutes** (`schedule`, `*/10 * * * *` UTC): picks `random_repo_count` (default 2) repos each for
   Go, Python, and Java using GitHub *code* search for a cloud-SDK import
   marker. Each language randomly selects one of an AWS, GCP, or Azure marker
   (`github.com/aws/aws-sdk-go` / `cloud.google.com/go` /
