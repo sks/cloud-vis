@@ -24,7 +24,7 @@ on:
       random_repo_count:
         description: "Random repos per language (only used when random_repos is true)"
         type: string
-        default: "2"
+        default: "8"
       extra_repo:
         description: 'Optional extra repo to scan, "owner/repo" (leave blank to skip)'
         type: string
