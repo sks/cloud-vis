@@ -2,6 +2,7 @@
 # Random runs skip these. One owner/repo per line.
 AagamVadecha/CSCI201FinalProject
 AirStair/eye
+Arakaii1083/AWS-SDK
 AssortedAppSecTestProjects/JavaVulnerableLab
 Avnet/Monarch-AzureAWS-OOB
 DLR-RM/rl-baselines3-zoo
@@ -38,6 +39,8 @@ awspring/spring-cloud-aws
 banzaicloud/lambda-slack-bot
 casper-gh/AutoTagOwner
 chanan/AwsConsole
+ciandt-d1/cvtool-image-hashes
+claymodel/aws-sdk-for-android
 contrivancecompanychicago/qualityoflifegames
 corevaluecamp/the-app
 cx-oleg-mikashevsky/18M_LOC_source
@@ -65,11 +68,14 @@ madebymany/moltar
 mateusmuller/k8s-cluster-spinup
 mattsahn/alexa-subway
 meloMPK/MeloZone
+mjudeikis/ARO-RP-Mirror
+msnidal/dulcitone
 mwking0/Generating-S3-presigned-URLS-using-Lambda
 namita-tj/Email-Filtering-Using-DistilBERT
 nine-entertainment/flywheel
 notnoopci/bazel-remote-proxy
 nzoschke/gofaas
+owaisahmad-dev/beats
 patnaikshekhar/KEDA-GCP-PubSub-Sample
 prowler-cloud/prowler
 rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
