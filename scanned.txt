@@ -22,7 +22,9 @@ MovieAugur/RottenTomatoes
 MxJ3lany/ExtractionFiles
 NUS-ALSET/lambda-nbconvert
 Nightonke/WoWoViewPager
+PacktPublishing/Serverless-Programming-Cookbook
 PureStorage-OpenConnect/px-deploy
+RajarshiGO/product_image_recommendation_app
 Songmu/ecschedule
 Spartak95/devbooks-project
 ThreatResponse/poor-webhook
@@ -44,6 +46,7 @@ claymodel/aws-sdk-for-android
 contrivancecompanychicago/qualityoflifegames
 corevaluecamp/the-app
 cx-oleg-mikashevsky/18M_LOC_source
+dansimpson/chronos
 devenes/maven-server-automation
 devlancer412/test-api
 eksctl-io/eksctl
@@ -55,6 +58,7 @@ gmr/env-aws-params
 googleapis/google-cloud-java
 hyphmongo/deepcurator
 in4it/ecs-ssh
+infracast/terraform-provider-aws-public
 jaswanthk993/multi-ai-agent
 jessfraz/s3server
 jlcoto/elections_lambda_api
@@ -83,12 +87,14 @@ rambleRamblePie/RiskProject
 remind101/ssm-env
 rs3lab/veritas
 segmentio/go-athena
+selefra/selefra-provider-aws
 shen100/wemall
 srirajan/athena
 striblab/2020-elex-promos
 sul-dlss-labs/machine-eyes
 tadash10/aws_s3_bucket_security_checker.py
 tkherman/merkle_fs
+tlofreso/bulletin
 tomellis/athena-playground
 tonyxyz/my_little_render_farm
 uber/assume-role-cli
