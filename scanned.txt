@@ -5,7 +5,10 @@ AirStair/eye
 Arakaii1083/AWS-SDK
 AssortedAppSecTestProjects/JavaVulnerableLab
 Avnet/Monarch-AzureAWS-OOB
+Azure/ARO-RP
+Azure/azure-container-networking
 DLR-RM/rl-baselines3-zoo
+GoogleCloudDataproc/spark-spanner-connector
 GoogleCloudPlatform/gke-autoneg-controller
 GoogleCloudPlatform/healthcare-data-harmonization
 GoogleCloudPlatform/k8s-config-connector
@@ -27,10 +30,12 @@ PureStorage-OpenConnect/px-deploy
 RajarshiGO/product_image_recommendation_app
 Songmu/ecschedule
 Spartak95/devbooks-project
+StanfordBioinformatics/Swarm
 ThreatResponse/poor-webhook
 ThreatResponse/serverless-observatory
 UCSB-CS-RACELab/jetty-examples
 Vardhan0257/security-policy-attack-path-analysis
+Yveto-M/Python-Flask-App
 a3linux/go-aws-mon
 aaronosb/sam-python-serverless-stack
 angelshuwei/Memestagram
@@ -86,6 +91,7 @@ rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
 rambleRamblePie/RiskProject
 remind101/ssm-env
 rs3lab/veritas
+sankethp44/Attendance-System
 segmentio/go-athena
 selefra/selefra-provider-aws
 shen100/wemall
