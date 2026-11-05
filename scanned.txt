@@ -7,6 +7,7 @@ AssortedAppSecTestProjects/JavaVulnerableLab
 Avnet/Monarch-AzureAWS-OOB
 Azure/ARO-RP
 Azure/azure-container-networking
+Bethesda477/YoTalent_AiYoYo
 DLR-RM/rl-baselines3-zoo
 GoogleCloudDataproc/spark-spanner-connector
 GoogleCloudPlatform/gke-autoneg-controller
@@ -28,6 +29,7 @@ Nightonke/WoWoViewPager
 PacktPublishing/Serverless-Programming-Cookbook
 PureStorage-OpenConnect/px-deploy
 RajarshiGO/product_image_recommendation_app
+SamShoberWork/SamShober-New-JVL-GitHubAction
 Songmu/ecschedule
 Spartak95/devbooks-project
 StanfordBioinformatics/Swarm
@@ -49,6 +51,7 @@ chanan/AwsConsole
 ciandt-d1/cvtool-image-hashes
 claymodel/aws-sdk-for-android
 contrivancecompanychicago/qualityoflifegames
+conveyal/gtfs-rt-admin
 corevaluecamp/the-app
 cx-oleg-mikashevsky/18M_LOC_source
 dansimpson/chronos
@@ -91,6 +94,7 @@ rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
 rambleRamblePie/RiskProject
 remind101/ssm-env
 rs3lab/veritas
+sanikamal/ai-code-reviewer-deepseek
 sankethp44/Attendance-System
 segmentio/go-athena
 selefra/selefra-provider-aws
@@ -105,7 +109,9 @@ tomellis/athena-playground
 tonyxyz/my_little_render_farm
 uber/assume-role-cli
 venu-gopal-myneni/aws_and_associates
+vkshdev/klubconnect
 wibd-ls/wibd-ls1
+wordmuncher/Python-Speech-Translate
 ying32/govcl
 zak905/gcp-pub-sub-emulator-test-demo
 zhaipro/easy12306
