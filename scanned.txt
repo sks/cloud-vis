@@ -40,6 +40,7 @@ Vardhan0257/security-policy-attack-path-analysis
 Yveto-M/Python-Flask-App
 a3linux/go-aws-mon
 aaronosb/sam-python-serverless-stack
+ahsann826/TextVision-Image-Text-Extractor
 angelshuwei/Memestagram
 anisarambelieva/devops-upskill-final-project
 aws/aws-sam-cli-app-templates
@@ -48,8 +49,10 @@ awspring/spring-cloud-aws
 banzaicloud/lambda-slack-bot
 casper-gh/AutoTagOwner
 chanan/AwsConsole
+chartmuseum/storage
 ciandt-d1/cvtool-image-hashes
 claymodel/aws-sdk-for-android
+concourse/registry-image-resource
 contrivancecompanychicago/qualityoflifegames
 conveyal/gtfs-rt-admin
 corevaluecamp/the-app
@@ -64,6 +67,7 @@ fmguerreiro/cloud-prime
 getsocial-rnd/ecs-drain-lambda
 gmr/env-aws-params
 googleapis/google-cloud-java
+gurel/eisenhower-box
 hyphmongo/deepcurator
 in4it/ecs-ssh
 infracast/terraform-provider-aws-public
@@ -103,11 +107,13 @@ srirajan/athena
 striblab/2020-elex-promos
 sul-dlss-labs/machine-eyes
 tadash10/aws_s3_bucket_security_checker.py
+techdev-solutions/play-bookstore
 tkherman/merkle_fs
 tlofreso/bulletin
 tomellis/athena-playground
 tonyxyz/my_little_render_farm
 uber/assume-role-cli
+utkuyns/SE4453Final
 venu-gopal-myneni/aws_and_associates
 vkshdev/klubconnect
 wibd-ls/wibd-ls1
