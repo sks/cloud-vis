@@ -33,6 +33,7 @@ SamShoberWork/SamShober-New-JVL-GitHubAction
 Songmu/ecschedule
 Spartak95/devbooks-project
 StanfordBioinformatics/Swarm
+TenishevaN/lambda
 ThreatResponse/poor-webhook
 ThreatResponse/serverless-observatory
 UCSB-CS-RACELab/jetty-examples
@@ -40,9 +41,11 @@ Vardhan0257/security-policy-attack-path-analysis
 Yveto-M/Python-Flask-App
 a3linux/go-aws-mon
 aaronosb/sam-python-serverless-stack
+agranig/rtpengine-google-speech2text
 ahsann826/TextVision-Image-Text-Extractor
 angelshuwei/Memestagram
 anisarambelieva/devops-upskill-final-project
+arianvp/webauthn-oidc
 aws/aws-sam-cli-app-templates
 aws/aws-sdk-java
 awspring/spring-cloud-aws
@@ -77,9 +80,11 @@ jlcoto/elections_lambda_api
 jquepi/bind
 jszwec/s3fs
 juanspadaro/mlops_utdt
+kayac/bqin
 leroy-merlin-br/action-s3-cache
 lit-monster/PDF-Extraction
 lucagrulla/cw
+maddoudou22/repo-aws-sdk-java
 madebymany/moltar
 mateusmuller/k8s-cluster-spinup
 mattsahn/alexa-subway
@@ -95,6 +100,7 @@ owaisahmad-dev/beats
 patnaikshekhar/KEDA-GCP-PubSub-Sample
 prowler-cloud/prowler
 rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
+rakeshravi298/NutriBuddy
 rambleRamblePie/RiskProject
 remind101/ssm-env
 rs3lab/veritas
