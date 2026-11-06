@@ -1,6 +1,7 @@
 # Repos the cce-scan workflow has already selected.
 # Random runs skip these. One owner/repo per line.
 AagamVadecha/CSCI201FinalProject
+Aaryansi/rosereview-react
 AirStair/eye
 Arakaii1083/AWS-SDK
 AssortedAppSecTestProjects/JavaVulnerableLab
@@ -22,6 +23,7 @@ MARSfarmCorporation/Flaskapp
 MAVProxyUser/SKYROVER_src
 MagicMashRoom/SuperCalendar
 MarshallWace/cachenator
+MotGolla/MotGolla-Backend
 MovieAugur/RottenTomatoes
 MxJ3lany/ExtractionFiles
 NUS-ALSET/lambda-nbconvert
@@ -33,11 +35,13 @@ SamShoberWork/SamShober-New-JVL-GitHubAction
 Songmu/ecschedule
 Spartak95/devbooks-project
 StanfordBioinformatics/Swarm
+SuperMuel/Syncademic
 TenishevaN/lambda
 ThreatResponse/poor-webhook
 ThreatResponse/serverless-observatory
 UCSB-CS-RACELab/jetty-examples
 Vardhan0257/security-policy-attack-path-analysis
+VoltDB/export-kinesis
 Yveto-M/Python-Flask-App
 a3linux/go-aws-mon
 aaronosb/sam-python-serverless-stack
@@ -55,6 +59,7 @@ chanan/AwsConsole
 chartmuseum/storage
 ciandt-d1/cvtool-image-hashes
 claymodel/aws-sdk-for-android
+cloudspannerecosystem/spanner-cli
 concourse/registry-image-resource
 contrivancecompanychicago/qualityoflifegames
 conveyal/gtfs-rt-admin
@@ -89,6 +94,7 @@ madebymany/moltar
 mateusmuller/k8s-cluster-spinup
 mattsahn/alexa-subway
 meloMPK/MeloZone
+mercari/datastore
 mjudeikis/ARO-RP-Mirror
 msnidal/dulcitone
 mwking0/Generating-S3-presigned-URLS-using-Lambda
