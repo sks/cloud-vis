@@ -10,6 +10,7 @@ Avnet/Monarch-AzureAWS-OOB
 Azure/ARO-RP
 Azure/azure-container-networking
 Bethesda477/YoTalent_AiYoYo
+BingHongLi/ncu_gcp_ai_project
 DLR-RM/rl-baselines3-zoo
 GaybsGimenez/adk-google-study
 GoogleCloudDataproc/spark-spanner-connector
@@ -45,11 +46,13 @@ TenishevaN/lambda
 ThreatResponse/poor-webhook
 ThreatResponse/serverless-observatory
 UCSB-CS-RACELab/jetty-examples
+Vanco/SrtEditor
 Vardhan0257/security-policy-attack-path-analysis
 VoltDB/export-kinesis
 Yveto-M/Python-Flask-App
 a3linux/go-aws-mon
 aaronosb/sam-python-serverless-stack
+abhirockzz/cosmosdb-vector-search-python-typescript-java-dotnet
 agranig/rtpengine-google-speech2text
 ahsann826/TextVision-Image-Text-Extractor
 angelshuwei/Memestagram
@@ -66,6 +69,7 @@ chartmuseum/storage
 ciandt-d1/cvtool-image-hashes
 claymodel/aws-sdk-for-android
 cloudspannerecosystem/spanner-cli
+cloudspannerecosystem/spanner-dump
 concourse/registry-image-resource
 contrivancecompanychicago/qualityoflifegames
 conveyal/gtfs-rt-admin
@@ -97,6 +101,7 @@ jquepi/bind
 jszwec/s3fs
 juanspadaro/mlops_utdt
 kayac/bqin
+kelseyhightower/google-cloud-next-17
 leroy-merlin-br/action-s3-cache
 lianngg/ArchS2015-Project9-FT
 lit-monster/PDF-Extraction
@@ -125,6 +130,7 @@ rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
 rakeshravi298/NutriBuddy
 rambleRamblePie/RiskProject
 remind101/ssm-env
+rickyriled/data_engineering_project_1
 rs3lab/veritas
 sambit824/agent-framework_old
 sanikamal/ai-code-reviewer-deepseek
