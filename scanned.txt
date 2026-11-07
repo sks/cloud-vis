@@ -1,5 +1,6 @@
 # Repos the cce-scan workflow has already selected.
 # Random runs skip these. One owner/repo per line.
+10antz-inc/ssorm
 AagamVadecha/CSCI201FinalProject
 Aaryansi/rosereview-react
 AirStair/eye
@@ -77,6 +78,7 @@ dn0/CloudStatusPage
 eksctl-io/eksctl
 emicklei/parzello
 envato/ejsonkms
+faizan0717/scanmadi
 fmguerreiro/cloud-prime
 getsocial-rnd/ecs-drain-lambda
 gmr/env-aws-params
@@ -96,6 +98,7 @@ jszwec/s3fs
 juanspadaro/mlops_utdt
 kayac/bqin
 leroy-merlin-br/action-s3-cache
+lianngg/ArchS2015-Project9-FT
 lit-monster/PDF-Extraction
 lucagrulla/cw
 maddoudou22/repo-aws-sdk-java
@@ -105,6 +108,8 @@ mateusmuller/k8s-cluster-spinup
 mattsahn/alexa-subway
 meloMPK/MeloZone
 mercari/datastore
+migcv/CNV_RenderFarm
+mirespace/python-azure
 mjudeikis/ARO-RP-Mirror
 msnidal/dulcitone
 mwking0/Generating-S3-presigned-URLS-using-Lambda
@@ -121,6 +126,7 @@ rakeshravi298/NutriBuddy
 rambleRamblePie/RiskProject
 remind101/ssm-env
 rs3lab/veritas
+sambit824/agent-framework_old
 sanikamal/ai-code-reviewer-deepseek
 sankethp44/Attendance-System
 segmentio/go-athena
