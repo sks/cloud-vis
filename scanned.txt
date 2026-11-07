@@ -3,6 +3,7 @@
 10antz-inc/ssorm
 AagamVadecha/CSCI201FinalProject
 Aaryansi/rosereview-react
+AbiramiSukumaran/RetailEngine
 AbiramiSukumaran/movie-score
 AirStair/eye
 Arakaii1083/AWS-SDK
@@ -38,6 +39,7 @@ Nightonke/WoWoViewPager
 PacktPublishing/Serverless-Programming-Cookbook
 Pradheep-S/Alumni-Association
 PureStorage-OpenConnect/px-deploy
+RIPBackdoored/Backdoored-1.8.2-Source-Leak
 RajarshiGO/product_image_recommendation_app
 RobertHochberg/NDBC
 SamShoberWork/SamShober-New-JVL-GitHubAction
@@ -100,6 +102,7 @@ infracast/terraform-provider-aws-public
 inkrement/MySQLbq
 james-google/event-streams-dataflow
 jaswanthk993/multi-ai-agent
+jennifermarsman/OCTOHackathon2025
 jessfraz/s3server
 jlcoto/elections_lambda_api
 jquepi/bind
@@ -129,6 +132,7 @@ notnoopci/bazel-remote-proxy
 nzoschke/gofaas
 owaisahmad-dev/beats
 patnaikshekhar/KEDA-GCP-PubSub-Sample
+penLab101/Azure-AppService-webapp
 platform-engineering-labs/formae-plugin-azure
 prowler-cloud/prowler
 qyjohn/AWS_Tutorials
@@ -150,10 +154,12 @@ striblab/2020-elex-promos
 sul-dlss-labs/machine-eyes
 tadash10/aws_s3_bucket_security_checker.py
 techdev-solutions/play-bookstore
+theplant/oidc2aws
 tkherman/merkle_fs
 tlofreso/bulletin
 tomellis/athena-playground
 tonyxyz/my_little_render_farm
+trek10inc/awsets
 uber/assume-role-cli
 utkuyns/SE4453Final
 venu-gopal-myneni/aws_and_associates
