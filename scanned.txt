@@ -10,10 +10,12 @@ Azure/ARO-RP
 Azure/azure-container-networking
 Bethesda477/YoTalent_AiYoYo
 DLR-RM/rl-baselines3-zoo
+GaybsGimenez/adk-google-study
 GoogleCloudDataproc/spark-spanner-connector
 GoogleCloudPlatform/gke-autoneg-controller
 GoogleCloudPlatform/healthcare-data-harmonization
 GoogleCloudPlatform/k8s-config-connector
+GoogleCloudPlatform/solutions-gke-autoprovisioning
 InsightDataScience/ansible-playbook
 JGAntunes/cnv-renderfarm
 Jack-261108/oss-spring-boot-starter
@@ -23,12 +25,14 @@ MARSfarmCorporation/Flaskapp
 MAVProxyUser/SKYROVER_src
 MagicMashRoom/SuperCalendar
 MarshallWace/cachenator
+MixinNetwork/ocean.one
 MotGolla/MotGolla-Backend
 MovieAugur/RottenTomatoes
 MxJ3lany/ExtractionFiles
 NUS-ALSET/lambda-nbconvert
 Nightonke/WoWoViewPager
 PacktPublishing/Serverless-Programming-Cookbook
+Pradheep-S/Alumni-Association
 PureStorage-OpenConnect/px-deploy
 RajarshiGO/product_image_recommendation_app
 SamShoberWork/SamShober-New-JVL-GitHubAction
@@ -52,6 +56,7 @@ anisarambelieva/devops-upskill-final-project
 arianvp/webauthn-oidc
 aws/aws-sam-cli-app-templates
 aws/aws-sdk-java
+awslabs/aws-codebuild-jenkins-plugin
 awspring/spring-cloud-aws
 banzaicloud/lambda-slack-bot
 casper-gh/AutoTagOwner
@@ -110,6 +115,7 @@ nzoschke/gofaas
 owaisahmad-dev/beats
 patnaikshekhar/KEDA-GCP-PubSub-Sample
 prowler-cloud/prowler
+qyjohn/AWS_Tutorials
 rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
 rakeshravi298/NutriBuddy
 rambleRamblePie/RiskProject
