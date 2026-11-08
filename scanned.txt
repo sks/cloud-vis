@@ -41,6 +41,7 @@ Nightonke/WoWoViewPager
 PacktPublishing/Serverless-Programming-Cookbook
 Pradheep-S/Alumni-Association
 PureStorage-OpenConnect/px-deploy
+R3n3r0/Nexo
 RIPBackdoored/Backdoored-1.8.2-Source-Leak
 RajarshiGO/product_image_recommendation_app
 RobertHochberg/NDBC
@@ -84,6 +85,7 @@ contrivancecompanychicago/qualityoflifegames
 conveyal/gtfs-rt-admin
 corevaluecamp/the-app
 cosmo0920/fluent-bit-go-s3
+crashappsec/chalkular
 cx-oleg-mikashevsky/18M_LOC_source
 dansimpson/chronos
 deepin-community/golang-github-azure-azure-sdk-for-go
@@ -110,6 +112,7 @@ jaswanthk993/multi-ai-agent
 jennifermarsman/OCTOHackathon2025
 jessfraz/s3server
 jlcoto/elections_lambda_api
+joe-boudreau/graphsforgood
 jquepi/bind
 jszwec/s3fs
 juanspadaro/mlops_utdt
@@ -137,6 +140,7 @@ nine-entertainment/flywheel
 notnoopci/bazel-remote-proxy
 nzoschke/gofaas
 owaisahmad-dev/beats
+pagopa/idpay-ranker
 patnaikshekhar/KEDA-GCP-PubSub-Sample
 penLab101/Azure-AppService-webapp
 platform-engineering-labs/formae-plugin-azure
@@ -151,6 +155,7 @@ rs3lab/veritas
 sambit824/agent-framework_old
 sanikamal/ai-code-reviewer-deepseek
 sankethp44/Attendance-System
+seanno/shutdownhook
 segmentio/go-athena
 selefra/selefra-provider-aws
 sharatsawhney/tesseract
@@ -160,6 +165,7 @@ striblab/2020-elex-promos
 sul-dlss-labs/machine-eyes
 tadash10/aws_s3_bucket_security_checker.py
 techdev-solutions/play-bookstore
+tedder/s3-client-side-encryption
 theplant/oidc2aws
 tkherman/merkle_fs
 tlofreso/bulletin
