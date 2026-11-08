@@ -63,6 +63,7 @@ aaronosb/sam-python-serverless-stack
 abhirockzz/cosmosdb-vector-search-python-typescript-java-dotnet
 agranig/rtpengine-google-speech2text
 ahsann826/TextVision-Image-Text-Extractor
+aiearthhack/gino
 alokedesai/Aloah
 angelshuwei/Memestagram
 anisarambelieva/devops-upskill-final-project
@@ -73,6 +74,7 @@ awslabs/aws-codebuild-jenkins-plugin
 awspring/spring-cloud-aws
 banzaicloud/lambda-slack-bot
 bgweber/GameAnalytics
+bgweber/StartupDataScience
 casper-gh/AutoTagOwner
 chanan/AwsConsole
 chartmuseum/storage
@@ -93,6 +95,7 @@ devenes/maven-server-automation
 devlancer412/test-api
 dn0/CloudStatusPage
 eksctl-io/eksctl
+elastic/package-registry
 emicklei/parzello
 emmanueldeletang/nosqlwebapp
 envato/ejsonkms
@@ -100,6 +103,7 @@ faizan0717/scanmadi
 fmguerreiro/cloud-prime
 getsocial-rnd/ecs-drain-lambda
 gmr/env-aws-params
+googleapis/go-gorm-spanner
 googleapis/google-cloud-java
 gurel/eisenhower-box
 hortonworks/cloud-haunter
@@ -142,6 +146,7 @@ nzoschke/gofaas
 owaisahmad-dev/beats
 pagopa/idpay-ranker
 patnaikshekhar/KEDA-GCP-PubSub-Sample
+pedro00dk/willow
 penLab101/Azure-AppService-webapp
 platform-engineering-labs/formae-plugin-azure
 prowler-cloud/prowler
@@ -152,6 +157,7 @@ rambleRamblePie/RiskProject
 remind101/ssm-env
 rickyriled/data_engineering_project_1
 rs3lab/veritas
+salimcodes/AIVerse-BySalim
 sambit824/agent-framework_old
 sanikamal/ai-code-reviewer-deepseek
 sankethp44/Attendance-System
