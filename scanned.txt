@@ -8,12 +8,14 @@ AbiramiSukumaran/movie-score
 AirStair/eye
 Arakaii1083/AWS-SDK
 AssortedAppSecTestProjects/JavaVulnerableLab
+Autodesk/go-awsecs
 Avnet/Monarch-AzureAWS-OOB
 Azure/ARO-RP
 Azure/azure-container-networking
 Bethesda477/YoTalent_AiYoYo
 BingHongLi/ncu_gcp_ai_project
 DLR-RM/rl-baselines3-zoo
+Emma37/ReadTheRoom
 GaybsGimenez/adk-google-study
 GoogleCloudDataproc/spark-spanner-connector
 GoogleCloudPlatform/gke-autoneg-controller
@@ -69,6 +71,7 @@ aws/aws-sdk-java
 awslabs/aws-codebuild-jenkins-plugin
 awspring/spring-cloud-aws
 banzaicloud/lambda-slack-bot
+bgweber/GameAnalytics
 casper-gh/AutoTagOwner
 chanan/AwsConsole
 chartmuseum/storage
@@ -80,6 +83,7 @@ concourse/registry-image-resource
 contrivancecompanychicago/qualityoflifegames
 conveyal/gtfs-rt-admin
 corevaluecamp/the-app
+cosmo0920/fluent-bit-go-s3
 cx-oleg-mikashevsky/18M_LOC_source
 dansimpson/chronos
 deepin-community/golang-github-azure-azure-sdk-for-go
@@ -88,6 +92,7 @@ devlancer412/test-api
 dn0/CloudStatusPage
 eksctl-io/eksctl
 emicklei/parzello
+emmanueldeletang/nosqlwebapp
 envato/ejsonkms
 faizan0717/scanmadi
 fmguerreiro/cloud-prime
@@ -114,6 +119,7 @@ leroy-merlin-br/action-s3-cache
 lianngg/ArchS2015-Project9-FT
 lit-monster/PDF-Extraction
 lucagrulla/cw
+lurodrigo/firestore-clj
 maddoudou22/repo-aws-sdk-java
 madebymany/moltar
 malachischrager/CSCI201_Music_Party
