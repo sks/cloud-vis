@@ -22,6 +22,7 @@ GoogleCloudPlatform/gke-autoneg-controller
 GoogleCloudPlatform/healthcare-data-harmonization
 GoogleCloudPlatform/k8s-config-connector
 GoogleCloudPlatform/solutions-gke-autoprovisioning
+GoogleCloudPlatformTraining/cpb201-dataflow
 Imad-Hassanein/IH-Imad-Hassanein-
 InsightDataScience/ansible-playbook
 JGAntunes/cnv-renderfarm
@@ -40,11 +41,13 @@ NUS-ALSET/lambda-nbconvert
 Nightonke/WoWoViewPager
 PacktPublishing/Serverless-Programming-Cookbook
 Pradheep-S/Alumni-Association
+PulseInnovations/prometheus-deadmansswitch
 PureStorage-OpenConnect/px-deploy
 R3n3r0/Nexo
 RIPBackdoored/Backdoored-1.8.2-Source-Leak
 RajarshiGO/product_image_recommendation_app
 RobertHochberg/NDBC
+SJSU272LabS17/Project-Team-22
 SamShoberWork/SamShober-New-JVL-GitHubAction
 Songmu/ecschedule
 Spartak95/devbooks-project
@@ -94,6 +97,7 @@ deepin-community/golang-github-azure-azure-sdk-for-go
 devenes/maven-server-automation
 devlancer412/test-api
 dn0/CloudStatusPage
+donnieprakoso/Husky-Not-Husky
 eksctl-io/eksctl
 elastic/package-registry
 emicklei/parzello
@@ -122,6 +126,7 @@ jszwec/s3fs
 juanspadaro/mlops_utdt
 kayac/bqin
 kelseyhightower/google-cloud-next-17
+kelseyhightower/vault-init
 leroy-merlin-br/action-s3-cache
 lianngg/ArchS2015-Project9-FT
 lit-monster/PDF-Extraction
@@ -148,6 +153,7 @@ pagopa/idpay-ranker
 patnaikshekhar/KEDA-GCP-PubSub-Sample
 pedro00dk/willow
 penLab101/Azure-AppService-webapp
+pendo-io/acme-books
 platform-engineering-labs/formae-plugin-azure
 prowler-cloud/prowler
 qyjohn/AWS_Tutorials
