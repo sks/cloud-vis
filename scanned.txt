@@ -23,6 +23,7 @@ GoogleCloudPlatform/healthcare-data-harmonization
 GoogleCloudPlatform/k8s-config-connector
 GoogleCloudPlatform/solutions-gke-autoprovisioning
 GoogleCloudPlatformTraining/cpb201-dataflow
+ICEI-PUC-Minas-CC-TI/plmg-cc-ti2-2024-1-g08-organizai
 Imad-Hassanein/IH-Imad-Hassanein-
 InsightDataScience/ansible-playbook
 JGAntunes/cnv-renderfarm
@@ -54,6 +55,7 @@ Spartak95/devbooks-project
 StanfordBioinformatics/Swarm
 SuperMuel/Syncademic
 TenishevaN/lambda
+The-Wayfinder-Society/wayfinder-app
 ThreatResponse/poor-webhook
 ThreatResponse/serverless-observatory
 UCSB-CS-RACELab/jetty-examples
@@ -107,6 +109,7 @@ faizan0717/scanmadi
 fmguerreiro/cloud-prime
 getsocial-rnd/ecs-drain-lambda
 gmr/env-aws-params
+golang/playground
 googleapis/go-gorm-spanner
 googleapis/google-cloud-java
 gurel/eisenhower-box
@@ -159,11 +162,13 @@ prowler-cloud/prowler
 qyjohn/AWS_Tutorials
 rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
 rakeshravi298/NutriBuddy
+rakyll/go-sql-driver-spanner
 rambleRamblePie/RiskProject
 remind101/ssm-env
 rickyriled/data_engineering_project_1
 rs3lab/veritas
 salimcodes/AIVerse-BySalim
+samatt/scraper-boilerplate
 sambit824/agent-framework_old
 sanikamal/ai-code-reviewer-deepseek
 sankethp44/Attendance-System
@@ -173,6 +178,7 @@ selefra/selefra-provider-aws
 sharatsawhney/tesseract
 shen100/wemall
 srirajan/athena
+staruser143/Technology-Talks
 striblab/2020-elex-promos
 sul-dlss-labs/machine-eyes
 tadash10/aws_s3_bucket_security_checker.py
