@@ -12,6 +12,7 @@ Arakaii1083/AWS-SDK
 AssortedAppSecTestProjects/JavaVulnerableLab
 Autodesk/go-awsecs
 Avnet/Monarch-AzureAWS-OOB
+Azure-Samples/aoai-realtime-audio-sdk
 Azure/ARO-RP
 Azure/azure-container-networking
 Azure/azure-microprofile
@@ -30,6 +31,7 @@ Emma37/ReadTheRoom
 GaybsGimenez/adk-google-study
 GoogleCloudDataproc/spark-spanner-connector
 GoogleCloudPlatform/DataflowTemplates
+GoogleCloudPlatform/alloydb-go-connector
 GoogleCloudPlatform/gke-autoneg-controller
 GoogleCloudPlatform/healthcare-data-harmonization
 GoogleCloudPlatform/k8s-config-connector
@@ -89,6 +91,7 @@ a3linux/go-aws-mon
 aaronosb/sam-python-serverless-stack
 abdullah-arif-swe/mCP-ABE_API
 abhirockzz/cosmosdb-vector-search-python-typescript-java-dotnet
+adiom-data/dsync
 agranig/rtpengine-google-speech2text
 ahmetb/zone-printer
 ahsann826/TextVision-Image-Text-Extractor
@@ -97,6 +100,7 @@ akshaykadambatt/Deep_Sort-Yolo-WebApp
 alan-kelly-maersk/azure-java-test
 alexolivier/flight2bq
 alokedesai/Aloah
+andrelucassc/block-ideas-bot
 angelshuwei/Memestagram
 anisarambelieva/devops-upskill-final-project
 arianvp/webauthn-oidc
@@ -188,6 +192,7 @@ jszwec/s3fs
 juanspadaro/mlops_utdt
 kayac/bqin
 kedacore/sample-go-gcppubsub
+kelseyhightower/gif-maker
 kelseyhightower/google-cloud-next-17
 kelseyhightower/vault-init
 khmic5/azure-sdk-for-java
@@ -204,6 +209,7 @@ m-lab/signal-searcher
 maddoudou22/repo-aws-sdk-java
 madebymany/moltar
 malachischrager/CSCI201_Music_Party
+manu354/spaced-in
 mateusmuller/k8s-cluster-spinup
 mattsahn/alexa-subway
 mchmarny/github-activity-counter
