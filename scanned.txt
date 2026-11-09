@@ -6,6 +6,7 @@ Aaryansi/rosereview-react
 AbiramiSukumaran/RetailEngine
 AbiramiSukumaran/movie-score
 AirStair/eye
+Appliscale/cloud-security-audit
 Arakaii1083/AWS-SDK
 AssortedAppSecTestProjects/JavaVulnerableLab
 Autodesk/go-awsecs
@@ -68,6 +69,7 @@ VoltDB/export-kinesis
 Yveto-M/Python-Flask-App
 a3linux/go-aws-mon
 aaronosb/sam-python-serverless-stack
+abdullah-arif-swe/mCP-ABE_API
 abhirockzz/cosmosdb-vector-search-python-typescript-java-dotnet
 agranig/rtpengine-google-speech2text
 ahsann826/TextVision-Image-Text-Extractor
@@ -80,6 +82,7 @@ aws/aws-sam-cli-app-templates
 aws/aws-sdk-java
 awslabs/aws-codebuild-jenkins-plugin
 awspring/spring-cloud-aws
+azb/ERApp_Team5
 banzaicloud/lambda-slack-bot
 bgweber/GameAnalytics
 bgweber/StartupDataScience
@@ -117,6 +120,8 @@ golang/playground
 googleapis/go-gorm-spanner
 googleapis/google-cloud-java
 gurel/eisenhower-box
+harshuljain13/HackNYU-2020
+he1ght/NMT_Serving
 hortonworks/cloud-haunter
 hyphmongo/deepcurator
 in4it/ecs-ssh
@@ -144,6 +149,7 @@ madebymany/moltar
 malachischrager/CSCI201_Music_Party
 mateusmuller/k8s-cluster-spinup
 mattsahn/alexa-subway
+megaproaktiv/git-remote-codecommit
 meloMPK/MeloZone
 mercari/datastore
 migcv/CNV_RenderFarm
