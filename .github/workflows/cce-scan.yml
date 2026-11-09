@@ -5,6 +5,7 @@ name: CCE scan (internet repos)
 # catalog-gap ingest. The action installs cce, scans, and exports aws-iam /
 # gcp-iam / azure-rbac / esbom. On a schedule it picks random repos per language
 # from GitHub code search across AWS/GCP/Azure SDK markers.
+# SDK call inventories are evidence, not validated minimum cloud permissions.
 # Repos already selected are listed in scanned.txt on the scanned-repos branch.
 # Random picks skip that list, and a record job appends the repos from each run.
 # workflow_dispatch keeps three curated repos by default; set random_repos to true
@@ -246,11 +247,13 @@ jobs:
             git clone --depth 1 "https://github.com/${{ matrix.repo }}.git" target-repo
           fi
 
-      # Installs cce, scans target-repo, exports aws-iam/gcp-iam/azure-rbac/esbom.
-      # diagnostics=true is intentional for this fuzz harness only.
+      # Installs cce, scans target-repo, and exports only reviewed GCP/Azure
+      # permissions (unknown tuples produce no role). v1 still allows inferred
+      # guessed permissions; pin the strict-export main revision until a new
+      # immutable release is published. diagnostics=true is intentional here.
       - name: Scan ${{ matrix.name }}
         id: cce
-        uses: stackgenhq/cce-action@v1
+        uses: stackgenhq/cce-action@9d1d4b9da12828d39c2e3560ed1bc6c969c81bbf # strict GCP/Azure exports
         with:
           path: target-repo
           language: ${{ matrix.language }}
@@ -299,34 +302,35 @@ jobs:
             echo "### ${{ matrix.name }}"
             echo
             echo "- cce: ${CCE_VERSION:-unknown}"
+            echo "- SDK calls are evidence, not a complete or deployable least-privilege policy. Empty roles can mean unmapped or unreviewed calls."
             if [ -n "${REPORT:-}" ] && [ -f "$REPORT" ]; then
               jq -r '
                 "- Files scanned: \(.files_scanned)",
-                "- Entitlements: \(.summary.total_entitlements)",
+                "- Mapped SDK call sites: \(.summary.total_entitlements)",
                 (.summary.by_provider | to_entries[] | "  - \(.key): \(.value)")
               ' "$REPORT"
             else
-              echo "- Entitlements: ${ENTITLEMENTS:-0}"
+              echo "- Mapped SDK call sites: ${ENTITLEMENTS:-0}"
               echo "- scan produced no report"
             fi
             echo
             if [ -n "${AWS_IAM:-}" ] && [ -f "$AWS_IAM" ]; then
               mapfile -t actions < <(jq -r '[.Statement[]?.Action[]?] | unique | sort | .[]' "$AWS_IAM")
-              list_capped "Minimum AWS IAM actions" "${actions[@]}"
+              list_capped "Candidate AWS IAM actions (review required)" "${actions[@]}"
             else
-              echo "- Minimum AWS IAM actions: none"
+              echo "- Candidate AWS IAM actions: no policy exported (not evidence of no access)"
             fi
             if [ -n "${GCP_IAM:-}" ] && [ -f "$GCP_IAM" ]; then
               mapfile -t perms < <(ruby -ryaml -e 'doc=YAML.load_file(ARGV[0])||{}; Array(doc["includedPermissions"]).uniq.sort.each{|p| puts p}' "$GCP_IAM")
-              list_capped "Minimum GCP IAM permissions" "${perms[@]}"
+              list_capped "Catalog-mapped GCP IAM permissions (review required)" "${perms[@]}"
             else
-              echo "- Minimum GCP IAM permissions: none"
+              echo "- Catalog-mapped GCP IAM permissions: no role exported (not evidence of no access)"
             fi
             if [ -n "${AZURE_RBAC:-}" ] && [ -f "$AZURE_RBAC" ]; then
               mapfile -t actions < <(jq -r '[.Actions[]?] | unique | sort | .[]' "$AZURE_RBAC")
-              list_capped "Minimum Azure RBAC actions" "${actions[@]}"
+              list_capped "Catalog-mapped Azure RBAC actions (review required)" "${actions[@]}"
             else
-              echo "- Minimum Azure RBAC actions: none"
+              echo "- Catalog-mapped Azure RBAC actions: no role exported (not evidence of no access)"
             fi
             if [ -n "${ESBOM:-}" ] && [ -f "$ESBOM" ]; then
               other=$(jq -r '

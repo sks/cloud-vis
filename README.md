@@ -6,9 +6,14 @@ Default branch. Holds a single GitHub Actions workflow:
 This repo is a **fuzz harness**: it clones random public cloud-SDK repos and
 scans them with [`stackgenhq/cce-action`](https://github.com/stackgenhq/cce-action)
 (`diagnostics: true`) so unmapped signatures feed catalog-gap ingest. The
-action installs `cce`, scans the clone, and exports AWS/GCP/Azure policies plus
-E-SBOM. Everyday product CI should call the action directly on its own checkout
-instead (diagnostics off by default).
+action installs `cce`, scans the clone, and attempts AWS/GCP/Azure policy
+exports plus E-SBOM. The workflow pins the action's strict-export commit
+because the older `@v1` tag still allows inferred GCP/Azure permission guesses.
+Strict export omits a GCP/Azure role if any operation has no reviewed catalog
+mapping. The AWS export can still infer actions; **none of these reports or
+policies is automatically a complete, deployable least-privilege role**.
+Everyday product CI should call the action directly on its own checkout instead
+(diagnostics off by default).
 
 Two ways repos get picked:
 
@@ -55,8 +60,10 @@ Run it from the Actions tab: **CCE scan (internet repos)** → **Run workflow**.
 you switch to random repos, change the per-language random count, or add one
 more ad hoc `owner/repo` to the matrix either way. Each scan's report and
 policy artifacts from `cce-action` are attached as a build artifact. A per-repo
-summary (files scanned, entitlements by provider, and minimum permissions per
-cloud) is written to the run's step summary.
+summary (files scanned, mapped SDK call sites by provider, and any exported
+candidate permissions) is written to the run's step summary. A missing policy
+or zero matches means **no policy was derived**, not that a repository needs no
+cloud permissions; consult the raw scan and provider permission docs.
 
 ```bash
 gh workflow run cce-scan.yml --repo sks/cloud-vis
