@@ -246,6 +246,23 @@ jobs:
             git clone --depth 1 "https://github.com/${{ matrix.repo }}.git" target-repo
           fi
 
+      - name: Exclude vendored dependency trees
+        run: |
+          set -euo pipefail
+          # CCE honors .git/info/exclude by default. This is clone-local Git
+          # metadata, so neither the upstream repo nor its worktree is changed.
+          printf '\n# Exclude vendored dependencies from the CCE fuzz scan\nvendor/\n' >> target-repo/.git/info/exclude
+
+          # A repository .gitignore can negate info/exclude (it takes precedence).
+          # Fail closed rather than scanning a vendor tree in that case. --no-index
+          # is needed because Git otherwise omits tracked vendor files from checks.
+          while IFS= read -r -d '' dir; do
+            if ! git -C target-repo check-ignore --no-index -q -- "${dir#target-repo/}/"; then
+              echo '::error::a repository ignore rule overrides the vendor exclusion'
+              exit 1
+            fi
+          done < <(find target-repo -name .git -prune -o -type d -name vendor -prune -print0)
+
       # Installs cce, scans target-repo, exports aws-iam/gcp-iam/azure-rbac/esbom.
       # diagnostics=true is intentional for this fuzz harness only.
       - name: Scan ${{ matrix.name }}

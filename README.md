@@ -63,6 +63,22 @@ gh workflow run cce-scan.yml --repo sks/cloud-vis
 gh workflow run cce-scan.yml --repo sks/cloud-vis -f random_repos=true -f random_repo_count=3
 ```
 
+## Vendored dependencies
+
+Before each scan, the workflow adds `vendor/` to the cloned repository's
+`.git/info/exclude`. The current CCE default scan honors this clone-local Git
+exclude (including nested `vendor` directories), so dependency copies do not
+inflate the fuzz scan or its diagnostics. It does **not** edit the upstream
+repository, remove files from the checkout, or narrow the scan to a particular
+source directory. Other application files remain in scope subject to the
+repository's own `.gitignore` rules. CCE's walker skips matching paths even if
+vendored files are **tracked**; plain `git check-ignore` would not report those
+unless called with `--no-index`. The workflow checks each vendor directory with
+that flag and fails the scan if a higher-priority repository `.gitignore`
+negates the exclusion, rather than silently scanning it. Repositories without
+`vendor` directories are unaffected. This targets directories literally named
+`vendor`; other dependency layouts are not covered by this rule.
+
 ## Diagnostics
 
 This harness sets `diagnostics: true` on `stackgenhq/cce-action`. Releases
