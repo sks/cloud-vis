@@ -155,6 +155,7 @@ chris0piper/DotaClipzVideoCreator
 ciandt-d1/cvtool-image-hashes
 cirello-io/dynamolock
 cis-famu/booking-api-part-2-JamalISD
+cjephuneh/Realtime-Azure-AI
 claymodel/aws-sdk-for-android
 cloudspannerecosystem/spanner-cli
 cloudspannerecosystem/spanner-dump
@@ -234,6 +235,7 @@ ipfs/go-ds-s3
 j0taaa/TI2
 james-google/event-streams-dataflow
 jaswanthk993/multi-ai-agent
+jenesis/jenesis-repository
 jennifermarsman/OCTOHackathon2025
 jessfraz/s3server
 jlcoto/elections_lambda_api
@@ -246,6 +248,7 @@ kayac/bqin
 kayac/sqsjkr
 kedacore/sample-go-gcppubsub
 keilerkonzept/aws-secretsmanager-files
+kelseyhightower/gcscache
 kelseyhightower/gif-maker
 kelseyhightower/google-cloud-next-17
 kelseyhightower/vault-init
@@ -269,6 +272,7 @@ m-lab/signal-searcher
 maddoudou22/repo-aws-sdk-java
 madebymany/moltar
 malachischrager/CSCI201_Music_Party
+manbobo2002/gcp-visionAPI-demo
 manu354/spaced-in
 marek5050/AWS_S3_File_Synchronizer
 mateusmuller/k8s-cluster-spinup
@@ -323,6 +327,7 @@ rambleRamblePie/RiskProject
 randomvariable/kms-cryptsetup
 rcarlton25/cs201final
 recursecenter/pairing-bot
+reddragonnm/shipathon
 remind101/ssm-env
 rescribe/bookpipeline
 riccardopetronio/tesi
@@ -382,6 +387,7 @@ wibd-ls/wibd-ls1
 woori-silok/project
 wordmuncher/Python-Speech-Translate
 wxy1203/AWS-Bedrck-FullStack
+y0c/festa-notify
 yadudoc/cloud_kotta
 yanolja/arena
 yegle/yegle-bots
