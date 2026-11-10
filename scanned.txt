@@ -14,6 +14,7 @@ Arakaii1083/AWS-SDK
 AssortedAppSecTestProjects/JavaVulnerableLab
 Autodesk/go-awsecs
 Avnet/Monarch-AzureAWS-OOB
+Azure-Samples/AnomalyDetector
 Azure-Samples/aoai-realtime-audio-sdk
 Azure/ARO-RP
 Azure/azure-cli-extensions
@@ -60,6 +61,7 @@ JGAntunes/cnv-renderfarm
 Jack-261108/oss-spring-boot-starter
 JerryCHEN0924/udemy_microservices
 Jopepato/DogSpotting
+KUoslab/NeCon_k8s
 LeanerCloud/aws-ipv4-cost-viewer
 MARSfarmCorporation/Flaskapp
 MAVProxyUser/SKYROVER_src
@@ -127,6 +129,7 @@ alan-kelly-maersk/azure-java-test
 alexolivier/flight2bq
 alokedesai/Aloah
 andrelucassc/block-ideas-bot
+andrewsykim/earthly-kube
 angelshuwei/Memestagram
 anisarambelieva/devops-upskill-final-project
 anupam-talentica/ai-debate
@@ -280,6 +283,7 @@ lurodrigo/firestore-clj
 m-lab/etl
 m-lab/prometheus-bigquery-exporter
 m-lab/signal-searcher
+madani301/PPE-Detection-AWS-Rekognition
 maddoudou22/repo-aws-sdk-java
 madebymany/moltar
 malachischrager/CSCI201_Music_Party
@@ -309,6 +313,7 @@ namita-tj/Email-Filtering-Using-DistilBERT
 nathants/git-remote-aws
 nbharathfeb/gcp-apigateway
 nine-entertainment/flywheel
+nmondal/cowj
 nomikura/atcoder-api
 notkamonohasi/ahcapp
 notnoopci/bazel-remote-proxy
@@ -399,6 +404,7 @@ wibd-ls/wibd-ls1
 woori-silok/project
 wordmuncher/Python-Speech-Translate
 wxy1203/AWS-Bedrck-FullStack
+xtompok/Adrucam_PTZ_PlantID
 y0c/festa-notify
 yadudoc/cloud_kotta
 yanolja/arena
