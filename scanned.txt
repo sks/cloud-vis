@@ -16,6 +16,7 @@ Autodesk/go-awsecs
 Avnet/Monarch-AzureAWS-OOB
 Azure-Samples/aoai-realtime-audio-sdk
 Azure/ARO-RP
+Azure/azure-cli-extensions
 Azure/azure-container-networking
 Azure/azure-microprofile
 Azure/azure-sdk-for-java
@@ -29,6 +30,7 @@ BugBash-Test/aws-sdk-android
 Bytes0211/scotton-aws-utils
 DEEP-IMPACT-AG/skuld
 DLR-RM/rl-baselines3-zoo
+DanyaMawed/CI-CD-UdacityProject
 Deeven-Seru/adk-multi-agent-renovation-project
 Deeven-Seru/retail-engine
 DinaAhmed22/Smart-Glasses-Using-Raspberry-PI-Graduation-Project-Clear-Sight-
@@ -45,7 +47,9 @@ GoogleCloudPlatform/gke-autoneg-controller
 GoogleCloudPlatform/healthcare-data-harmonization
 GoogleCloudPlatform/k8s-config-connector
 GoogleCloudPlatform/solutions-gke-autoprovisioning
+GoogleCloudPlatform/spring-cloud-gcp
 GoogleCloudPlatformTraining/cpb201-dataflow
+GoogleContainerTools/jib-extensions
 Humboldt-WI-Dissertations/AgnesChatbot
 ICEI-PUC-Minas-CC-TI/plmg-cc-ti2-2024-1-g08-organizai
 Imad-Hassanein/IH-Imad-Hassanein-
@@ -181,6 +185,7 @@ devlancer412/test-api
 devtbit/tg-scrapper
 dlleigh/horse-id
 dlsniper/phas
+dmfutcher/git-s3-push
 dn0/CloudStatusPage
 donnieprakoso/Husky-Not-Husky
 dvassallo/s3-benchmark
@@ -245,6 +250,7 @@ jschoedt/go-firestorm
 jszwec/s3fs
 juanspadaro/mlops_utdt
 kayac/bqin
+kayac/ecspresso
 kayac/sqsjkr
 kedacore/sample-go-gcppubsub
 keilerkonzept/aws-secretsmanager-files
