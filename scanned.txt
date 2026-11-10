@@ -23,6 +23,7 @@ Azure/azure-sdk-for-java
 Azure/azure-storage-azcopy
 Azure/secrets-store-csi-driver-provider-azure
 AzureDoom/AzureCortex
+BEPb/Vulnerabilities
 Bethesda477/YoTalent_AiYoYo
 BiglySoftware/BiglyBT
 BingHongLi/ncu_gcp_ai_project
@@ -40,6 +41,7 @@ Fcevalerio/MLOps_Project_AWS
 ForkedM1nd/Muejam-Lib
 Gar1ton/Knowledge-Arch
 GaybsGimenez/adk-google-study
+GeekTrainer/computer-vision-demo
 GoogleCloudDataproc/spark-spanner-connector
 GoogleCloudPlatform/DataflowTemplates
 GoogleCloudPlatform/alloydb-go-connector
@@ -149,12 +151,14 @@ banzaicloud/lambda-slack-bot
 banzaicloud/pipeline
 bgweber/GameAnalytics
 bgweber/StartupDataScience
+boscojones/-phonex-AI-
 bsem-f20-011/HealthyBytes-Your-AI-Nutrition-Consultant
 canfieldjuan/ATLAS
 casper-gh/AutoTagOwner
 casper-gh/ebs-auto-snapshot
 chanan/AwsConsole
 chartmuseum/storage
+chinmaymjog/azure-rbac-insight
 chris0piper/DotaClipzVideoCreator
 ciandt-d1/cvtool-image-hashes
 cirello-io/dynamolock
@@ -200,6 +204,7 @@ ep-infosec/33_apache_nifi
 eugeneh101/sns-to-redshift
 faizan0717/scanmadi
 fmguerreiro/cloud-prime
+forestrie/go-merklelog-azure
 formycore/Devops_Notes
 fujiwara/kinesis-tailf
 galabuzik/aws_python_boto3_scripts
@@ -382,6 +387,7 @@ trackit/s3-acl-viewer
 trek10inc/awsets
 tusharg1993/ClickHouse
 uber/assume-role-cli
+upbound/terraform-provider-azurerm
 uswitch/surtr
 utahta/trans
 utkuyns/SE4453Final
