@@ -63,6 +63,7 @@ JerryCHEN0924/udemy_microservices
 Jopepato/DogSpotting
 KUoslab/NeCon_k8s
 LeanerCloud/aws-ipv4-cost-viewer
+LibraryOfCongress/embARC
 MARSfarmCorporation/Flaskapp
 MAVProxyUser/SKYROVER_src
 MagicMashRoom/SuperCalendar
@@ -94,6 +95,7 @@ Skyscanner/kms-issuer
 Soham-Wadekar/python
 Songmu/ecschedule
 Spartak95/devbooks-project
+SpecterOps/AzureHound
 StanfordBioinformatics/Swarm
 Sudheerbmb/MED24-Web-Application
 SuperMuel/Syncademic
@@ -303,6 +305,7 @@ migcv/CNV_RenderFarm
 mirespace/python-azure
 mjudeikis/ARO-RP-Mirror
 mkogan1/ceph-utils
+mlabouardy/komiser
 monzo/etcd3-bootstrap
 msaarthak/ALPR-YoloV3
 msnidal/dulcitone
@@ -382,6 +385,7 @@ techdev-solutions/play-bookstore
 tedder/s3-client-side-encryption
 teralytics/prometheus-ecs-discovery
 theplant/oidc2aws
+timofeibratskov/book-tracking-backend
 tj/go-sms
 tkherman/merkle_fs
 tlofreso/bulletin
@@ -396,6 +400,7 @@ upbound/terraform-provider-azurerm
 uswitch/surtr
 utahta/trans
 utkuyns/SE4453Final
+uzbit/puurlee
 venu-gopal-myneni/aws_and_associates
 viant/bqwt
 vkshdev/klubconnect
@@ -403,6 +408,7 @@ weidongxu-microsoft/autorest.java_ci
 wibd-ls/wibd-ls1
 woori-silok/project
 wordmuncher/Python-Speech-Translate
+wsamotshozo/WWWYD
 wxy1203/AWS-Bedrck-FullStack
 xtompok/Adrucam_PTZ_PlantID
 y0c/festa-notify
