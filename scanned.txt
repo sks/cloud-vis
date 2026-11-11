@@ -60,6 +60,7 @@ InsightDataScience/ansible-playbook
 JGAntunes/cnv-renderfarm
 Jack-261108/oss-spring-boot-starter
 JerryCHEN0924/udemy_microservices
+Joan-Mateu-dt/test_repository
 Jopepato/DogSpotting
 KUoslab/NeCon_k8s
 LeanerCloud/aws-ipv4-cost-viewer
@@ -136,6 +137,7 @@ angelshuwei/Memestagram
 anisarambelieva/devops-upskill-final-project
 anupam-talentica/ai-debate
 arianvp/webauthn-oidc
+arnav1402/fileshare
 arvinddoraiswamy/LearnPython
 asedighi/aws-python-examples
 aws-samples/multi-branch-cdk-pipelines
@@ -168,6 +170,7 @@ chris0piper/DotaClipzVideoCreator
 ciandt-d1/cvtool-image-hashes
 cirello-io/dynamolock
 cis-famu/booking-api-part-2-JamalISD
+cis-famu/mid-term-project-Kalen1Shaw
 cjephuneh/Realtime-Azure-AI
 claymodel/aws-sdk-for-android
 cloudspannerecosystem/spanner-cli
@@ -180,6 +183,7 @@ conveyal/gtfs-rt-admin
 convox/syslog
 corevaluecamp/the-app
 cosmo0920/fluent-bit-go-s3
+covermymeds/azure-key-vault-agent
 crashappsec/chalkular
 crossplane-contrib/function-kcl
 cx-oleg-mikashevsky/18M_LOC_source
@@ -307,6 +311,7 @@ mjudeikis/ARO-RP-Mirror
 mkogan1/ceph-utils
 mlabouardy/komiser
 monzo/etcd3-bootstrap
+mridulkashyap2012/Data_Pipeline_Project
 msaarthak/ALPR-YoloV3
 msnidal/dulcitone
 mtougeron/k8s-pvc-tagger
@@ -416,6 +421,7 @@ yadudoc/cloud_kotta
 yanolja/arena
 yegle/yegle-bots
 ying32/govcl
+youscan/go-azuremutex
 zak905/gcp-pub-sub-emulator-test-demo
 zcemycl/aws-serverless-ddns-terraform
 zhaipro/easy12306
