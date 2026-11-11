@@ -55,6 +55,7 @@ GoogleCloudPlatformTraining/cpb201-dataflow
 GoogleContainerTools/jib-extensions
 Humboldt-WI-Dissertations/AgnesChatbot
 ICEI-PUC-Minas-CC-TI/plmg-cc-ti2-2024-1-g08-organizai
+ICEI-PUC-Minas-PMGCC-TI/ti-1-pmg-cc-t-20241-fios-de-bondade
 Imad-Hassanein/IH-Imad-Hassanein-
 InsightDataScience/ansible-playbook
 JGAntunes/cnv-renderfarm
@@ -121,8 +122,10 @@ abdullah-arif-swe/mCP-ABE_API
 abhirockzz/cosmosdb-vector-search-python-typescript-java-dotnet
 adhocteam/rds2conn
 adiom-data/dsync
+aere69/kv-demo-app
 afontana1/Data-Engineering
 agranig/rtpengine-google-speech2text
+ahmedivy/auctions
 ahmetb/zone-printer
 ahsann826/TextVision-Image-Text-Extractor
 aiearthhack/gino
@@ -320,6 +323,7 @@ myselfshravan/EnigmaEscape
 namita-tj/Email-Filtering-Using-DistilBERT
 nathants/git-remote-aws
 nbharathfeb/gcp-apigateway
+nickfang/personal-dashboard
 nine-entertainment/flywheel
 nmondal/cowj
 nomikura/atcoder-api
@@ -352,6 +356,7 @@ randomvariable/kms-cryptsetup
 rcarlton25/cs201final
 recursecenter/pairing-bot
 reddragonnm/shipathon
+redwanghb/cloud-query
 remind101/ssm-env
 rescribe/bookpipeline
 riccardopetronio/tesi
@@ -399,6 +404,7 @@ tonyxyz/my_little_render_farm
 trackit/aws-cost-report
 trackit/s3-acl-viewer
 trek10inc/awsets
+triona6/genai-workshop
 tusharg1993/ClickHouse
 uber/assume-role-cli
 upbound/terraform-provider-azurerm
