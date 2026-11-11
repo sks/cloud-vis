@@ -1,6 +1,6 @@
 name: CCE scan (internet repos)
 
-# Fuzz harness: clone public Go/Python/Java cloud-SDK repos and scan them with
+# Fuzz harness: clone public Go/Python/Java/JavaScript cloud-SDK repos and scan them with
 # stackgenhq/cce-action (diagnostics on) so unmapped signatures feed StackGen
 # catalog-gap ingest. The action installs cce, scans, and exports aws-iam /
 # gcp-iam / azure-rbac / esbom. On a schedule it picks random repos per language
@@ -123,7 +123,7 @@ jobs:
             # picks one AWS, GCP, or Azure marker at random so scheduled runs cover
             # more than AWS without tripling code-search traffic.
             first=true
-            for pair in "GO:go" "PYTHON:python" "JAVA:java"; do
+            for pair in "GO:go" "PYTHON:python" "JAVA:java" "JAVASCRIPT:javascript"; do
               # Code search allows about 10 requests a minute per token. The gap
               # below stays under that. A 429 still names its own wait, and
               # sleep_for_search_limit follows that instead of a fixed backoff.
@@ -136,13 +136,16 @@ jobs:
               gh_lang="${pair#*:}"
               case "$lang" in
                 GO)
-                  markers=("github.com/aws/aws-sdk-go" "cloud.google.com/go" "github.com/Azure/azure-sdk-for-go")
+                  markers=("github.com/aws/aws-sdk-go" "github.com/aws/aws-sdk-go-v2" "cloud.google.com/go" "github.com/Azure/azure-sdk-for-go" "github.com/Azure/azure-sdk-for-go/sdk" "github.com/alibabacloud-go" "github.com/oracle/oci-go-sdk")
                   ;;
                 PYTHON)
-                  markers=("import boto3" "from google.cloud" "from azure")
+                  markers=("import boto3" "from google.cloud" "from azure" "from alibabacloud")
                   ;;
                 JAVA)
-                  markers=("com.amazonaws" "com.google.cloud" "com.azure")
+                  markers=("com.amazonaws" "com.google.cloud" "com.azure" "io.awspring.cloud" "org.springframework.cloud.gcp" "com.aliyun" "com.oracle.bmc")
+                  ;;
+                JAVASCRIPT)
+                  markers=("@aws-sdk/client-s3" "@azure/storage-blob" "@google-cloud/storage")
                   ;;
                 *)
                   echo "::warning::unknown language $lang; skipping"
@@ -191,9 +194,24 @@ jobs:
                 echo "::warning::no unseen ${lang} repos this run"
                 continue
               fi
-              picks=$(printf '%s\n' "$found" | shuf -n "$RANDOM_REPO_COUNT")
+              # Ask for a few extra candidates so the size filter below can drop
+              # oversized repos without leaving the language under-quota.
+              picks=$(printf '%s\n' "$found" | shuf -n $((RANDOM_REPO_COUNT + 5)))
+              picked=0
               while IFS= read -r full_name; do
                 [ -z "$full_name" ] && continue
+                if [ "$picked" -ge "$RANDOM_REPO_COUNT" ]; then
+                  break
+                fi
+                # Skip repos too big for the scan budget: google-cloud-java
+                # (2.2GB, 143k files) burned a whole 20-minute job in run
+                # 43075263215 without producing a report, while prowler
+                # (344MB) scans fine, so 500MB is a safe cutoff.
+                size=$(GH_TOKEN="$search_token" gh api "repos/${full_name}" --jq '.size' 2>/dev/null || echo 0)
+                if [ "${size:-0}" -gt 500000 ]; then
+                  echo "::notice::skipping ${full_name}: repo size ${size}KB exceeds the 500000KB scan budget"
+                  continue
+                fi
                 # Code search results don't carry default_branch; the clone step
                 # omits -branch for repos with no ref, which clones the default HEAD.
                 item=$(jq -nc \
@@ -202,6 +220,7 @@ jobs:
                   --arg repo "$full_name" \
                   '{name:$name, language:$language, repo:$repo, ref:""}')
                 matrix=$(printf '%s' "$matrix" | jq -c --argjson e "$item" '. + [$e]')
+                picked=$((picked + 1))
               done <<< "$picks"
             done
           else
