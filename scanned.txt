@@ -4,6 +4,7 @@ AagamVadecha/CSCI201FinalProject
 Anant2003jain/TextExtractify
 Deeven-Seru/adk-multi-agent-renovation-project
 Deeven-Seru/retail-engine
+EDToaster/Speakeasy
 GoogleCloudPlatform/DataflowTemplates
 GoogleCloudPlatform/alloydb-go-connector
 GoogleCloudPlatform/cloud-sql-go-connector
@@ -14,19 +15,24 @@ GoogleCloudPlatform/spring-cloud-gcp
 GoogleContainerTools/jib-extensions
 GudisaSandeep/Smart-Review-System
 HarunTuna93/LogoStaj
+Luke-Rogerson/examplesentences
 MalgorzataVictor/IoTProject
 MixinNetwork/ocean.one
 Nikhil-Emmanuel/IEEE_GG
+OtobongEmmanuel/Panason-Learning-Institute
 RIPBackdoored/Backdoored-1.6-Deobf-Source-Leak
 RIPBackdoored/Backdoored-1.8.2-Source-Leak
 RubnK/Projet-Cloud-Computing
+SamShoberWork/SamShober-New-JVL-GitHubAction
 StanfordBioinformatics/Swarm
 ThiMa25/practicecode-T1
 Vasu1712/movie-predictor
+WiiLink24/Mail-Server
 aere69/kv-demo-app
 aichi/IP-address-collector
 belimitless/dropdash
 bitrise-io/go-xcode
+brockenbrough/ssu-social-backend
 cis-famu/booking-api-part-2-JamalISD
 cis-famu/mid-term-project-Kalen1Shaw
 cloudspannerecosystem/spanner-cli
@@ -49,6 +55,7 @@ mattjoke/pa200-hw3
 meloMPK/MeloZone
 mercari/datastore
 nbharathfeb/gcp-apigateway
+nikolsky/meeting-cadmus
 penLab101/Azure-AppService-webapp
 qiaoqiao7878/grocery_object_detection
 rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
@@ -58,5 +65,6 @@ sanikamal/ai-code-reviewer-deepseek
 sgarciac/fuego
 tweag/nix-store-gcs-proxy
 varsha815/AzureLingo
+wibd-ls/wibd-ls1
 yanivharpaz/basic_avatar_web
 yswi1892/python-docs-hello-world
