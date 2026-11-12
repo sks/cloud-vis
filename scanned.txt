@@ -2,6 +2,7 @@
 # Random runs skip these. One owner/repo per line.
 AagamVadecha/CSCI201FinalProject
 Anant2003jain/TextExtractify
+Azure/draft
 Deeven-Seru/adk-multi-agent-renovation-project
 Deeven-Seru/retail-engine
 EDToaster/Speakeasy
@@ -17,6 +18,7 @@ GudisaSandeep/Smart-Review-System
 HarunTuna93/LogoStaj
 Luke-Rogerson/examplesentences
 MalgorzataVictor/IoTProject
+MerryFairyTalesAD440/UX-UI
 MixinNetwork/ocean.one
 Nikhil-Emmanuel/IEEE_GG
 OtobongEmmanuel/Panason-Learning-Institute
@@ -30,6 +32,7 @@ Vasu1712/movie-predictor
 WiiLink24/Mail-Server
 aere69/kv-demo-app
 aichi/IP-address-collector
+alibaba/havenask
 belimitless/dropdash
 bitrise-io/go-xcode
 brockenbrough/ssu-social-backend
@@ -38,7 +41,9 @@ cis-famu/mid-term-project-Kalen1Shaw
 cloudspannerecosystem/spanner-cli
 cloudspannerecosystem/spool
 contrivancecompanychicago/qualityoflifegames
+cycloidio/terracognita
 develozombie/iot-servicebus-py
+dipjyotimetia/HybridTestFramework
 drhammed/github-models
 elastic/package-registry
 gobitfly/eth2-beaconchain-explorer
@@ -54,6 +59,8 @@ kelseyhightower/gif-maker
 mattjoke/pa200-hw3
 meloMPK/MeloZone
 mercari/datastore
+msr5464/QA-Dashboard
+nacos-group/nacos-sdk-python
 nbharathfeb/gcp-apigateway
 nikolsky/meeting-cadmus
 penLab101/Azure-AppService-webapp
@@ -61,6 +68,7 @@ qiaoqiao7878/grocery_object_detection
 rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
 rakyll/go-sql-driver-spanner
 rcarlton25/cs201final
+salaichitoolatt/miniflix
 sanikamal/ai-code-reviewer-deepseek
 sgarciac/fuego
 tweag/nix-store-gcs-proxy
