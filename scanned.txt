@@ -2,6 +2,7 @@
 # Random runs skip these. One owner/repo per line.
 AagamVadecha/CSCI201FinalProject
 Anant2003jain/TextExtractify
+Azure/azure-kusto-java
 Azure/draft
 Deeven-Seru/adk-multi-agent-renovation-project
 Deeven-Seru/retail-engine
@@ -26,6 +27,7 @@ RIPBackdoored/Backdoored-1.6-Deobf-Source-Leak
 RIPBackdoored/Backdoored-1.8.2-Source-Leak
 RubnK/Projet-Cloud-Computing
 SamShoberWork/SamShober-New-JVL-GitHubAction
+Siddharthsavaliya/node-common_functionality
 StanfordBioinformatics/Swarm
 ThiMa25/practicecode-T1
 Vasu1712/movie-predictor
@@ -33,6 +35,7 @@ WiiLink24/Mail-Server
 aere69/kv-demo-app
 aichi/IP-address-collector
 alibaba/havenask
+alibabacloud-go/vod-20170321
 belimitless/dropdash
 bitrise-io/go-xcode
 brockenbrough/ssu-social-backend
@@ -45,12 +48,15 @@ cycloidio/terracognita
 develozombie/iot-servicebus-py
 dipjyotimetia/HybridTestFramework
 drhammed/github-models
+eclipse-store/store
 elastic/package-registry
 gobitfly/eth2-beaconchain-explorer
 golang/playground
 googleapis/go-gorm-spanner
 googleapis/go-sql-spanner
 googleapis/google-cloud-java
+guihaojin/url-shortener
+infraboard/cmdb
 jaswanthk993/multi-ai-agent
 jessfraz/s3server
 jimbobbennett/Hackathon-CaptureImageForComputerVision
@@ -59,6 +65,7 @@ kelseyhightower/gif-maker
 mattjoke/pa200-hw3
 meloMPK/MeloZone
 mercari/datastore
+michaelliao/sync-s3-compatible-action
 msr5464/QA-Dashboard
 nacos-group/nacos-sdk-python
 nbharathfeb/gcp-apigateway
@@ -76,3 +83,4 @@ varsha815/AzureLingo
 wibd-ls/wibd-ls1
 yanivharpaz/basic_avatar_web
 yswi1892/python-docs-hello-world
+zphelps/eta-ruby
