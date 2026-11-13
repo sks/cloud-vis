@@ -43,6 +43,7 @@ alibabacloud-go/vod-20170321
 belimitless/dropdash
 bitrise-io/go-xcode
 brockenbrough/ssu-social-backend
+cirello-io/dynamolock
 cis-famu/booking-api-part-2-JamalISD
 cis-famu/mid-term-project-Kalen1Shaw
 cloudspannerecosystem/spanner-cli
@@ -54,6 +55,9 @@ dipjyotimetia/HybridTestFramework
 drhammed/github-models
 eclipse-store/store
 elastic/package-registry
+elisska/cloud-build-test
+fujiwara/kinesis-tailf
+g5hlqaH9N5/LCIFULxRapY
 gobitfly/eth2-beaconchain-explorer
 golang/playground
 goodrain/rainbond-console
@@ -70,9 +74,13 @@ kelseyhightower/gif-maker
 mattjoke/pa200-hw3
 meloMPK/MeloZone
 mercari/datastore
+mfogel/haraka-plugin-queue-s3
 michaelliao/sync-s3-compatible-action
+mizanmahi/upload-file-s3-sdk-v3
 msr5464/QA-Dashboard
+mwking0/Generating-S3-presigned-URLS-using-Lambda
 nacos-group/nacos-sdk-python
+nbchazi99/atg-app
 nbharathfeb/gcp-apigateway
 nguyennguyennam/online-news
 nikolsky/meeting-cadmus
