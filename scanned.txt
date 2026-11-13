@@ -41,8 +41,12 @@ Vasu1712/movie-predictor
 WiiLink24/Mail-Server
 aere69/kv-demo-app
 aichi/IP-address-collector
+aj-archipelago/cortex
+ajupeter23/hackathon-workshop-1
 alibaba/havenask
 alibabacloud-go/vod-20170321
+alipay/antchain-openapi-prod-sdk
+aliyun/dingtalk-sdk
 belimitless/dropdash
 bitrise-io/go-xcode
 brockenbrough/ssu-social-backend
@@ -62,6 +66,7 @@ eclipse-store/store
 elastic/package-registry
 elisska/cloud-build-test
 farzad528/foundry-iq-demo
+fellgar246/legalmove-pro
 fujiwara/kinesis-tailf
 g5hlqaH9N5/LCIFULxRapY
 gobitfly/eth2-beaconchain-explorer
@@ -71,6 +76,7 @@ googleapis/go-gorm-spanner
 googleapis/go-sql-spanner
 googleapis/google-cloud-java
 guihaojin/url-shortener
+guru2024/github-actions-demo6
 horizontalintegration/vercel-cronjob-poc
 infraboard/cmdb
 janmg/logstash-input-azure_blob_storage
@@ -78,6 +84,7 @@ jaswanthk993/multi-ai-agent
 jessfraz/s3server
 jimbobbennett/Hackathon-CaptureImageForComputerVision
 jmhodges/howsmyssl
+joemccann/covid-19-news-sentiment
 kelseyhightower/gif-maker
 lvallari/SportzBattle-Server
 maniish-jaiin/spring-cloud-messaging-sample
@@ -110,6 +117,7 @@ sivaprasadreddy/spring-cloud-aws-demo
 speleo-dev/eSpeleoSociety
 susheelkbhargav/bulk-ingestor
 tweag/nix-store-gcs-proxy
+upbound/terraform-provider-azurerm
 varsha815/AzureLingo
 wibd-ls/wibd-ls1
 yanivharpaz/basic_avatar_web
