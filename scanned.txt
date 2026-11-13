@@ -5,6 +5,7 @@ AlibabaCloudDocs/llm_learning
 Anant2003jain/TextExtractify
 Azure/azure-kusto-java
 Azure/draft
+BiglySoftware/BiglyBT
 Deeven-Seru/adk-multi-agent-renovation-project
 Deeven-Seru/retail-engine
 EDToaster/Speakeasy
@@ -34,6 +35,7 @@ SamShoberWork/SamShober-New-JVL-GitHubAction
 Siddharthsavaliya/node-common_functionality
 StanfordBioinformatics/Swarm
 ThiMa25/practicecode-T1
+Tup0lev/Grand-Theft-Video
 Vasu1712/movie-predictor
 WiiLink24/Mail-Server
 aere69/kv-demo-app
@@ -49,13 +51,16 @@ cis-famu/mid-term-project-Kalen1Shaw
 cloudspannerecosystem/spanner-cli
 cloudspannerecosystem/spool
 contrivancecompanychicago/qualityoflifegames
+crdwortz/Forge
 cycloidio/terracognita
+deepin-community/golang-github-azure-azure-sdk-for-go
 develozombie/iot-servicebus-py
 dipjyotimetia/HybridTestFramework
 drhammed/github-models
 eclipse-store/store
 elastic/package-registry
 elisska/cloud-build-test
+farzad528/foundry-iq-demo
 fujiwara/kinesis-tailf
 g5hlqaH9N5/LCIFULxRapY
 gobitfly/eth2-beaconchain-explorer
@@ -71,12 +76,14 @@ jessfraz/s3server
 jimbobbennett/Hackathon-CaptureImageForComputerVision
 jmhodges/howsmyssl
 kelseyhightower/gif-maker
+lvallari/SportzBattle-Server
 mattjoke/pa200-hw3
 meloMPK/MeloZone
 mercari/datastore
 mfogel/haraka-plugin-queue-s3
 michaelliao/sync-s3-compatible-action
 mizanmahi/upload-file-s3-sdk-v3
+mrpjevans/stenographer
 msr5464/QA-Dashboard
 mwking0/Generating-S3-presigned-URLS-using-Lambda
 nacos-group/nacos-sdk-python
@@ -94,6 +101,7 @@ rcarlton25/cs201final
 salaichitoolatt/miniflix
 sanikamal/ai-code-reviewer-deepseek
 sgarciac/fuego
+susheelkbhargav/bulk-ingestor
 tweag/nix-store-gcs-proxy
 varsha815/AzureLingo
 wibd-ls/wibd-ls1
