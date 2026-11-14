@@ -6,6 +6,7 @@ Anant2003jain/TextExtractify
 Azure/azure-kusto-java
 Azure/draft
 BiglySoftware/BiglyBT
+DamyanBG/real-estate-nodejs-be
 Deeven-Seru/adk-multi-agent-renovation-project
 Deeven-Seru/retail-engine
 EDToaster/Speakeasy
@@ -31,14 +32,18 @@ OtobongEmmanuel/Panason-Learning-Institute
 RIPBackdoored/Backdoored-1.6-Deobf-Source-Leak
 RIPBackdoored/Backdoored-1.8.2-Source-Leak
 RubnK/Projet-Cloud-Computing
+Sachin4B4/Translation-Backend
 SamShoberWork/SamShober-New-JVL-GitHubAction
+Samyak05/AI-Powered-Investor-Platform
 Siddharthsavaliya/node-common_functionality
+SigNoz/signoz-otel-collector
 StanfordBioinformatics/Swarm
 ThiMa25/practicecode-T1
 TiaApril/docuscan-ai
 Tup0lev/Grand-Theft-Video
 Vasu1712/movie-predictor
 WiiLink24/Mail-Server
+X-oss-byte/Multisig
 aere69/kv-demo-app
 aichi/IP-address-collector
 aj-archipelago/cortex
@@ -47,6 +52,7 @@ alibaba/havenask
 alibabacloud-go/vod-20170321
 alipay/antchain-openapi-prod-sdk
 aliyun/dingtalk-sdk
+awspring/spring-cloud-aws
 belimitless/dropdash
 bitrise-io/go-xcode
 brockenbrough/ssu-social-backend
@@ -116,10 +122,12 @@ sgarciac/fuego
 sivaprasadreddy/spring-cloud-aws-demo
 speleo-dev/eSpeleoSociety
 susheelkbhargav/bulk-ingestor
+tibor19/static-website-deploy
 tweag/nix-store-gcs-proxy
 upbound/terraform-provider-azurerm
 varsha815/AzureLingo
 wibd-ls/wibd-ls1
+yahyanouali/spring-boot-testing
 yanivharpaz/basic_avatar_web
 yswi1892/python-docs-hello-world
 zaratsian/Google-Cloud-Scripts
