@@ -2,6 +2,7 @@
 # Random runs skip these. One owner/repo per line.
 AagamVadecha/CSCI201FinalProject
 AlibabaCloudDocs/llm_learning
+Altinn/altinn-platform
 Anant2003jain/TextExtractify
 Azure/azure-kusto-java
 Azure/draft
@@ -52,10 +53,12 @@ alibaba/havenask
 alibabacloud-go/vod-20170321
 alipay/antchain-openapi-prod-sdk
 aliyun/dingtalk-sdk
+appcd-dev/terracognita
 awspring/spring-cloud-aws
 belimitless/dropdash
 bitrise-io/go-xcode
 brockenbrough/ssu-social-backend
+camptocamp/argocd-gs-scripts
 cirello-io/dynamolock
 cis-famu/booking-api-part-2-JamalISD
 cis-famu/mid-term-project-Kalen1Shaw
@@ -64,10 +67,12 @@ cloudspannerecosystem/spool
 contrivancecompanychicago/qualityoflifegames
 crdwortz/Forge
 cycloidio/terracognita
+dala00/cloud-storage-proxy
 deepin-community/golang-github-azure-azure-sdk-for-go
 develozombie/iot-servicebus-py
 dipjyotimetia/HybridTestFramework
 drhammed/github-models
+eclipse-lmos/arc
 eclipse-store/store
 elastic/package-registry
 elisska/cloud-build-test
@@ -75,6 +80,7 @@ farzad528/foundry-iq-demo
 fellgar246/legalmove-pro
 fujiwara/kinesis-tailf
 g5hlqaH9N5/LCIFULxRapY
+gestalt-config/gestalt
 gobitfly/eth2-beaconchain-explorer
 golang/playground
 goodrain/rainbond-console
@@ -124,11 +130,13 @@ speleo-dev/eSpeleoSociety
 susheelkbhargav/bulk-ingestor
 tibor19/static-website-deploy
 tweag/nix-store-gcs-proxy
+ubyssey/ubysseybot
 upbound/terraform-provider-azurerm
 varsha815/AzureLingo
 wibd-ls/wibd-ls1
 yahyanouali/spring-boot-testing
 yanivharpaz/basic_avatar_web
+youssef03040/AI-Verbeteraar
 yswi1892/python-docs-hello-world
 zaratsian/Google-Cloud-Scripts
 zphelps/eta-ruby
