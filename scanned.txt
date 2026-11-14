@@ -4,6 +4,7 @@ AagamVadecha/CSCI201FinalProject
 AlibabaCloudDocs/llm_learning
 Altinn/altinn-platform
 Anant2003jain/TextExtractify
+Azure/agw-pep-custom-names
 Azure/azure-kusto-java
 Azure/draft
 BiglySoftware/BiglyBT
@@ -24,6 +25,7 @@ GudisaSandeep/Smart-Review-System
 Hai-Che/NodeJs_Backend_Architecture
 HarunTuna93/LogoStaj
 Joan-Mateu-dt/test_repository
+KEVINcustoms/LuckyPOS
 Luke-Rogerson/examplesentences
 MalgorzataVictor/IoTProject
 MerryFairyTalesAD440/UX-UI
@@ -55,6 +57,7 @@ alipay/antchain-openapi-prod-sdk
 aliyun/dingtalk-sdk
 appcd-dev/terracognita
 awspring/spring-cloud-aws
+bank-vaults/bank-vaults
 belimitless/dropdash
 bitrise-io/go-xcode
 brockenbrough/ssu-social-backend
@@ -99,7 +102,9 @@ jmhodges/howsmyssl
 joemccann/covid-19-news-sentiment
 kelseyhightower/gif-maker
 lvallari/SportzBattle-Server
+malob/generate-podcast-rss-cloud-function
 maniish-jaiin/spring-cloud-messaging-sample
+marceloricciardi/azure-search-openai-demo-back
 mattjoke/pa200-hw3
 meloMPK/MeloZone
 mercari/datastore
@@ -111,6 +116,7 @@ mrpjevans/stenographer
 msr5464/QA-Dashboard
 mwking0/Generating-S3-presigned-URLS-using-Lambda
 nacos-group/nacos-sdk-python
+nanovms/ops
 nbchazi99/atg-app
 nbharathfeb/gcp-apigateway
 nguyennguyennam/online-news
@@ -123,6 +129,7 @@ rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
 rakyll/go-sql-driver-spanner
 rcarlton25/cs201final
 salaichitoolatt/miniflix
+salrashid123/gcs_signedurl
 sanikamal/ai-code-reviewer-deepseek
 sgarciac/fuego
 sivaprasadreddy/spring-cloud-aws-demo
@@ -132,6 +139,7 @@ tibor19/static-website-deploy
 tweag/nix-store-gcs-proxy
 ubyssey/ubysseybot
 upbound/terraform-provider-azurerm
+utkuyns/SE4453Final
 varsha815/AzureLingo
 wibd-ls/wibd-ls1
 yahyanouali/spring-boot-testing
