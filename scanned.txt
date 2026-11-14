@@ -40,6 +40,7 @@ RubnK/Projet-Cloud-Computing
 Sachin4B4/Translation-Backend
 SamShoberWork/SamShober-New-JVL-GitHubAction
 Samyak05/AI-Powered-Investor-Platform
+Shailender-Youtube/DeepSeek-Azure-AI-Foundry-WebApp
 Siddharthsavaliya/node-common_functionality
 SigNoz/signoz-otel-collector
 SpecterOps/AzureHound
@@ -65,6 +66,7 @@ bank-vaults/bank-vaults
 belimitless/dropdash
 bitrise-io/go-xcode
 brockenbrough/ssu-social-backend
+bushidocodes/instagram-clone
 camptocamp/argocd-gs-scripts
 cirello-io/dynamolock
 cis-famu/booking-api-part-2-JamalISD
@@ -73,6 +75,7 @@ cloudspannerecosystem/spanner-cli
 cloudspannerecosystem/spool
 codeday/uploader
 contrivancecompanychicago/qualityoflifegames
+conveyal/gtfs-data-manager
 crdwortz/Forge
 cycloidio/terracognita
 dala00/cloud-storage-proxy
@@ -80,13 +83,16 @@ deepin-community/golang-github-azure-azure-sdk-for-go
 develozombie/iot-servicebus-py
 dipjyotimetia/HybridTestFramework
 drhammed/github-models
+duneanalytics/prometheus-trusted-advisor-exporter
 eclipse-lmos/arc
 eclipse-store/store
 elastic/package-registry
 elisska/cloud-build-test
+equinor/equinor-trading-plotly-dash-template
 farzad528/foundry-iq-demo
 fellgar246/legalmove-pro
 fujiwara/kinesis-tailf
+fzgitara/b-log
 g5hlqaH9N5/LCIFULxRapY
 gestalt-config/gestalt
 gobitfly/eth2-beaconchain-explorer
@@ -133,6 +139,7 @@ opencost/opencost
 oracle/terraform-provider-oci
 penLab101/Azure-AppService-webapp
 qiaoqiao7878/grocery_object_detection
+qyjohn/AWS_Tutorials
 rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
 rakyll/go-sql-driver-spanner
 rcarlton25/cs201final
@@ -142,6 +149,7 @@ sanikamal/ai-code-reviewer-deepseek
 sgarciac/fuego
 sivaprasadreddy/spring-cloud-aws-demo
 speleo-dev/eSpeleoSociety
+spezam/eventbridge-cli
 susheelkbhargav/bulk-ingestor
 tibor19/static-website-deploy
 tweag/nix-store-gcs-proxy
