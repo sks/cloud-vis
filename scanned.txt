@@ -1,6 +1,7 @@
 # Repos the cce-scan workflow has already selected.
 # Random runs skip these. One owner/repo per line.
 AagamVadecha/CSCI201FinalProject
+Aaryansi/rosereview-react
 AlibabaCloudDocs/llm_learning
 Altinn/altinn-platform
 Anant2003jain/TextExtractify
@@ -32,6 +33,7 @@ MerryFairyTalesAD440/UX-UI
 MixinNetwork/ocean.one
 Nikhil-Emmanuel/IEEE_GG
 OtobongEmmanuel/Panason-Learning-Institute
+Qihoo360/zeppelin-gateway
 RIPBackdoored/Backdoored-1.6-Deobf-Source-Leak
 RIPBackdoored/Backdoored-1.8.2-Source-Leak
 RubnK/Projet-Cloud-Computing
@@ -40,7 +42,9 @@ SamShoberWork/SamShober-New-JVL-GitHubAction
 Samyak05/AI-Powered-Investor-Platform
 Siddharthsavaliya/node-common_functionality
 SigNoz/signoz-otel-collector
+SpecterOps/AzureHound
 StanfordBioinformatics/Swarm
+The-Quan/myFlaskApp
 ThiMa25/practicecode-T1
 TiaApril/docuscan-ai
 Tup0lev/Grand-Theft-Video
@@ -67,6 +71,7 @@ cis-famu/booking-api-part-2-JamalISD
 cis-famu/mid-term-project-Kalen1Shaw
 cloudspannerecosystem/spanner-cli
 cloudspannerecosystem/spool
+codeday/uploader
 contrivancecompanychicago/qualityoflifegames
 crdwortz/Forge
 cycloidio/terracognita
@@ -93,6 +98,7 @@ googleapis/google-cloud-java
 guihaojin/url-shortener
 guru2024/github-actions-demo6
 horizontalintegration/vercel-cronjob-poc
+ikhsanalatsary/multer-sharp
 infraboard/cmdb
 janmg/logstash-input-azure_blob_storage
 jaswanthk993/multi-ai-agent
@@ -100,11 +106,13 @@ jessfraz/s3server
 jimbobbennett/Hackathon-CaptureImageForComputerVision
 jmhodges/howsmyssl
 joemccann/covid-19-news-sentiment
+juliensimon/aws
 kelseyhightower/gif-maker
 lvallari/SportzBattle-Server
 malob/generate-podcast-rss-cloud-function
 maniish-jaiin/spring-cloud-messaging-sample
 marceloricciardi/azure-search-openai-demo-back
+mariadb-operator/mariadb-operator
 mattjoke/pa200-hw3
 meloMPK/MeloZone
 mercari/datastore
