@@ -94,6 +94,7 @@ deepin-community/golang-github-azure-azure-sdk-for-go
 develozombie/iot-servicebus-py
 dipjyotimetia/HybridTestFramework
 dllewellyn/reflex
+dobbo-ca/azure-go-cli
 drhammed/github-models
 duneanalytics/prometheus-trusted-advisor-exporter
 eclipse-lmos/arc
@@ -102,6 +103,7 @@ elastic/apm-aws-lambda
 elastic/package-registry
 elisska/cloud-build-test
 equinor/equinor-trading-plotly-dash-template
+erans/bucketvcs
 farmhutsoftwareteam/videoserver
 farzad528/foundry-iq-demo
 fellgar246/legalmove-pro
@@ -109,6 +111,7 @@ fujiwara/kinesis-tailf
 fyfsxkh/TokBrain
 fzgitara/b-log
 g5hlqaH9N5/LCIFULxRapY
+gSchool/aws-s3-sdk-node-example
 gcbrandao/gcp-pubsub-sample
 gestalt-config/gestalt
 glassechidna/lambdaeip
@@ -121,6 +124,7 @@ googleapis/google-cloud-java
 guihaojin/url-shortener
 guru2024/github-actions-demo6
 horizontalintegration/vercel-cronjob-poc
+hychrisli/Bike-Rental-System
 ikhsanalatsary/multer-sharp
 infraboard/cmdb
 janmg/logstash-input-azure_blob_storage
@@ -132,6 +136,7 @@ jmhodges/howsmyssl
 joemccann/covid-19-news-sentiment
 juliensimon/aws
 kelseyhightower/gif-maker
+kumar385/gcppubsub
 lvallari/SportzBattle-Server
 malob/generate-podcast-rss-cloud-function
 maniish-jaiin/spring-cloud-messaging-sample
@@ -143,7 +148,9 @@ mercari/datastore
 mfogel/haraka-plugin-queue-s3
 michaelliao/sync-s3-compatible-action
 mizanmahi/upload-file-s3-sdk-v3
+mkogan1/ceph-utils
 mostafa/xk6-kafka
+mridulkashyap2012/Data_Pipeline_Project
 mrpjevans/stenographer
 msr5464/QA-Dashboard
 mwking0/Generating-S3-presigned-URLS-using-Lambda
@@ -151,6 +158,7 @@ nacos-group/nacos-sdk-python
 nanovms/ops
 nbchazi99/atg-app
 nbharathfeb/gcp-apigateway
+nftstorage/backup
 nguyennguyennam/online-news
 nikolsky/meeting-cadmus
 opencost/opencost
