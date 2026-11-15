@@ -10,12 +10,14 @@ Azure/azure-kusto-java
 Azure/draft
 Bethesda477/YoTalent_AiYoYo
 BiglySoftware/BiglyBT
+BlockSurvey/ballot
 DEFRA/bng-public-register
 DamyanBG/real-estate-nodejs-be
 Deeven-Seru/adk-multi-agent-renovation-project
 Deeven-Seru/retail-engine
 EDToaster/Speakeasy
 FJVicVel03/Semi1-A-2S2025-Grupo5-Practica2
+Fcevalerio/MLOps_Project_AWS
 GoogleCloudPlatform/DataflowTemplates
 GoogleCloudPlatform/alloydb-go-connector
 GoogleCloudPlatform/cloud-sql-go-connector
@@ -32,8 +34,10 @@ Joan-Mateu-dt/test_repository
 KEVINcustoms/LuckyPOS
 Luke-Rogerson/examplesentences
 MalgorzataVictor/IoTProject
+MarcoGiacoppo/familyties
 MerryFairyTalesAD440/UX-UI
 MixinNetwork/ocean.one
+NVIDIA/aistore
 Nikhil-Emmanuel/IEEE_GG
 OtobongEmmanuel/Panason-Learning-Institute
 Qihoo360/zeppelin-gateway
@@ -72,6 +76,7 @@ bank-vaults/bank-vaults
 belimitless/dropdash
 bitrise-io/go-xcode
 brockenbrough/ssu-social-backend
+bsem-f20-011/HealthyBytes-Your-AI-Nutrition-Consultant
 bushidocodes/instagram-clone
 camptocamp/argocd-gs-scripts
 cirello-io/dynamolock
@@ -149,8 +154,10 @@ nbharathfeb/gcp-apigateway
 nguyennguyennam/online-news
 nikolsky/meeting-cadmus
 opencost/opencost
+oracle/oci-go-sdk
 oracle/oci-java-sdk
 oracle/terraform-provider-oci
+p-singh-ms/oracle-db-examples
 penLab101/Azure-AppService-webapp
 qiaoqiao7878/grocery_object_detection
 qyjohn/AWS_Tutorials
