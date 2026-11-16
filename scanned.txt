@@ -2,9 +2,11 @@
 # Random runs skip these. One owner/repo per line.
 AagamVadecha/CSCI201FinalProject
 Aaryansi/rosereview-react
+AdityaPratap1/maskup
 AlibabaCloudDocs/llm_learning
 Altinn/altinn-platform
 Anant2003jain/TextExtractify
+Azure-Samples/aoai-realtime-audio-sdk
 Azure/agw-pep-custom-names
 Azure/azure-kusto-java
 Azure/draft
@@ -18,6 +20,7 @@ Deeven-Seru/retail-engine
 EDToaster/Speakeasy
 FJVicVel03/Semi1-A-2S2025-Grupo5-Practica2
 Fcevalerio/MLOps_Project_AWS
+GoodFaithExteriors/nodejs-docs-samples-main
 GoogleCloudPlatform/DataflowTemplates
 GoogleCloudPlatform/alloydb-go-connector
 GoogleCloudPlatform/cloud-sql-go-connector
@@ -102,6 +105,7 @@ eclipse-store/store
 elastic/apm-aws-lambda
 elastic/package-registry
 elisska/cloud-build-test
+emmanueldeletang/nosqlwebapp
 equinor/equinor-trading-plotly-dash-template
 erans/bucketvcs
 farmhutsoftwareteam/videoserver
@@ -136,6 +140,7 @@ jmhodges/howsmyssl
 joemccann/covid-19-news-sentiment
 juliensimon/aws
 kelseyhightower/gif-maker
+kubernetes/autoscaler
 kumar385/gcppubsub
 lvallari/SportzBattle-Server
 malob/generate-podcast-rss-cloud-function
@@ -164,9 +169,11 @@ nikolsky/meeting-cadmus
 opencost/opencost
 oracle/oci-go-sdk
 oracle/oci-java-sdk
+oracle/oci-service-operator
 oracle/terraform-provider-oci
 p-singh-ms/oracle-db-examples
 penLab101/Azure-AppService-webapp
+perfectsense/gyro-azure-provider
 qiaoqiao7878/grocery_object_detection
 qyjohn/AWS_Tutorials
 rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
@@ -177,6 +184,7 @@ salaichitoolatt/miniflix
 salrashid123/gcs_signedurl
 sanikamal/ai-code-reviewer-deepseek
 sgarciac/fuego
+shippeo/gcp-cloud-identity-debug
 sivaprasadreddy/spring-cloud-aws-demo
 speleo-dev/eSpeleoSociety
 spezam/eventbridge-cli
