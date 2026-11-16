@@ -7,6 +7,7 @@ AlibabaCloudDocs/llm_learning
 Altinn/altinn-platform
 Anant2003jain/TextExtractify
 Azure-Samples/aoai-realtime-audio-sdk
+Azure/AppConfiguration-Emulator
 Azure/agw-pep-custom-names
 Azure/azure-kusto-java
 Azure/draft
@@ -43,6 +44,7 @@ MixinNetwork/ocean.one
 NVIDIA/aistore
 Nikhil-Emmanuel/IEEE_GG
 OtobongEmmanuel/Panason-Learning-Institute
+PRX/stream-recorder
 Qihoo360/zeppelin-gateway
 RIPBackdoored/Backdoored-1.6-Deobf-Source-Leak
 RIPBackdoored/Backdoored-1.8.2-Source-Leak
@@ -50,11 +52,13 @@ RubnK/Projet-Cloud-Computing
 Sachin4B4/Translation-Backend
 SamShoberWork/SamShober-New-JVL-GitHubAction
 Samyak05/AI-Powered-Investor-Platform
+Santo2011/Ayurvedic_Healthcare_Assistant
 Shailender-Youtube/DeepSeek-Azure-AI-Foundry-WebApp
 Siddharthsavaliya/node-common_functionality
 SigNoz/signoz-otel-collector
 SpecterOps/AzureHound
 StanfordBioinformatics/Swarm
+SuperMuel/Syncademic
 The-Quan/myFlaskApp
 ThiMa25/practicecode-T1
 TiaApril/docuscan-ai
@@ -111,6 +115,7 @@ erans/bucketvcs
 farmhutsoftwareteam/videoserver
 farzad528/foundry-iq-demo
 fellgar246/legalmove-pro
+fmguerreiro/cloud-prime
 fujiwara/kinesis-tailf
 fyfsxkh/TokBrain
 fzgitara/b-log
@@ -152,6 +157,7 @@ meloMPK/MeloZone
 mercari/datastore
 mfogel/haraka-plugin-queue-s3
 michaelliao/sync-s3-compatible-action
+milvus-io/birdwatcher
 mizanmahi/upload-file-s3-sdk-v3
 mkogan1/ceph-utils
 mostafa/xk6-kafka
@@ -178,6 +184,8 @@ qiaoqiao7878/grocery_object_detection
 qyjohn/AWS_Tutorials
 rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
 rakyll/go-sql-driver-spanner
+rambleRamblePie/RiskProject
+ravishanamina174/Pettah_Transit_Hub
 rcarlton25/cs201final
 rishabkumar7/gemini-langchain-rag
 salaichitoolatt/miniflix
