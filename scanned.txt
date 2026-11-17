@@ -77,10 +77,12 @@ alibabacloud-go/vod-20170321
 alipay/antchain-openapi-prod-sdk
 aliyun/alibabacloud-dms-mcp-server
 aliyun/dingtalk-sdk
+aliyun/tablestore-examples
 apache/netbeans
 appcd-dev/terracognita
 awspring/spring-cloud-aws
 bank-vaults/bank-vaults
+banzaicloud/lambda-slack-bot
 belimitless/dropdash
 bitrise-io/go-xcode
 brockenbrough/ssu-social-backend
@@ -98,6 +100,7 @@ conveyal/gtfs-data-manager
 crdwortz/Forge
 cycloidio/terracognita
 dala00/cloud-storage-proxy
+danmia/pcapdaemon
 deepin-community/golang-github-azure-azure-sdk-for-go
 develozombie/iot-servicebus-py
 dipjyotimetia/HybridTestFramework
@@ -151,12 +154,14 @@ kelseyhightower/gif-maker
 kubernetes/autoscaler
 kumar385/gcppubsub
 lvallari/SportzBattle-Server
+malob/article-to-audio-cloud-function
 malob/generate-podcast-rss-cloud-function
 maniish-jaiin/spring-cloud-messaging-sample
 marceloricciardi/azure-search-openai-demo-back
 mariadb-operator/mariadb-operator
 mattjoke/pa200-hw3
 meloMPK/MeloZone
+memezinga/memegeddon
 mercari/datastore
 mfogel/haraka-plugin-queue-s3
 michaelliao/sync-s3-compatible-action
@@ -190,6 +195,7 @@ productivity-in-tech/pit_transcriptor_amazon
 qiaoqiao7878/grocery_object_detection
 qyjohn/AWS_Tutorials
 rahulratan12/Build-a-Multi-Agent-App-with-ADK-Agent-Engine-AlloyDB-
+rakeshravi298/NutriBuddy
 rakyll/go-sql-driver-spanner
 rambleRamblePie/RiskProject
 ravishanamina174/Pettah_Transit_Hub
@@ -211,7 +217,9 @@ uk-gov-mirror/ONSdigital.aims-create-address.replaced.2026-09-03
 upbound/terraform-provider-azurerm
 utkuyns/SE4453Final
 varsha815/AzureLingo
+vinihora/tutorial_django_logging
 wibd-ls/wibd-ls1
+xnx3/xnx3
 yahyanouali/spring-boot-testing
 yanivharpaz/basic_avatar_web
 youssef03040/AI-Verbeteraar
