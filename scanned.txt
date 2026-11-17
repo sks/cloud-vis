@@ -44,6 +44,7 @@ MerryFairyTalesAD440/UX-UI
 MixinNetwork/ocean.one
 NVIDIA/aistore
 Nikhil-Emmanuel/IEEE_GG
+NoisimRo/APP-AI
 OtobongEmmanuel/Panason-Learning-Institute
 PRX/stream-recorder
 Qihoo360/zeppelin-gateway
@@ -78,6 +79,7 @@ alipay/antchain-openapi-prod-sdk
 aliyun/alibabacloud-dms-mcp-server
 aliyun/dingtalk-sdk
 aliyun/tablestore-examples
+aliyunmq/mq-http-samples
 apache/netbeans
 appcd-dev/terracognita
 awspring/spring-cloud-aws
@@ -93,6 +95,7 @@ cirello-io/dynamolock
 cis-famu/booking-api-part-2-JamalISD
 cis-famu/mid-term-project-Kalen1Shaw
 cloudspannerecosystem/spanner-cli
+cloudspannerecosystem/spanner-dump
 cloudspannerecosystem/spool
 codeday/uploader
 contrivancecompanychicago/qualityoflifegames
@@ -107,6 +110,7 @@ dipjyotimetia/HybridTestFramework
 dllewellyn/reflex
 dobbo-ca/azure-go-cli
 drhammed/github-models
+duckrun/odps_book
 duneanalytics/prometheus-trusted-advisor-exporter
 eclipse-lmos/arc
 eclipse-store/store
@@ -150,15 +154,18 @@ jimbobbennett/Hackathon-CaptureImageForComputerVision
 jmhodges/howsmyssl
 joemccann/covid-19-news-sentiment
 juliensimon/aws
+kayac/bqin
 kelseyhightower/gif-maker
 kubernetes/autoscaler
 kumar385/gcppubsub
+kunaldeshpande2004/CV-Project
 lvallari/SportzBattle-Server
 malob/article-to-audio-cloud-function
 malob/generate-podcast-rss-cloud-function
 maniish-jaiin/spring-cloud-messaging-sample
 marceloricciardi/azure-search-openai-demo-back
 mariadb-operator/mariadb-operator
+masmoudi-mehdi/crawler-validator
 mattjoke/pa200-hw3
 meloMPK/MeloZone
 memezinga/memegeddon
@@ -224,5 +231,6 @@ yahyanouali/spring-boot-testing
 yanivharpaz/basic_avatar_web
 youssef03040/AI-Verbeteraar
 yswi1892/python-docs-hello-world
+yyccPhil/pizza-delivery-pipeline
 zaratsian/Google-Cloud-Scripts
 zphelps/eta-ruby
