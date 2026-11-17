@@ -5,3 +5,11 @@ Aaryansi/rosereview-react
 AdityaPratap1/maskup
 AlibabaCloudDocs/llm_learning
 Altinn/altinn-platform
+aliyun/data-agent-skill
+aliyun/dingtalk-sdk
+apache/netbeans
+aws/amazon-eks-pod-identity-webhook
+nathants/git-remote-aws
+oracle/oci-java-sdk
+outsideris/citizen
+parse-community/parse-server-gcs-adapter
