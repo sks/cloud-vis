@@ -6,12 +6,17 @@ AdityaPratap1/maskup
 AlibabaCloudDocs/llm_learning
 Altinn/altinn-platform
 Cognipeer/console
+MediaBox-AUIKits/AUIAICall
+Niraj1412/clip-Backend
+alibabacloud-go/darabonba-openapi
 alipay/antchain-openapi-prod-sdk
 aliyun/alibabacloud-bailian-demo
+aliyun/alibabacloud-observability-mcp-server
 aliyun/aliyun-maxcompute-data-collectors
 aliyun/aliyun-oss-java-sdk
 aliyun/data-agent-skill
 aliyun/dingtalk-sdk
+aliyunmq/mq-http-samples
 apache/netbeans
 aquasecurity/cloudsploit
 aws/amazon-eks-pod-identity-webhook
@@ -20,8 +25,10 @@ behemoth3663/ports_local
 charendt/azure-ai-evaluation-kickstarter
 dmonto/curso-azureai
 harshuljain13/HackNYU-2020
+hyphmongo/deepcurator
 keitakn/go-cognito-lambda
 madebymany/moltar
+meblabs/fullstack-test
 nathants/git-remote-aws
 nikogura/diagnostic-bot
 oracle/oci-java-sdk
@@ -29,3 +36,4 @@ outsideris/citizen
 parse-community/parse-server-gcs-adapter
 parse-community/parse-server-s3-adapter
 rayprastya/english-ai
+trackit/s3-acl-viewer
