@@ -6,8 +6,12 @@ AdityaPratap1/maskup
 AlibabaCloudDocs/llm_learning
 Altinn/altinn-platform
 Cognipeer/console
+GoogleCloudPlatform/healthcare-data-harmonization
+GoogleCloudPlatform/spring-cloud-gcp
 MediaBox-AUIKits/AUIAICall
 Niraj1412/clip-Backend
+RajarshiGO/product_image_recommendation_app
+adobe/aio-tvm
 alibabacloud-go/darabonba-openapi
 alipay/antchain-openapi-prod-sdk
 aliyun/alibabacloud-bailian-demo
@@ -26,9 +30,12 @@ charendt/azure-ai-evaluation-kickstarter
 dmonto/curso-azureai
 harshuljain13/HackNYU-2020
 hyphmongo/deepcurator
+jckuester/awsls
+kayac/lamvms
 keitakn/go-cognito-lambda
 madebymany/moltar
 meblabs/fullstack-test
+msk4862/Anomly
 nathants/git-remote-aws
 nikogura/diagnostic-bot
 oracle/oci-java-sdk
@@ -36,4 +43,5 @@ outsideris/citizen
 parse-community/parse-server-gcs-adapter
 parse-community/parse-server-s3-adapter
 rayprastya/english-ai
+tlofreso/bulletin
 trackit/s3-acl-viewer
