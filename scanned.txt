@@ -8,10 +8,14 @@ Altinn/altinn-platform
 Cognipeer/console
 GoogleCloudPlatform/healthcare-data-harmonization
 GoogleCloudPlatform/spring-cloud-gcp
+KnowArIoT/sensordata-reader
+MAVProxyUser/SKYROVER_src
 MediaBox-AUIKits/AUIAICall
 Niraj1412/clip-Backend
 RajarshiGO/product_image_recommendation_app
+Spartak95/devbooks-project
 adobe/aio-tvm
+ahmerds/pg-docker-server
 alibabacloud-go/darabonba-openapi
 alipay/antchain-openapi-prod-sdk
 aliyun/alibabacloud-bailian-demo
@@ -28,6 +32,7 @@ backyourstack/backyourstack
 behemoth3663/ports_local
 charendt/azure-ai-evaluation-kickstarter
 dmonto/curso-azureai
+dolthub/dolt
 harshuljain13/HackNYU-2020
 hyphmongo/deepcurator
 jckuester/awsls
@@ -42,6 +47,9 @@ oracle/oci-java-sdk
 outsideris/citizen
 parse-community/parse-server-gcs-adapter
 parse-community/parse-server-s3-adapter
+pirateandfox/qalatra
+pritunl/pritunl-zero
 rayprastya/english-ai
+texastribune/walls
 tlofreso/bulletin
 trackit/s3-acl-viewer
