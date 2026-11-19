@@ -7,8 +7,10 @@ AdityaPratap1/maskup
 AlibabaCloudDocs/llm_learning
 Altinn/altinn-platform
 Azure/aztfexport
+Azure/karpenter-provider-azure
 AzureDoom/AzureCortex
 Cognipeer/console
+DanyaMawed/CI-CD-UdacityProject
 GoogleCloudPlatform/healthcare-data-harmonization
 GoogleCloudPlatform/spring-cloud-gcp
 InterplanetaryGentlemann/python-awsdiscord-bot
@@ -27,8 +29,10 @@ alertlogic/al-aws-collector-js
 alibabacloud-go/darabonba-openapi
 alipay/antchain-openapi-prod-sdk
 aliyun/alibabacloud-bailian-demo
+aliyun/alibabacloud-java-sdk
 aliyun/alibabacloud-observability-mcp-server
 aliyun/aliyun-maxcompute-data-collectors
+aliyun/aliyun-openapi-java-sdk
 aliyun/aliyun-oss-java-sdk
 aliyun/data-agent-skill
 aliyun/dingtalk-sdk
@@ -40,13 +44,16 @@ arcology-network/aws-ansible
 aws/amazon-eks-pod-identity-webhook
 awslabs/compliant-framework-for-federal-and-dod-workloads-in-aws-govcloud-us
 backyourstack/backyourstack
+banzaicloud/pipeline
 behemoth3663/ports_local
 bollmann/searchi
+broadinstitute/cromwell-automation
 charendt/azure-ai-evaluation-kickstarter
 chunyenHuang/aws-sdk-extra-v3
 cmusv-sc/ArchF2013-Project3-FT
 dmonto/curso-azureai
 dolthub/dolt
+dstrockis/did-enterprise-agent
 fazt/nodejs-s3-example
 ffxsam/virtual-s3-filesystem
 fly-apps/node-dictaphone
@@ -88,6 +95,7 @@ plsplsme/Service-Account-Auth-Minimum-Project
 pritunl/pritunl-zero
 rayprastya/english-ai
 remko/cloudrun-slog
+reneenoble/demo-uts-workshop-app
 riccardopetronio/tesi
 sakintoye/search-sdk-java-clone
 seanno/shutdownhook
