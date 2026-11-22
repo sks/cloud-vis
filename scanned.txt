@@ -4,6 +4,7 @@
 Adventech/sabbath-school-reader
 BEPb/Vulnerabilities
 BiglySoftware/BiglyBT
+CSingh26/quiz-app
 DEFRA/ffc-pay-report-generator
 GoogleCloudPlatform/alloydb-go-connector
 GoogleCloudPlatform/cloud-run-microservice-template-go
@@ -14,10 +15,14 @@ NUS-ALSET/lambda-nbconvert
 Nasdanika/ai
 PSU-Cloud/vsp-benchmark
 PacktPublishing/Ionic-4---Build-iOS-Android-and-Web-Apps-with-Ionic-and-Angular
+RobertHochberg/NDBC
+SJSU272LabS17/Project-Team-22
 ThreatResponse/poor-webhook
 adiom-data/dsync
 ahmedivy/auctions
 alexandersimoes/google-cloud-storage-node-boilerplate
+aliyun/data-agent-skill
+aliyun/dingtalk-sdk
 alvarowolfx/gcloud-ota-arduino-update
 argoproj-labs/argocd-vault-plugin
 aws-samples/mturk-code-samples
@@ -26,10 +31,12 @@ ballerina-platform/module-ballerinax-asb
 bitrise-io/go-xcode
 boscojones/-phonex-AI-
 bytecodeio/google-cloud-function
+cfjedimaster/fireflyapi
 chris0piper/DotaClipzVideoCreator
 cockpit-project/bots
 datasektionen/yoggi
 dforwardfeed/memo_generator
+dn0/CloudStatusPage
 ember-cli-deploy/ember-cli-deploy-s3-index
 fyfsxkh/TokBrain
 golang/playground
@@ -46,6 +53,7 @@ kubernetes-sigs/cluster-api-provider-azure
 leopardslab/nodecloud-gcp-plugin
 lochuung/CareX
 marksweb/bq-streamlit
+mennanov/limiters
 mercari/datastore
 mjazwiecki/azure-storage-queue-reader
 nanovms/ops
