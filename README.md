@@ -29,8 +29,10 @@ Two ways repos get picked:
   marker, so a `-filter cloud` scan has something to find. Those searches use
   the `CODE_SEARCH_TOKEN` repository secret, not the Actions `GITHUB_TOKEN`.
   The Actions token is what produced the long 429s (one response asked for a
-  728 second wait). The secret is sent only on `search/code`. Reading the
-  scanned-repo list and pushing updates still use the Actions token. A
+  728 second wait). The secret is sent only on `search/code`; if it is unset or
+  rejected (`HTTP 401`/`403`, e.g. expired), `plan` logs a warning and falls
+  back to the Actions `GITHUB_TOKEN`. Reading the scanned-repo list, checking
+  candidate repo metadata, and pushing updates still use the Actions token. A
   fine-grained token that can read public repositories is enough:
 
   ```bash

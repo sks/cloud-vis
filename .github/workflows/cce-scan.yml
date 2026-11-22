@@ -62,6 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.build.outputs.matrix }}
+      has_repos: ${{ steps.build.outputs.has_repos }}
     steps:
       - name: Build scan matrix
         id: build
@@ -94,12 +95,34 @@ jobs:
           # Code search has its own quota. The Actions token shares a small one
           # and gets secondary 429s; a user token has its own budget.
           search_token="${CODE_SEARCH_TOKEN:-}"
+          using_custom_search_token=false
           if [ -z "$search_token" ]; then
             echo "::warning::CODE_SEARCH_TOKEN is unset. Code search is using the Actions GITHUB_TOKEN, which is the token that gets the long 429s."
             search_token="$GH_TOKEN"
+          elif [ "$search_token" = "$GH_TOKEN" ]; then
+            echo "code search is using Actions GITHUB_TOKEN"
           else
+            using_custom_search_token=true
             echo "code search is using CODE_SEARCH_TOKEN"
           fi
+
+          is_rate_limit_error() {
+            grep -Eqi 'HTTP 429|rate limit|try again in|abuse detection' "$1"
+          }
+
+          is_auth_or_access_error() {
+            if grep -Eq 'HTTP 401' "$1"; then
+              return 0
+            fi
+            if grep -Eq 'HTTP 403' "$1" && ! is_rate_limit_error "$1"; then
+              return 0
+            fi
+            return 1
+          }
+
+          is_non_retryable_error() {
+            is_auth_or_access_error "$1" || grep -Eq 'HTTP 404|HTTP 422' "$1"
+          }
 
           sleep_for_search_limit() {
             local fallback="$1"
@@ -114,6 +137,66 @@ jobs:
             sleep "$wait"
           }
 
+          # Runs one search/code page request into out_file without a subshell so
+          # falling back from an expired/revoked CODE_SEARCH_TOKEN updates
+          # search_token for all remaining pages and languages in this job.
+          search_code_page() {
+            local lang="$1"
+            local encoded="$2"
+            local this_page="$3"
+            local out_file="$4"
+            local attempt=1
+            : > "$out_file"
+            while [ "$attempt" -le 4 ]; do
+              if GH_TOKEN="$search_token" gh api "search/code?q=${encoded}&per_page=30&page=${this_page}" \
+                --jq '[.items[] | select(.repository.private != true) | .repository.full_name] | unique | .[]' \
+                > "$out_file" 2>/tmp/code_search_err; then
+                return 0
+              fi
+              : > "$out_file"
+              local err_msg
+              err_msg=$(tr '\n' ' ' < /tmp/code_search_err)
+              if [ "$using_custom_search_token" = "true" ] && is_auth_or_access_error /tmp/code_search_err; then
+                echo "::warning::CODE_SEARCH_TOKEN was rejected (${err_msg}); falling back to Actions GITHUB_TOKEN. Rotate via: gh secret set CODE_SEARCH_TOKEN --repo ${GITHUB_REPOSITORY}"
+                search_token="$GH_TOKEN"
+                using_custom_search_token=false
+                continue
+              fi
+              if grep -Eq 'HTTP 401' /tmp/code_search_err; then
+                echo "::error::code search failed with HTTP 401 using GITHUB_TOKEN: ${err_msg}"
+                exit 1
+              fi
+              if is_non_retryable_error /tmp/code_search_err; then
+                echo "::warning::code search for ${lang} page ${this_page} failed with non-retryable error: ${err_msg}"
+                return 0
+              fi
+              echo "::warning::code search for ${lang} page ${this_page} failed (attempt ${attempt}): ${err_msg}"
+              sleep_for_search_limit $((attempt * 30))
+              attempt=$((attempt + 1))
+            done
+            return 0
+          }
+
+          # Skip repos that are non-public, disabled, or too big for the scan
+          # budget: google-cloud-java (2.2GB, 143k files) burned a whole
+          # 20-minute job in run 43075263215 without producing a report, while
+          # prowler (344MB) scans fine, so 500MB is a safe cutoff. Uses GH_TOKEN
+          # so CODE_SEARCH_TOKEN is sent strictly on search/code.
+          is_scannable_public_repo() {
+            local full_name="$1"
+            local size
+            if ! size=$(gh api "repos/${full_name}" --jq 'select(.private != true and .disabled != true) | .size' 2>/dev/null) || [ -z "$size" ]; then
+              echo "::notice::skipping ${full_name}: repository metadata unavailable or not public"
+              return 1
+            fi
+            if [ "$size" -gt 500000 ]; then
+              echo "::notice::skipping ${full_name}: repo size ${size}KB exceeds the 500000KB scan budget"
+              return 1
+            fi
+            return 0
+          }
+
+          page_out=$(mktemp)
           if [ "$USE_RANDOM" = "true" ]; then
             matrix="[]"
             # Plain repository search (stars/forks/size) picks popular repos, not
@@ -163,16 +246,8 @@ jobs:
               page=$(( (RANDOM % 5) + 1 ))
               for extra in 0 1 2; do
                 this_page=$((page + extra))
-                raw=""
-                for attempt in 1 2 3 4; do
-                  if raw=$(GH_TOKEN="$search_token" gh api "search/code?q=${encoded}&per_page=30&page=${this_page}" \
-                    --jq '[.items[].repository.full_name] | unique | .[]' 2>/tmp/code_search_err); then
-                    break
-                  fi
-                  echo "::warning::code search for ${lang} page ${this_page} failed (attempt ${attempt}): $(cat /tmp/code_search_err)"
-                  raw=""
-                  sleep_for_search_limit $((attempt * 30))
-                done
+                search_code_page "$lang" "$encoded" "$this_page" "$page_out"
+                raw=$(cat "$page_out")
                 if [ -z "$raw" ]; then
                   continue
                 fi
@@ -204,13 +279,7 @@ jobs:
                 if [ "$picked" -ge "$RANDOM_REPO_COUNT" ]; then
                   break
                 fi
-                # Skip repos too big for the scan budget: google-cloud-java
-                # (2.2GB, 143k files) burned a whole 20-minute job in run
-                # 43075263215 without producing a report, while prowler
-                # (344MB) scans fine, so 500MB is a safe cutoff.
-                size=$(GH_TOKEN="$search_token" gh api "repos/${full_name}" --jq '.size' 2>/dev/null || echo 0)
-                if [ "${size:-0}" -gt 500000 ]; then
-                  echo "::notice::skipping ${full_name}: repo size ${size}KB exceeds the 500000KB scan budget"
+                if ! is_scannable_public_repo "$full_name"; then
                   continue
                 fi
                 # Code search results don't carry default_branch; the clone step
@@ -244,10 +313,22 @@ jobs:
             matrix=$(printf '%s' "$matrix" | jq -c --argjson e "$extra" '. + [$e]')
           fi
 
-          echo "matrix=$(printf '%s' "$matrix" | jq -c '{include: .}')" >> "$GITHUB_OUTPUT"
+          repo_count=$(printf '%s' "$matrix" | jq 'length')
+          if [ "$repo_count" -eq 0 ]; then
+            echo "::warning::plan selected 0 repositories this run; skipping scan and record"
+            has_repos="false"
+          else
+            echo "selected ${repo_count} repo(s) for scanning"
+            has_repos="true"
+          fi
+          {
+            echo "has_repos=${has_repos}"
+            echo "matrix=$(printf '%s' "$matrix" | jq -c '{include: .}')"
+          } >> "$GITHUB_OUTPUT"
 
   scan:
     needs: plan
+    if: needs.plan.outputs.has_repos == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     strategy:
@@ -383,7 +464,7 @@ jobs:
   # Curated and extra repos are recorded too, so a later random run skips them.
   record:
     needs: [plan, scan]
-    if: always() && needs.plan.result == 'success'
+    if: always() && needs.plan.result == 'success' && needs.plan.outputs.has_repos == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write
