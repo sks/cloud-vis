@@ -8,6 +8,7 @@ DEFRA/ffc-pay-report-generator
 GoogleCloudPlatform/alloydb-go-connector
 GoogleCloudPlatform/cloud-run-microservice-template-go
 ICEI-PUC-Minas-CC-TI/plmg-cc-ti2-2024-1-g08-organizai
+MAyang38/dify-on-dingding-go
 MixinNetwork/ocean.one
 NUS-ALSET/lambda-nbconvert
 Nasdanika/ai
@@ -24,11 +25,13 @@ ayung8/CodeBoard
 ballerina-platform/module-ballerinax-asb
 bitrise-io/go-xcode
 boscojones/-phonex-AI-
+bytecodeio/google-cloud-function
 chris0piper/DotaClipzVideoCreator
 cockpit-project/bots
 datasektionen/yoggi
 dforwardfeed/memo_generator
 ember-cli-deploy/ember-cli-deploy-s3-index
+fyfsxkh/TokBrain
 golang/playground
 google-marketing-solutions/dgpulse
 googleapis/go-sql-spanner
@@ -47,6 +50,7 @@ mercari/datastore
 mjazwiecki/azure-storage-queue-reader
 nanovms/ops
 nhd79/Azure-Text-To-Speech-Python
+oracle-samples/modern-app-dev
 rakyll/go-sql-driver-spanner
 sahava/multisite-lighthouse-gcp
 samsends/cloud-build-badge
