@@ -1,6 +1,7 @@
 # Repos the cce-scan workflow has already selected.
 # Random runs skip these. One owner/repo per line.
 0fatal/laf-oss-upload
+4thel00z/microsoft-crap-that-doesnt-work
 Adventech/sabbath-school-reader
 BEPb/Vulnerabilities
 BiglySoftware/BiglyBT
@@ -12,9 +13,11 @@ GoogleCloudPlatform/alloydb-go-connector
 GoogleCloudPlatform/cloud-run-microservice-template-go
 ICEI-PUC-Minas-CC-TI/plmg-cc-ti2-2024-1-g08-organizai
 MAyang38/dify-on-dingding-go
+MerryFairyTalesAD440/UX-UI
 MixinNetwork/ocean.one
 NUS-ALSET/lambda-nbconvert
 Nasdanika/ai
+OwlbanGroup/AI-POST-QUANTUM-AI-STOCKMARKET
 PSU-Cloud/vsp-benchmark
 PacktPublishing/Ionic-4---Build-iOS-Android-and-Web-Apps-with-Ionic-and-Angular
 Prathamj07/PixInspect
@@ -33,6 +36,7 @@ atjiu/pybbs
 aws-samples/mturk-code-samples
 ayung8/CodeBoard
 ballerina-platform/module-ballerinax-asb
+basilsajeev987/Scalable_project
 bitrise-io/go-xcode
 boscojones/-phonex-AI-
 bytecodeio/google-cloud-function
@@ -43,11 +47,13 @@ datasektionen/yoggi
 dforwardfeed/memo_generator
 dn0/CloudStatusPage
 ember-cli-deploy/ember-cli-deploy-s3-index
+fluxcd/pkg
 fyfsxkh/TokBrain
 golang/playground
 google-marketing-solutions/dgpulse
 googleapis/go-sql-spanner
 hashicorp/vault
+hashicorp/vault-plugin-auth-azure
 igabr/Metis_Projects_Chicago_2017
 jbsouthe/MS-Azure-MA-Extension
 jenesis/jenesis-repository
@@ -70,7 +76,9 @@ oracle/terraform-provider-oci
 premint/premintbot
 rakyll/go-sql-driver-spanner
 remko/cloudrun-slog
+riccardopetronio/tesi
 sahava/multisite-lighthouse-gcp
+sakintoye/search-sdk-java-clone
 samsends/cloud-build-badge
 seoulcity/KOPIS_yesshow
 sul-dlss-labs/machine-eyes
