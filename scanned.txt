@@ -29,6 +29,7 @@ aliyun/data-agent-skill
 aliyun/dingtalk-sdk
 alvarowolfx/gcloud-ota-arduino-update
 argoproj-labs/argocd-vault-plugin
+atjiu/pybbs
 aws-samples/mturk-code-samples
 ayung8/CodeBoard
 ballerina-platform/module-ballerinax-asb
@@ -60,14 +61,18 @@ marksweb/bq-streamlit
 mennanov/limiters
 mercari/datastore
 mjazwiecki/azure-storage-queue-reader
+mozamimy/s3-multicloud-backup
 nanovms/ops
 nhd79/Azure-Text-To-Speech-Python
 oracle-samples/modern-app-dev
 oracle/oci-service-operator
 oracle/terraform-provider-oci
+premint/premintbot
 rakyll/go-sql-driver-spanner
+remko/cloudrun-slog
 sahava/multisite-lighthouse-gcp
 samsends/cloud-build-badge
+seoulcity/KOPIS_yesshow
 sul-dlss-labs/machine-eyes
 tadash10/aws_s3_bucket_security_checker.py
 tweag/nix-store-gcs-proxy
