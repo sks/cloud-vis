@@ -7,10 +7,12 @@ BEPb/Vulnerabilities
 BiglySoftware/BiglyBT
 CJackson117/Form-Plugin-NAC
 CSingh26/quiz-app
+ChanHsing1972/o2o-coupon-usage-forecast
 DEFRA/ffc-pay-report-generator
 DikshantV/PrepBettr
 GoogleCloudPlatform/alloydb-go-connector
 GoogleCloudPlatform/cloud-run-microservice-template-go
+HanSanCoder/hhsblog
 ICEI-PUC-Minas-CC-TI/plmg-cc-ti2-2024-1-g08-organizai
 MAyang38/dify-on-dingding-go
 MerryFairyTalesAD440/UX-UI
@@ -23,13 +25,16 @@ PacktPublishing/Ionic-4---Build-iOS-Android-and-Web-Apps-with-Ionic-and-Angular
 Prathamj07/PixInspect
 RobertHochberg/NDBC
 SJSU272LabS17/Project-Team-22
+Sumanthka/terraform-basics
 ThreatResponse/poor-webhook
 adiom-data/dsync
+agranig/rtpengine-google-speech2text
 ahmedivy/auctions
 alexandersimoes/google-cloud-storage-node-boilerplate
 aliyun/aliyun-oss-java-sdk
 aliyun/data-agent-skill
 aliyun/dingtalk-sdk
+allens/s3cab
 alvarowolfx/gcloud-ota-arduino-update
 argoproj-labs/argocd-vault-plugin
 atjiu/pybbs
@@ -38,6 +43,7 @@ ayung8/CodeBoard
 ballerina-platform/module-ballerinax-asb
 basilsajeev987/Scalable_project
 bitrise-io/go-xcode
+borisrakovan/dtu-mlops-project
 boscojones/-phonex-AI-
 bytecodeio/google-cloud-function
 cfjedimaster/fireflyapi
@@ -61,6 +67,7 @@ jordanbean-msft/keyvault-java
 kelseyhightower/gif-maker
 kengonakajima/snippets
 kubernetes-sigs/cluster-api-provider-azure
+leccorside/ia-contabil
 leopardslab/nodecloud-gcp-plugin
 lochuung/CareX
 marksweb/bq-streamlit
@@ -75,6 +82,7 @@ oracle/oci-service-operator
 oracle/terraform-provider-oci
 premint/premintbot
 rakyll/go-sql-driver-spanner
+redwanghb/cloud-query
 remko/cloudrun-slog
 riccardopetronio/tesi
 sahava/multisite-lighthouse-gcp
