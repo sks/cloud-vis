@@ -9,6 +9,7 @@ CJackson117/Form-Plugin-NAC
 CSingh26/quiz-app
 ChanHsing1972/o2o-coupon-usage-forecast
 DEFRA/ffc-pay-report-generator
+DP6/media-quality
 DikshantV/PrepBettr
 GoogleCloudPlatform/alloydb-go-connector
 GoogleCloudPlatform/cloud-run-microservice-template-go
@@ -16,6 +17,7 @@ HanSanCoder/hhsblog
 ICEI-PUC-Minas-CC-TI/plmg-cc-ti2-2024-1-g08-organizai
 MAyang38/dify-on-dingding-go
 MerryFairyTalesAD440/UX-UI
+MicrosoftTranslator/azure-phi3-gpt4-AzureTranslator-playground
 MixinNetwork/ocean.one
 NUS-ALSET/lambda-nbconvert
 Nasdanika/ai
@@ -31,6 +33,7 @@ ThreatResponse/poor-webhook
 adiom-data/dsync
 agranig/rtpengine-google-speech2text
 ahmedivy/auctions
+alan-kelly-maersk/azure-java-test
 alexandersimoes/google-cloud-storage-node-boilerplate
 aliyun/aliyun-oss-java-sdk
 aliyun/data-agent-skill
@@ -51,6 +54,7 @@ cfjedimaster/fireflyapi
 chris0piper/DotaClipzVideoCreator
 cirello-io/dynamolock
 cockpit-project/bots
+cyber-danceeeee/open_im_chat
 datasektionen/yoggi
 dforwardfeed/memo_generator
 dn0/CloudStatusPage
@@ -65,6 +69,7 @@ hashicorp/vault-plugin-auth-azure
 igabr/Metis_Projects_Chicago_2017
 jbsouthe/MS-Azure-MA-Extension
 jenesis/jenesis-repository
+jnan806/ddns-golang
 jordanbean-msft/keyvault-java
 just-chillin/ImageRunner
 kelseyhightower/gif-maker
@@ -86,11 +91,13 @@ openshift/aws-account-operator
 oracle-samples/modern-app-dev
 oracle/oci-service-operator
 oracle/terraform-provider-oci
+phenobarbital/azure_teambots
 premint/premintbot
 rakyll/go-sql-driver-spanner
 redwanghb/cloud-query
 remko/cloudrun-slog
 riccardopetronio/tesi
+rodrigoncalves/presidente-game
 sahava/multisite-lighthouse-gcp
 sakintoye/search-sdk-java-clone
 samsends/cloud-build-badge
@@ -100,6 +107,7 @@ sul-dlss-labs/machine-eyes
 tadash10/aws_s3_bucket_security_checker.py
 tweag/nix-store-gcs-proxy
 wdhunter465/lgfc-on-vercel
+weidongxu-microsoft/autorest.java_ci
 wepe/O2O-Coupon-Usage-Forecast
 williamw520/jsoda
 xlibb/module-asb
