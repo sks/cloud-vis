@@ -15,7 +15,9 @@ GoogleCloudPlatform/alloydb-go-connector
 GoogleCloudPlatform/cloud-run-microservice-template-go
 HanSanCoder/hhsblog
 ICEI-PUC-Minas-CC-TI/plmg-cc-ti2-2024-1-g08-organizai
+Luke-Rogerson/examplesentences
 MAyang38/dify-on-dingding-go
+MalgorzataVictor/IoTProject
 MerryFairyTalesAD440/UX-UI
 MicrosoftTranslator/azure-phi3-gpt4-AzureTranslator-playground
 MixinNetwork/ocean.one
@@ -30,9 +32,11 @@ S7AGE/user-service
 SJSU272LabS17/Project-Team-22
 Sumanthka/terraform-basics
 ThreatResponse/poor-webhook
+VanRitzOwen/Speech-to-Text
 adiom-data/dsync
 agranig/rtpengine-google-speech2text
 ahmedivy/auctions
+akitaonrails/clash_of_kings_analysis
 alan-kelly-maersk/azure-java-test
 alexandersimoes/google-cloud-storage-node-boilerplate
 aliyun/aliyun-oss-java-sdk
@@ -46,6 +50,7 @@ aws-samples/mturk-code-samples
 ayung8/CodeBoard
 ballerina-platform/module-ballerinax-asb
 basilsajeev987/Scalable_project
+belimitless/dropdash
 bitrise-io/go-xcode
 borisrakovan/dtu-mlops-project
 boscojones/-phonex-AI-
@@ -67,6 +72,7 @@ googleapis/go-sql-spanner
 hashicorp/vault
 hashicorp/vault-plugin-auth-azure
 igabr/Metis_Projects_Chicago_2017
+ingenerator/action-gcs-uploader
 jbsouthe/MS-Azure-MA-Extension
 jenesis/jenesis-repository
 jnan806/ddns-golang
@@ -78,6 +84,7 @@ kubernetes-sigs/cluster-api-provider-azure
 leccorside/ia-contabil
 leopardslab/nodecloud-gcp-plugin
 lochuung/CareX
+marek5050/AWS_S3_File_Synchronizer
 marksweb/bq-streamlit
 mennanov/limiters
 mercari/datastore
@@ -86,6 +93,7 @@ mozamimy/s3-multicloud-backup
 nanovms/ops
 nastadavisranch/hsm-leander
 nhd79/Azure-Text-To-Speech-Python
+nikogura/diagnostic-bot
 oleg-nenashev/workshop-aws-mocks-as-code
 openshift/aws-account-operator
 oracle-samples/modern-app-dev
