@@ -24,6 +24,7 @@ PSU-Cloud/vsp-benchmark
 PacktPublishing/Ionic-4---Build-iOS-Android-and-Web-Apps-with-Ionic-and-Angular
 Prathamj07/PixInspect
 RobertHochberg/NDBC
+S7AGE/user-service
 SJSU272LabS17/Project-Team-22
 Sumanthka/terraform-basics
 ThreatResponse/poor-webhook
@@ -48,6 +49,7 @@ boscojones/-phonex-AI-
 bytecodeio/google-cloud-function
 cfjedimaster/fireflyapi
 chris0piper/DotaClipzVideoCreator
+cirello-io/dynamolock
 cockpit-project/bots
 datasektionen/yoggi
 dforwardfeed/memo_generator
@@ -64,6 +66,7 @@ igabr/Metis_Projects_Chicago_2017
 jbsouthe/MS-Azure-MA-Extension
 jenesis/jenesis-repository
 jordanbean-msft/keyvault-java
+just-chillin/ImageRunner
 kelseyhightower/gif-maker
 kengonakajima/snippets
 kubernetes-sigs/cluster-api-provider-azure
@@ -76,7 +79,10 @@ mercari/datastore
 mjazwiecki/azure-storage-queue-reader
 mozamimy/s3-multicloud-backup
 nanovms/ops
+nastadavisranch/hsm-leander
 nhd79/Azure-Text-To-Speech-Python
+oleg-nenashev/workshop-aws-mocks-as-code
+openshift/aws-account-operator
 oracle-samples/modern-app-dev
 oracle/oci-service-operator
 oracle/terraform-provider-oci
@@ -89,9 +95,11 @@ sahava/multisite-lighthouse-gcp
 sakintoye/search-sdk-java-clone
 samsends/cloud-build-badge
 seoulcity/KOPIS_yesshow
+sharatsawhney/tesseract
 sul-dlss-labs/machine-eyes
 tadash10/aws_s3_bucket_security_checker.py
 tweag/nix-store-gcs-proxy
+wdhunter465/lgfc-on-vercel
 wepe/O2O-Coupon-Usage-Forecast
 williamw520/jsoda
 xlibb/module-asb
