@@ -3,6 +3,8 @@
 0fatal/laf-oss-upload
 4thel00z/microsoft-crap-that-doesnt-work
 Adventech/sabbath-school-reader
+Azure-Samples/AnomalyDetector
+Azure/azure-workload-identity
 BEPb/Vulnerabilities
 BiglySoftware/BiglyBT
 CJackson117/Form-Plugin-NAC
@@ -13,6 +15,7 @@ DP6/media-quality
 DikshantV/PrepBettr
 GoogleCloudPlatform/alloydb-go-connector
 GoogleCloudPlatform/cloud-run-microservice-template-go
+Hai-Che/NodeJs_Backend_Architecture
 HanSanCoder/hhsblog
 ICEI-PUC-Minas-CC-TI/plmg-cc-ti2-2024-1-g08-organizai
 Luke-Rogerson/examplesentences
@@ -52,6 +55,7 @@ ballerina-platform/module-ballerinax-asb
 basilsajeev987/Scalable_project
 belimitless/dropdash
 bitrise-io/go-xcode
+boring-registry/boring-registry
 borisrakovan/dtu-mlops-project
 boscojones/-phonex-AI-
 bytecodeio/google-cloud-function
@@ -59,10 +63,12 @@ cfjedimaster/fireflyapi
 chris0piper/DotaClipzVideoCreator
 cirello-io/dynamolock
 cockpit-project/bots
+cragkhit/agent-cefr-journal-study
 cyber-danceeeee/open_im_chat
 datasektionen/yoggi
 dforwardfeed/memo_generator
 dn0/CloudStatusPage
+eclipse-lmos/arc
 ember-cli-deploy/ember-cli-deploy-s3-index
 fluxcd/pkg
 fyfsxkh/TokBrain
@@ -114,6 +120,7 @@ sharatsawhney/tesseract
 sul-dlss-labs/machine-eyes
 tadash10/aws_s3_bucket_security_checker.py
 tweag/nix-store-gcs-proxy
+vignesh-gupta/simple-vercel
 wdhunter465/lgfc-on-vercel
 weidongxu-microsoft/autorest.java_ci
 wepe/O2O-Coupon-Usage-Forecast
@@ -121,3 +128,4 @@ williamw520/jsoda
 xlibb/module-asb
 yadudoc/cloud_kotta
 yankev07/yankev07.github.io
+yiliaomsft/python-deployment
