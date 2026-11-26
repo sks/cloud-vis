@@ -17,6 +17,7 @@ DP6/media-quality
 DikshantV/PrepBettr
 GoogleCloudPlatform/alloydb-go-connector
 GoogleCloudPlatform/cloud-run-microservice-template-go
+GresonKwan/GO-Claw-2.0
 Hai-Che/NodeJs_Backend_Architecture
 HanSanCoder/hhsblog
 ICEI-PUC-Minas-CC-TI/plmg-cc-ti2-2024-1-g08-organizai
@@ -44,6 +45,7 @@ ahmedivy/auctions
 akitaonrails/clash_of_kings_analysis
 alan-kelly-maersk/azure-java-test
 alexandersimoes/google-cloud-storage-node-boilerplate
+aliyun/alibabacloud-python-sdk-v2
 aliyun/aliyun-oss-java-sdk
 aliyun/data-agent-skill
 aliyun/dingtalk-sdk
@@ -73,6 +75,7 @@ dforwardfeed/memo_generator
 dn0/CloudStatusPage
 eclipse-lmos/arc
 ember-cli-deploy/ember-cli-deploy-s3-index
+emicklei/parzello
 fluxcd/pkg
 ftrnyc-o4f-xz/SAPA-PROJECT
 fyfsxkh/TokBrain
@@ -83,8 +86,10 @@ hashicorp/vault
 hashicorp/vault-plugin-auth-azure
 igabr/Metis_Projects_Chicago_2017
 ingenerator/action-gcs-uploader
+jbangdev/jbang-examples
 jbsouthe/MS-Azure-MA-Extension
 jenesis/jenesis-repository
+jjconceptos/webapp1
 jnan806/ddns-golang
 jordanbean-msft/keyvault-java
 just-chillin/ImageRunner
@@ -95,6 +100,7 @@ leccorside/ia-contabil
 leopardslab/nodecloud-gcp-plugin
 lochuung/CareX
 marek5050/AWS_S3_File_Synchronizer
+marklewis01/react-materialui-starter
 marksweb/bq-streamlit
 mennanov/limiters
 mercari/datastore
@@ -111,7 +117,9 @@ oracle-samples/modern-app-dev
 oracle/oci-java-sdk
 oracle/oci-service-operator
 oracle/terraform-provider-oci
+oshyshko/uio
 p-singh-ms/oracle-db-examples
+patnaikshekhar/KEDA-GCP-PubSub-Sample
 phenobarbital/azure_teambots
 premint/premintbot
 rakyll/go-sql-driver-spanner
