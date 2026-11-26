@@ -3,12 +3,14 @@
 0fatal/laf-oss-upload
 4thel00z/microsoft-crap-that-doesnt-work
 Adventech/sabbath-school-reader
+ArnavDogra/Cognitwin-
 Azure-Samples/AnomalyDetector
 Azure/azure-workload-identity
 BEPb/Vulnerabilities
 BiglySoftware/BiglyBT
 CJackson117/Form-Plugin-NAC
 CSingh26/quiz-app
+CelioFsDev/gravity
 ChanHsing1972/o2o-coupon-usage-forecast
 DEFRA/ffc-pay-report-generator
 DP6/media-quality
@@ -45,6 +47,7 @@ alexandersimoes/google-cloud-storage-node-boilerplate
 aliyun/aliyun-oss-java-sdk
 aliyun/data-agent-skill
 aliyun/dingtalk-sdk
+aliyun/pai-python-sdk
 allens/s3cab
 alvarowolfx/gcloud-ota-arduino-update
 argoproj-labs/argocd-vault-plugin
@@ -71,6 +74,7 @@ dn0/CloudStatusPage
 eclipse-lmos/arc
 ember-cli-deploy/ember-cli-deploy-s3-index
 fluxcd/pkg
+ftrnyc-o4f-xz/SAPA-PROJECT
 fyfsxkh/TokBrain
 golang/playground
 google-marketing-solutions/dgpulse
@@ -98,13 +102,16 @@ mjazwiecki/azure-storage-queue-reader
 mozamimy/s3-multicloud-backup
 nanovms/ops
 nastadavisranch/hsm-leander
+nathants/git-remote-aws
 nhd79/Azure-Text-To-Speech-Python
 nikogura/diagnostic-bot
 oleg-nenashev/workshop-aws-mocks-as-code
 openshift/aws-account-operator
 oracle-samples/modern-app-dev
+oracle/oci-java-sdk
 oracle/oci-service-operator
 oracle/terraform-provider-oci
+p-singh-ms/oracle-db-examples
 phenobarbital/azure_teambots
 premint/premintbot
 rakyll/go-sql-driver-spanner
@@ -117,6 +124,7 @@ sakintoye/search-sdk-java-clone
 samsends/cloud-build-badge
 seoulcity/KOPIS_yesshow
 sharatsawhney/tesseract
+sony/appsync-client-go
 sul-dlss-labs/machine-eyes
 tadash10/aws_s3_bucket_security_checker.py
 tweag/nix-store-gcs-proxy
