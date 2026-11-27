@@ -23,6 +23,7 @@ HanSanCoder/hhsblog
 ICEI-PUC-Minas-CC-TI/plmg-cc-ti2-2024-1-g08-organizai
 Luke-Rogerson/examplesentences
 MAyang38/dify-on-dingding-go
+MakonDev/HQBot
 MalgorzataVictor/IoTProject
 MerryFairyTalesAD440/UX-UI
 MicrosoftTranslator/azure-phi3-gpt4-AzureTranslator-playground
@@ -42,6 +43,7 @@ VanRitzOwen/Speech-to-Text
 adiom-data/dsync
 agranig/rtpengine-google-speech2text
 ahmedivy/auctions
+ajsib/ajsibley-gallery
 akitaonrails/clash_of_kings_analysis
 alan-kelly-maersk/azure-java-test
 alexandersimoes/google-cloud-storage-node-boilerplate
@@ -78,10 +80,13 @@ datasektionen/yoggi
 dforwardfeed/memo_generator
 dn0/CloudStatusPage
 eclipse-lmos/arc
+eins87/OCR-handwriting-form-data-extractor-using-Python-and-Google-cloud-Vision
 ember-cli-deploy/ember-cli-deploy-s3-index
 emicklei/parzello
+fatkulnurk/foundation
 fluxcd/pkg
 ftrnyc-o4f-xz/SAPA-PROJECT
+fujiwara/Rin
 fyfsxkh/TokBrain
 golang/playground
 google-marketing-solutions/dgpulse
@@ -108,6 +113,7 @@ marklewis01/react-materialui-starter
 marksweb/bq-streamlit
 mennanov/limiters
 mercari/datastore
+ministryofjustice/laa-ccms-caab
 mjazwiecki/azure-storage-queue-reader
 mozamimy/s3-multicloud-backup
 nanovms/ops
@@ -142,6 +148,7 @@ sony/appsync-client-go
 stealthycoin/chalice-package-canary
 sul-dlss-labs/machine-eyes
 tadash10/aws_s3_bucket_security_checker.py
+team-confeti/confeti-api-server
 tweag/nix-store-gcs-proxy
 vignesh-gupta/simple-vercel
 wdhunter465/lgfc-on-vercel
@@ -153,3 +160,4 @@ yadudoc/cloud_kotta
 yangfuhai/jboot
 yankev07/yankev07.github.io
 yiliaomsft/python-deployment
+zerosumpain/SR-Main
