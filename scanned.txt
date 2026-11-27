@@ -37,8 +37,10 @@ Prathamj07/PixInspect
 RobertHochberg/NDBC
 S7AGE/user-service
 SJSU272LabS17/Project-Team-22
+Sathyasri1/oci-java-sdk
 Sumanthka/terraform-basics
 ThreatResponse/poor-webhook
+TorkelV/pokemon-priser
 VanRitzOwen/Speech-to-Text
 adiom-data/dsync
 agranig/rtpengine-google-speech2text
@@ -49,6 +51,7 @@ alan-kelly-maersk/azure-java-test
 alexandersimoes/google-cloud-storage-node-boilerplate
 alibabacloud-go/dingtalk
 alibabacloud-go/tea
+alipay/antchain-openapi-prod-sdk
 aliyun/alibabacloud-python-sdk-v2
 aliyun/aliyun-oss-java-sdk
 aliyun/data-agent-skill
@@ -77,6 +80,7 @@ cockpit-project/bots
 cragkhit/agent-cefr-journal-study
 cyber-danceeeee/open_im_chat
 datasektionen/yoggi
+dawnvince/SkillAdqBench
 dforwardfeed/memo_generator
 dn0/CloudStatusPage
 eclipse-lmos/arc
@@ -102,6 +106,7 @@ jjconceptos/webapp1
 jnan806/ddns-golang
 jordanbean-msft/keyvault-java
 just-chillin/ImageRunner
+keitakn/go-cognito-lambda
 kelseyhightower/gif-maker
 kengonakajima/snippets
 kubernetes-sigs/cluster-api-provider-azure
@@ -120,11 +125,13 @@ nanovms/ops
 nastadavisranch/hsm-leander
 nathants/git-remote-aws
 newrelic/azure-vnet-flow-logs
+nexocrew/3nigm4
 nhd79/Azure-Text-To-Speech-Python
 nikogura/diagnostic-bot
 oleg-nenashev/workshop-aws-mocks-as-code
 openshift/aws-account-operator
 oracle-samples/modern-app-dev
+oracle/aidataplatform-sdk
 oracle/oci-java-sdk
 oracle/oci-service-operator
 oracle/terraform-provider-oci
@@ -155,6 +162,7 @@ wdhunter465/lgfc-on-vercel
 weidongxu-microsoft/autorest.java_ci
 wepe/O2O-Coupon-Usage-Forecast
 williamw520/jsoda
+xinshao926/nodejs-docs-samples
 xlibb/module-asb
 yadudoc/cloud_kotta
 yangfuhai/jboot
