@@ -54,6 +54,7 @@ alibabacloud-go/dingtalk
 alibabacloud-go/tea
 alipay/antchain-openapi-prod-sdk
 aliyun/alibabacloud-python-sdk-v2
+aliyun/aliyun-odps-jdbc
 aliyun/aliyun-oss-java-sdk
 aliyun/data-agent-skill
 aliyun/dingtalk-sdk
@@ -64,6 +65,7 @@ alvarowolfx/gcloud-ota-arduino-update
 argoproj-labs/argocd-vault-plugin
 atjiu/pybbs
 aws-samples/mturk-code-samples
+aws-solutions-library-samples/guidance-for-media2cloud-on-aws
 ayowilfred95/azure-qr-code-generator
 ayung8/CodeBoard
 ballerina-platform/module-ballerinax-asb
@@ -125,6 +127,7 @@ mercari/datastore
 microsoft/kiota
 ministryofjustice/laa-ccms-caab
 mjazwiecki/azure-storage-queue-reader
+mlabouardy/komiser
 mozamimy/s3-multicloud-backup
 nanovms/ops
 nastadavisranch/hsm-leander
@@ -143,6 +146,7 @@ oracle/terraform-provider-oci
 oshyshko/uio
 p-singh-ms/oracle-db-examples
 patnaikshekhar/KEDA-GCP-PubSub-Sample
+percona/percona-backup-mongodb
 phenobarbital/azure_teambots
 premint/premintbot
 rakyll/go-sql-driver-spanner
@@ -153,6 +157,7 @@ rodrigoncalves/presidente-game
 runtakun/qiita-sample-step-functions
 sahava/multisite-lighthouse-gcp
 sakintoye/search-sdk-java-clone
+samidare-co/Mobile-Shop-Admin
 samsends/cloud-build-badge
 seoulcity/KOPIS_yesshow
 shaq-bracu/NewProof
@@ -171,6 +176,7 @@ wepe/O2O-Coupon-Usage-Forecast
 williamw520/jsoda
 xinshao926/nodejs-docs-samples
 xlibb/module-asb
+xnx3/xnx3
 yadudoc/cloud_kotta
 yangfuhai/jboot
 yankev07/yankev07.github.io
